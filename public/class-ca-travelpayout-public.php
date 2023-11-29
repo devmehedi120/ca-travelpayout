@@ -51,6 +51,8 @@ class Ca_Travelpayout_Public {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+		
+		add_shortcode( 'flyghtShow', [$this, 'flyghtShowHtml'] );
 
 	}
 
@@ -74,7 +76,7 @@ class Ca_Travelpayout_Public {
 		 */
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/ca-travelpayout-public.css', array(), $this->version, 'all' );
-
+		
 	}
 
 	/**
@@ -83,20 +85,15 @@ class Ca_Travelpayout_Public {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
+		wp_enqueue_script( 'vueGlobal', plugin_dir_url( __FILE__ ) . 'js/vue.global.js', array(  ), $this->version, false );
+		wp_enqueue_script( 'uuidv4', plugin_dir_url( __FILE__ ) . 'js/uuidv4.js', array(  ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ca-travelpayout-public.js', array( 'jquery','vueGlobal' ), $this->version, false );
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Ca_Travelpayout_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Ca_Travelpayout_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
+	}
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ca-travelpayout-public.js', array( 'jquery' ), $this->version, false );
+	function flyghtShowHtml(){
+		ob_start( );
+     	require_once plugin_dir_path(__FILE__)."partials/ca-travelpayout-public-display.php" ;
 
 	}
 

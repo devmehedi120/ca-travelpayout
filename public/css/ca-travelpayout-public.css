@@ -1,4 +1,109 @@
-/**
- * All of the CSS for your public-facing functionality should be
- * included in this file.
- */
+#caTravelFlight {
+    height: 90vh;
+    width: 100%;
+    background-color: #fff;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+}
+
+#caTravelFlight .flightHeading {
+    font-size: 25px;
+    margin: 0;
+    width: 100px;
+    background-color: #29C5FF;
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.inputBox {
+    display: flex;
+    gap: 15px;
+}
+
+.inputWraper {
+    display: flex;
+    justify-content: space-between;
+    gap: 4px;
+}
+
+input.radioBtn {
+    width: 25px;
+    height: 25px;
+}
+
+.flight-location-select {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+}
+.locationSet {
+    display: flex;
+    width: 45%;
+    gap: 2px;
+    flex-direction: column;
+}
+
+.location-wrap {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.location-toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    border: 1px solid #ddd;
+    height: 40px;
+    width: 10%;
+    align-self: end;
+}
+
+input.inputFild {
+    height: 40px;
+    width: 100%;
+    border: 2px solid #ddd;
+}
+input.inputFild:focus{
+    border-color: #2e2b2b;
+    outline: none;
+    transition: 0.3s ease-in-out;
+}
+
+.location-checkbox-wrap {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    width: 100%;
+    gap: 18%;
+}
+.fligh-date-select {
+    width: 90%;
+}
+.location-checkbox {
+    display: flex;
+    width: 50%;
+    justify-content: right;
+}
+input.inputFild__checkbox {
+    height: 28px;
+    width: 16px;
+}
+.checkbox__main__wrap {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+    justify-content: right;
+    align-content: end;
+}
+
+.dateSelectWrap {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
