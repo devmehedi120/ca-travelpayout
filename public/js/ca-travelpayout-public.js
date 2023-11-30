@@ -2,9 +2,12 @@ jQuery(function( $ ) {
    Vue.createApp({
         data() {
           return {
-            message: "Hello, Vue.js!"
+            tab:'',
+            isDisabled:true,
           }
         }
+
+        
       }).mount('#caTravelFlight');
 
 })

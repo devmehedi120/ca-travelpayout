@@ -74,8 +74,10 @@ class Ca_Travelpayout_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-
+		
+		
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/ca-travelpayout-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( 'card__style', plugin_dir_url( __FILE__ ) . 'css/ca-card-section.css', array(), $this->version, 'all' );
 		
 	}
 
@@ -94,6 +96,7 @@ class Ca_Travelpayout_Public {
 	function flyghtShowHtml(){
 		ob_start( );
      	require_once plugin_dir_path(__FILE__)."partials/ca-travelpayout-public-display.php" ;
+		require_once plugin_dir_path( __FILE__ )."partials/ca-flight-card.php";
 
 	}
 
