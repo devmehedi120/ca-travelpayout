@@ -1,4 +1,5 @@
-<div id="caTravelFlight" class="shadow-lg shadow-indigo-500/40 bg-indigo-500">
+<div id="caTravelFlight" class="travelpayoutWraper">
+<div  class="shadow-lg shadow-indigo-500/40 bg-indigo-500">
     <div >
         <h1 class='flightHeading'>Flight</h1>
     </div>
@@ -140,6 +141,12 @@
          </form>
     </div>
   </div>
-   
 </div>
 
+   <?php
+     require_once plugin_dir_path( __FILE__ )."/ca-flight-card.php";
+     require_once plugin_dir_path( __FILE__ )."/ca-search-result.php";
+   ?>
+
+
+</div>

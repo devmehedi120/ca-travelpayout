@@ -1,32 +1,19 @@
-#caTravelFlight {
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500&display=swap');
+
+.stopsFilterWrap {
     height: auto;
     width: 100%;
-    background-color: #ffa7a717;
-    padding: 1em;
+    background-color: #f7f7f7;
+    padding: 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 12px;
-    font-family: serif;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    gap: 0px;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
     border-radius: 10px;
 }
-#caTravelFlight:hover{
-    box-shadow: rgba(0, 0, 0, 0.40) 2px 8px 18px;
-    transition: 0.3s ease-in-out;
-}
 
-#caTravelFlight .flightHeading {
-    font-size: 25px;
-    margin: 0;
-    width: 100px;
-    background-color: hsl(11deg 100% 95.91%);
-    padding: 5px;
-    border-radius: 5px;
-    text-align: center;
-    color: #676666;
-    font-weight: 700;
-}
 #filteWraper {
     display: flex;
     width: 100%;
@@ -93,22 +80,22 @@ form#caFlyghtSearch {
     top: 40%;
     width: 42px;
     border-radius: 50%;
-    border: 3px solid #ddd;
+    border: 2px solid #d6d6d6;
     transform: translateX(-50%);
     left: 100%;
     z-index: 99;
     left: 100%;
     color: #fff;
-    background-color: #f9fafb;
+    background-color: #ffffff;
 }
 
-input.inputFild
- {
-    border: 2px solid #ddd;
+input.inputFild {
+    border: 1px solid #ddd;
     outline: none;
+    background-color: #fff;
 }
 input.inputFild:focus{
-    border: 2px solid #9e9e9e;
+    border: 1px solid #d6d6d6;
     transition: 0.3s ease-in-out;
 }
 
@@ -132,12 +119,18 @@ form#caFlyghtSearch {
     border: none;
 }
 input#submitBtn {
-    border: 2px solid dodgerblue;
-    background-color: dodgerblue;
+    border: 1px solid #d6d6d6;
+    background-color: #1e90ff00;
     font-size: 16px;
     border-radius: 5px;
+    color: #000;
 }
-
+input#submitBtn:hover {
+    color: blueviolet;
+    border: 1px solid blueviolet;
+    transition: 0.4s ease;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
 input#checkNearby {
     margin-left: 5px;
 }
@@ -167,13 +160,14 @@ input#checkNearby {
 }
 
 .fieldGroup input {
-    border: 2px solid #ddd;
+    border: 1px solid #d6d6d6;
     outline: none;
     width: 100%;
+    background-color: #fff;
 }
 
 .fieldGroup input:focus{
-    border: 2px solid #9e9e9e;
+    border: 1px solid #d6d6d6;
     transition: 0.3s ease-in-out;
 }
 
@@ -181,10 +175,10 @@ span.closeGroup {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 42px;
+    font-size: 30px;
     transform: rotate(45deg);
-    color: red;
-    font-weight: bold;
+    color: rgb(240, 91, 91);
+    font-weight: 400;
     padding: 10px;
     cursor: pointer;
     user-select: none;
