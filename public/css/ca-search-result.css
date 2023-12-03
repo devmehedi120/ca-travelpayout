@@ -8,7 +8,6 @@ div#flightTicketPage {
   width: 100%;
   margin:0;
   padding: 0;
-  background-color:#EFF1F2;
   font-family: 'Poppins', sans-serif;
   
 }
@@ -19,7 +18,7 @@ div.stopsFilterWrap {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 50px;
+  gap: 10px;
 }
 
 .allertPriceupdate {
@@ -34,9 +33,11 @@ span.alertMsg {
   align-items: center;
   gap: 2px;
   background-color: #fff;
-  padding: 0px 10px;
+  padding: 8px 10px;
   border-radius: 8px;
-  width: 95%;
+  width: 90%;
+  border: 1px solid #ddd;
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
 }
 
 .stops__wraper {
@@ -51,10 +52,11 @@ span.alertMsg {
 
 .shortFlight {
   display: flex;
-  width: 100%;
-  background-color: #686de0;
+  width: 90%;
+  background-color: #1f710b;
   cursor: pointer;
   position: relative;
+  border-radius: 5px;
 }
 
 span.arrowSvg {
@@ -72,10 +74,9 @@ span.arrowSvg {
 .short___list {
   display: flex;
   position: absolute;
-  top: 42px;
+  top: 50px;
   width: 100%;
   background-color: #fff;
-  
 }
 
 .inputWraper {
@@ -110,7 +111,7 @@ div.flightTicket {
   width: 75%;
   margin:0;
   padding: 0;
-  background-color:#EFF1F2;
+  background-color:#fff;
   flex-direction: column;
   font-family: 'Poppins', sans-serif;
 
@@ -120,7 +121,7 @@ div.flightTicket {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f9f9f9;
+  
   border-radius: 5px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   width: 90%;
@@ -230,7 +231,7 @@ span.deallenth {
 }
 
 span.totalAmount {
-  font-size: 25px;
+  font-size: 20px;
   letter-spacing: 0px;
   font-weight: 700;
   line-height: 1.5;
@@ -245,7 +246,7 @@ button.pricebutton {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  padding: 8px;
 }
 button.pricebutton:hover {
   color: #ddd;
@@ -292,7 +293,7 @@ button.navItem {
   border: none;
   background-color: #fff;
   text-align: left;
-  padding: 8px 12px;
+  padding: 8px 10px;
   color: #545860;
   border: none;
 
@@ -324,7 +325,7 @@ span.best__pp{
 }
 
 span.Best__pp__amount {
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 700;
   line-height: 1.5;
 }
@@ -346,3 +347,6 @@ svg.LegInfo_planeEnd__ZDkxM {
   border-bottom-right-radius: 5px;
 }
 
+p.alertPriceUpdate{
+  margin-bottom: 0px;
+}

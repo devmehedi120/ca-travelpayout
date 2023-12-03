@@ -1,4 +1,7 @@
 <div class="cardSection" id="cardSection">
+  <div class="Searchspan">
+      <b>Search Results</b>
+  </div>
      <div class="card_wraper">
         <div class="single__card">
              <div class="card__image">

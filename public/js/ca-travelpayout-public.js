@@ -5,7 +5,11 @@ jQuery(function( $ ) {
             tab:'',
             isDisabled:true,
           }
+        },
+        methods:{
+          
         }
+
 
         
       }).mount('#caTravelFlight');

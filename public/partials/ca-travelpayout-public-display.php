@@ -7,7 +7,7 @@
     
     <div id="filteWraper" class="filterWraper">
         <div class="search-filter">
-        <form action="" id="caFlyghtSearch">
+        <div action="" id="caFlyghtSearch">
         <div class="inputBox">
             <div class="inputWraper">
                     <input type="radio" id="return" value="return" v-model="tab" class="radioBtn" checked>
@@ -138,7 +138,7 @@
              </div>           
            </div>
            </div>
-         </form>
+</div>
     </div>
   </div>
 </div>
