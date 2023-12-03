@@ -1,5 +1,5 @@
 <div id="caTravelFlight" class="travelpayoutWraper">
-<div  class="shadow-lg shadow-indigo-500/40 bg-indigo-500">
+<div  class=" searchFlightWraper shadow-lg shadow-indigo-500/40 bg-indigo-500">
     <div >
         <h1 class='flightHeading'>Flight</h1>
     </div>
