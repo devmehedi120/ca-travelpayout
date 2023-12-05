@@ -5,23 +5,33 @@
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" class="PriceAlertsSignUp_iconFillBlue__MDZhZ BpkIcon_bpk-icon--rtl-support__YWE2M" style="width: 1rem; height: 1rem;"><path d="M12 1.5a7.202 7.202 0 00-7.186 7.219v.659A10.361 10.361 0 013.73 13.99l-.51 1.025A2.062 2.062 0 005.056 18h13.888a2.062 2.062 0 001.837-2.985l-.51-1.025a10.35 10.35 0 01-1.085-4.612v-.66A7.202 7.202 0 0012 1.5zM9.076 20.939A1.021 1.021 0 019.83 19.5h4.338a1.02 1.02 0 01.755 1.439 2.26 2.26 0 01-1.931 1.561h-2a2.244 2.244 0 01-1.917-1.561z"></path></svg>
                <p class="alertPriceUpdate">Get price alert</p>
             </span>
-        </div> <hr>
+        </div>
        <div class="shortMainWraper">
         <div class="shortFlight">
             <div class="stops__wraper">
                 <span>Stops</span>
                 <span class="arrowSvg"><svg width="20px" height="20px" viewBox="0 0 1024 1024" class="icon "  version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M903.232 256l56.768 50.432L512 768 64 306.432 120.768 256 512 659.072z" fill="#fff" /></svg></span>
             </div>
-            <hr>
             <div class="short___list">
-                <div class="inputWraper">
+                <div class="inputWraper__short">
                     <div class="inputGroup">
-                        <label for="direct__flight"> <small>Direct</small></label>
-                    <input type="checkbox" name="" id="direct__flight" value="direct">
+                    <div class="checkbox-wrapper-27">
+                    <label class="checkbox">
+                   <input type="checkbox">
+                   <span class="checkbox__icon"></span>
+                     Direct Flight
+                   </label>
+                    </div>
+                    
                     </div>
                     <div class="inputGroup">
-                        <label for="one__stopinc"> <small>1 Stop</small></label>
-                    <input type="checkbox" name="" id="one__stopinc" value="onestop">
+                    <div class="checkbox-wrapper-27">
+                    <label class="checkbox">
+                   <input type="checkbox">
+                   <span class="checkbox__icon"></span>
+                    1+ stops 
+                   </label>
+                    </div>
                     </div>
                 </div>
             </div>

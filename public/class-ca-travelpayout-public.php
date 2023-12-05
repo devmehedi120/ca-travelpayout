@@ -95,6 +95,8 @@ class Ca_Travelpayout_Public {
 	}
 
 	function flyghtShowHtml(){
+    
+
 		ob_start( );
      	require_once plugin_dir_path(__FILE__)."partials/ca-travelpayout-public-display.php" ;
 		

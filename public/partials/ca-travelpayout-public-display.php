@@ -36,12 +36,22 @@
                </div>
                <div class="checkbox__wrap">
                    <div class="checkBox__group">
-                     <label for="checkNearby"><small>add nearby airport</small></label>
-                     <input type="checkbox" id="checkNearby" value="nearby">
+                   <div class="checkbox-wrapper-27">
+                    <label class="checkbox">
+                   <input type="checkbox">
+                   <span class="checkbox__icon"></span>
+                    check Nearby
+                   </label>
+                    </div>
                    </div>
                    <div class="checkBox__group">
-                     <label for="checkNearby"><small>direct flight only</small></label>
-                     <input type="checkbox" id="checkNearby" value="nearby">
+                   <div class="checkbox-wrapper-27">
+                    <label class="checkbox">
+                   <input type="checkbox">
+                   <span class="checkbox__icon"></span>
+                    Direct flight only
+                   </label>
+                    </div>
                    </div>
                </div>
             </div>
@@ -52,8 +62,13 @@
                  </div>
                  <div class="checkbox__wrap">
                    <div class="checkBox__group">
-                     <label for="checkNearby"><small>add nearby airport</small></label>
-                     <input type="checkbox" id="checkNearby" value="nearby">
+                   <div class="checkbox-wrapper-27">
+                    <label class="checkbox">
+                   <input type="checkbox">
+                   <span class="checkbox__icon"></span>
+                    Add nearby airport
+                   </label>
+                    </div>
                    </div>
                </div>
             </div>
@@ -70,11 +85,7 @@
                     </div>
             </div>
             </div>
-            <div class="search__buton">
-                    <div class="search__inner">
-                        <input id="submitBtn" type="submit" value="search" class="inputFild">
-                    </div>
-            </div>
+           
            </div>  
 
           <!-- tab number two -->
@@ -110,11 +121,7 @@
                     </div>
             </div>
             </div>
-            <div class="search__buton">
-                    <div class="search__inner">
-                        <input id="submitBtn" type="submit" value="search" class="inputFild">
-                    </div>
-            </div>
+           
            </div>    
         
 
@@ -138,7 +145,13 @@
              </div>           
            </div>
            </div>
-</div>
+
+           <div class="search__buton">
+                    <div class="search__inner">
+                        <input id="submitBtn" type="submit" value="search" class="inputFild">
+                    </div>
+            </div>
+     </div>
     </div>
   </div>
 </div>
