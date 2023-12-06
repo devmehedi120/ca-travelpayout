@@ -91,16 +91,32 @@ class Ca_Travelpayout_Public {
 		wp_enqueue_script( 'vueGlobal', plugin_dir_url( __FILE__ ) . 'js/vue.global.js', array(  ), $this->version, false );
 		wp_enqueue_script( 'uuidv4', plugin_dir_url( __FILE__ ) . 'js/uuidv4.js', array(  ), $this->version, false );
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ca-travelpayout-public.js', array( 'jquery','vueGlobal' ), $this->version, false );
+		wp_localize_script( $this->plugin_name, 'userLocationbyip', array(
+			'userLocation' => $this->userLocatinByIP()
+		  ) );
 
+	}
+     
+	function userLocatinByIP(){
+		$ip_address = $_SERVER['REMOTE_ADDR'];
+        $locationURL = 'http://www.travelpayouts.com/whereami?locale=en&ip=' . $ip_address;
+		$countryData=wp_remote_get( $locationURL);
+		if(is_wp_error($countryData)){
+			return false;
+		}
+		$mainData=wp_remote_retrieve_body($countryData);
+		$maindata=json_decode($mainData);
+		return $mainData;
 	}
 
 	function flyghtShowHtml(){
-    
-
-		ob_start( );
+		
+ 		ob_start( );
      	require_once plugin_dir_path(__FILE__)."partials/ca-travelpayout-public-display.php" ;
 		
 
 	}
+
+	
 
 }

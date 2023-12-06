@@ -172,6 +172,10 @@ class Ca_Travelpayout {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		add_action('wp_ajax_custom_flight_search', 'custom_flight_search_callback');
+add_action('wp_ajax_nopriv_custom_flight_search', 'custom_flight_search_callback');
+
+
 
 	}
 
