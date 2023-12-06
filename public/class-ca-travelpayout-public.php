@@ -92,7 +92,7 @@ class Ca_Travelpayout_Public {
 		wp_enqueue_script( 'uuidv4', plugin_dir_url( __FILE__ ) . 'js/uuidv4.js', array(  ), $this->version, false );
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ca-travelpayout-public.js', array( 'jquery','vueGlobal' ), $this->version, false );
 		wp_localize_script( $this->plugin_name, 'userLocationbyip', array(
-			'userLocation' => $this->userLocatinByIP()
+			// 'userLocation' => $this->userLocatinByIP()
 		  ) );
 
 	}
@@ -105,12 +105,29 @@ class Ca_Travelpayout_Public {
 			return false;
 		}
 		$mainData=wp_remote_retrieve_body($countryData);
-		$maindata=json_decode($mainData);
-		return $mainData;
+		$useralocationdata=json_decode($mainData, true);
+
+		return $useralocationdata;
+	}
+
+	function popularLocation(){
+		$data=$this->userLocatinByIP();
+		$countryName = $data['iata'];
+      $url=	'http://api.travelpayouts.com/v1/city-directions?origin='.countryName.'&currency=BDT&token=14a1d288b1b2f173ac139063e817575c';
+	   $responseLocations=wp_remote_get($url);
+	   if (is_wp_error( $responseLocations )){
+		return false;
+	   }
+	   $responseLocations=wp_remote_retrieve_body( $responseLocations);
+	   $responseLocations=json_decode($responseLocations, true);
+	  return $responseLocations;	
 	}
 
 	function flyghtShowHtml(){
-		
+		$data=$this->popularLocation();
+		echo '<pre>';
+		var_dump($data);
+		echo '</pre>'
  		ob_start( );
      	require_once plugin_dir_path(__FILE__)."partials/ca-travelpayout-public-display.php" ;
 		

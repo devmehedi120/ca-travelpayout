@@ -2,7 +2,7 @@ jQuery(function( $ ) {
    Vue.createApp({
         data() {
           return {
-            userlocations:userLocationbyip.userLocation,
+            userlocation:'' ,
             tab:'',
             isDisabled:true,
           }
@@ -16,9 +16,8 @@ jQuery(function( $ ) {
         },
 
         mounted(){
-          const self=this;
-          const jsonData=JSON.parse(self.userlocations)
-          console.log(jsonData);
+          const data=JSON.parse(userLocationbyip.userLocation);
+          console.log(data);
           
         }
 
