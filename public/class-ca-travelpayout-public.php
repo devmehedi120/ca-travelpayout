@@ -30,6 +30,7 @@ class Ca_Travelpayout_Public {
 	 * @var      string    $plugin_name    The ID of this plugin.
 	 */
 	private $plugin_name;
+	public $countries_names = [];
 
 	/**
 	 * The version of this plugin.
@@ -53,7 +54,7 @@ class Ca_Travelpayout_Public {
 		$this->version = $version;
 		
 		add_shortcode( 'flyghtShow', [$this, 'flyghtShowHtml'] );
-
+		
 	}
 
 	/**
@@ -91,47 +92,62 @@ class Ca_Travelpayout_Public {
 		wp_enqueue_script( 'vueGlobal', plugin_dir_url( __FILE__ ) . 'js/vue.global.js', array(  ), $this->version, false );
 		wp_enqueue_script( 'uuidv4', plugin_dir_url( __FILE__ ) . 'js/uuidv4.js', array(  ), $this->version, false );
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ca-travelpayout-public.js', array( 'jquery','vueGlobal' ), $this->version, false );
-		wp_localize_script( $this->plugin_name, 'userLocationbyip', array(
-			// 'userLocation' => $this->userLocatinByIP()
-		  ) );
-
+		wp_localize_script( $this->plugin_name, 'catp_fragments', array(
+			'ajaxurl' => admin_url("admin-ajax.php")
+		) );
 	}
      
 	function userLocatinByIP(){
-		$ip_address = $_SERVER['REMOTE_ADDR'];
-        $locationURL = 'http://www.travelpayouts.com/whereami?locale=en&ip=' . $ip_address;
+		$ipObject = wp_remote_get( 'https://api.ipify.org?format=json' );
+		$ipObject = wp_remote_retrieve_body($ipObject);
+		$ipAddress = json_decode($ipObject)->ip;
+        $locationURL = 'http://www.travelpayouts.com/whereami?locale=en&ip=' . $ipAddress;
 		$countryData=wp_remote_get( $locationURL);
 		if(is_wp_error($countryData)){
 			return false;
 		}
 		$mainData=wp_remote_retrieve_body($countryData);
-		$useralocationdata=json_decode($mainData, true);
+		$useralocationdata=json_decode($mainData);
 
 		return $useralocationdata;
 	}
 
-	function popularLocation(){
-		$data=$this->userLocatinByIP();
-		$countryName = $data['iata'];
-      $url=	'http://api.travelpayouts.com/v1/city-directions?origin='.countryName.'&currency=BDT&token=14a1d288b1b2f173ac139063e817575c';
-	   $responseLocations=wp_remote_get($url);
-	   if (is_wp_error( $responseLocations )){
-		return false;
-	   }
-	   $responseLocations=wp_remote_retrieve_body( $responseLocations);
-	   $responseLocations=json_decode($responseLocations, true);
-	  return $responseLocations;	
+	function popularCountries(){
+		try {
+			$data=(array)$this->userLocatinByIP();
+			$iata=$data['iata'];
+			$url= 'http://api.travelpayouts.com/v1/city-directions?origin='.$iata.'&currency=BDT&token=14a1d288b1b2f173ac139063e817575c';
+			$dataResponse=wp_remote_get( $url);
+			if(is_wp_error( $dataResponse )){
+				return false;
+			}
+			$bodydata=wp_remote_retrieve_body( $dataResponse );
+			$decodedData=json_decode($bodydata);
+
+			$countries = [];
+			if($decodedData && is_object($decodedData->data)){
+				foreach($decodedData->data as $country){
+					$countries[] = [
+						'origin' => $country->origin,
+						'destination' => $country->destination,
+						'price' => $country->price,
+						'transfers' => $country->transfers,
+					];
+				}
+			}
+
+			wp_send_json_success( $countries, 200 );
+		} catch (\Throwable $th) {
+			//throw $th;
+		}
+		
+		wp_send_json_error( "Server error", 500 );
 	}
 
-	function flyghtShowHtml(){
-		$data=$this->popularLocation();
-		echo '<pre>';
-		var_dump($data);
-		echo '</pre>'
+
+	function flyghtShowHtml(){	
  		ob_start( );
      	require_once plugin_dir_path(__FILE__)."partials/ca-travelpayout-public-display.php" ;
-		
-
 	}
 
 	

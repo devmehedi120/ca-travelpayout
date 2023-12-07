@@ -156,10 +156,8 @@
   </div>
 </div>
 
-   <?php
-     require_once plugin_dir_path( __FILE__ )."/ca-flight-card.php";
-     require_once plugin_dir_path( __FILE__ )."/ca-search-result.php";
-   ?>
-
-
+  <?php
+    require_once plugin_dir_path( __FILE__ )."/ca-flight-cards.php";
+    require_once plugin_dir_path( __FILE__ )."/ca-search-result.php";
+  ?>
 </div>
