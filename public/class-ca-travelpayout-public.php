@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The public-facing functionality of the plugin.
  *
@@ -21,7 +20,7 @@
  * @author     Mehedi Hasan <wpdevmehedi@gmail.com>
  */
 class Ca_Travelpayout_Public {
-
+	
 	/**
 	 * The ID of this plugin.
 	 *
@@ -40,6 +39,7 @@ class Ca_Travelpayout_Public {
 	 * @var      string    $version    The current version of this plugin.
 	 */
 	private $version;
+	private $travel;
 
 	/**
 	 * Initialize the class and set its properties.
@@ -51,9 +51,13 @@ class Ca_Travelpayout_Public {
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
-		
+		$this->version = $version;			
 		add_shortcode( 'flyghtShow', [$this, 'flyghtShowHtml'] );
+		
+		// echo '<pre>';
+		// var_dump($this->cat_getPricess());
+		// exit;
+		
 		
 	}
 
@@ -91,7 +95,8 @@ class Ca_Travelpayout_Public {
 	public function enqueue_scripts() {
 		wp_enqueue_script( 'vueGlobal', plugin_dir_url( __FILE__ ) . 'js/vue.global.js', array(  ), $this->version, false );
 		wp_enqueue_script( 'uuidv4', plugin_dir_url( __FILE__ ) . 'js/uuidv4.js', array(  ), $this->version, false );
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ca-travelpayout-public.js', array( 'jquery','vueGlobal' ), $this->version, false );
+		wp_enqueue_script( 'cataxios', 'https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js', array(  ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ca-travelpayout-public.js', array( 'jquery','vueGlobal', 'cataxios' ), $this->version, false );
 		wp_localize_script( $this->plugin_name, 'catp_fragments', array(
 			'ajaxurl' => admin_url("admin-ajax.php")
 		) );
@@ -101,7 +106,7 @@ class Ca_Travelpayout_Public {
 		$ipObject = wp_remote_get( 'https://api.ipify.org?format=json' );
 		$ipObject = wp_remote_retrieve_body($ipObject);
 		$ipAddress = json_decode($ipObject)->ip;
-        $locationURL = 'http://www.travelpayouts.com/whereami?locale=en&ip=' . $ipAddress;
+        $locationURL = 'http://www.travelpayouts.com/whereami?locale=en&ip='.$ipAddress;
 		$countryData=wp_remote_get( $locationURL);
 		if(is_wp_error($countryData)){
 			return false;
@@ -110,6 +115,134 @@ class Ca_Travelpayout_Public {
 		$useralocationdata=json_decode($mainData);
 
 		return $useralocationdata;
+	}
+	// retrive country data
+	function cat_countries(){
+		try {
+			$countryUrl='http://api.travelpayouts.com/data/en/countries.json';
+			$countryResponse=wp_remote_get( $countryUrl);
+			if(is_wp_error( $countryResponse )){
+				return false;
+			}
+			$countryBody=wp_remote_retrieve_body( $countryResponse );
+			$countrydata=json_decode($countryBody);
+			if($countrydata&&is_array($countrydata)){
+				$allCountry=[];
+				foreach($countrydata as $country){
+					$allCountry[]=[
+						'code'  =>  $country->code,
+						'name'  =>  $country->name,						
+						'currency'  =>  $country->currency
+					];
+				}
+			}
+
+			return $allCountry;
+			wp_send_json_success( $allCountry, 200 );
+
+		} catch (\Throwable $th) {
+			
+		}
+		wp_send_json_error( "Server error", 500 );
+	}
+
+	function cat_allCittyes(){
+		// try {
+			
+		// 	$cityUrl='http://api.travelpayouts.com/data/en/cities.json';
+		// 	$cityResponse=wp_remote_get($cityUrl);
+		// 	if(is_wp_error($cityResponse )){
+		// 					return false;
+		// 	}
+		// 	$cityBody=wp_remote_retrieve_body( $cityResponse );
+		// 	$citydata=json_decode($cityBody);
+		// 	if($citydata&&is_array($citydata)){
+		// 		$allcity=[];
+		// 		foreach($citydata as $city){
+		// 			$allcity[]=[
+		// 				'country_code'=>  $city->country_code,
+		// 				'city_code'=>  $city->code,
+		// 				'cityName'=>  $city->name
+		// 			];
+		// 		}
+		// 	}
+
+		// 	wp_send_json_success( $allcity, 200 );
+		// } catch (\Throwable $th) {
+		// 	//throw $th;
+		// }
+		// wp_send_json_error( "Server error", 500 );
+
+
+		// Define the path for the temporary file
+		$tempFilePath = __DIR__. '/temp/cities.json';
+
+		// Read and process the downloaded JSON file
+		$cityData = file_get_contents($tempFilePath);
+
+		// Decode the JSON data
+		$cities = json_decode($cityData);
+
+		// Check for JSON decoding errors
+		if (json_last_error() !== JSON_ERROR_NONE) {
+			echo 'JSON decoding error: ' . json_last_error_msg();
+		} else {
+			// Process the data as needed
+			$allCities = [];
+			foreach ($cities as $city) {
+				$allCities[] = [
+					'country_code' => $city->country_code,
+					'city_code'    => $city->code,
+					'cityName'     => $city->name
+				];
+			}
+
+			// Print or use the processed data
+			wp_send_json_success( $allCities, 200 );
+		}
+
+		// Optionally, you can delete the temporary file
+		// unlink($tempFilePath);
+		wp_send_json_error( "Server error", 500 );
+	}
+
+	function cat_getPricess(){
+	try {
+		$originS=(array)$this->userLocatinByIP();
+		$origin=$originS['iata'];
+		$currentDate = date('Y-m-d');
+		// $newDate = date('Y-m-d', strtotime('+10 days', strtotime($currentDate)));
+
+		$priceUrl=' http://map.aviasales.com/prices.json?origin_iata='.$origin.'&period='.$currentDate.':season&direct=true&one_way=false&schengen=true&locale=en&min_trip_duration_in_days=15&max_trip_duration_in_days=30';
+		$priceOBJ= wp_remote_get( $priceUrl );
+		if(is_wp_error( $priceOBJ)){
+			return false;
+		}
+		$priceBody= wp_remote_retrieve_body( $priceOBJ);
+		$priceDecode=json_decode($priceBody);
+         if($priceDecode&&is_array($priceDecode)){
+			$singlePrice=[];
+			foreach ($priceDecode as $price) {
+				$singlePrice[]=[
+					'value' => $price->value,
+					'origin' => $price->origin,
+					'number_of_changes' => $price->number_of_changes,
+					'destination' => $price->destination,
+					'return_date' => $price->return_date,
+					'depart_date' => $price->depart_date,
+					'airline' => $price->airline,
+					'trip_class' => $price->trip_class
+				];
+			}
+			wp_send_json_success( $singlePrice, 200 );
+		 }
+	} catch (\Throwable $th) {
+		//throw $th;
+	}
+
+	wp_send_json_error( "Server error", 500 );
+
+
 	}
 
 	function popularCountries(){

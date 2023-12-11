@@ -174,6 +174,12 @@ class Ca_Travelpayout {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 		$this->loader->add_action( 'wp_ajax_getpopuplar_locations', $plugin_public, 'popularCountries');
 		$this->loader->add_action( 'wp_ajax_nopriv_getpopuplar_locations', $plugin_public, 'popularCountries');
+		$this->loader->add_action( 'wp_ajax_get_all_countries', $plugin_public, 'cat_countries');
+		$this->loader->add_action( 'wp_ajax_nopriv_get_all_countries', $plugin_public, 'cat_countries');
+		$this->loader->add_action( 'wp_ajax_get_all_price', $plugin_public, 'cat_getPricess');
+		$this->loader->add_action( 'wp_ajax_nopriv_get_all_price', $plugin_public, 'cat_getPricess');
+		$this->loader->add_action( 'wp_ajax_get_allCityName', $plugin_public, 'cat_allCittyes');
+		$this->loader->add_action( 'wp_ajax_nopriv_get_allCityName', $plugin_public, 'cat_allCittyes');
 
 
 
