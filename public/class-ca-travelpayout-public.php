@@ -211,11 +211,12 @@ class Ca_Travelpayout_Public {
 		$originS=(array)$this->userLocatinByIP();
 		$origin=$originS['iata'];
 		$currentDate = date('Y-m-d');
-		// $newDate = date('Y-m-d', strtotime('+10 days', strtotime($currentDate)));
+		// // $newDate = date('Y-m-d', strtotime('+10 days', strtotime($currentDate)));
 
 		$priceUrl=' http://map.aviasales.com/prices.json?origin_iata='.$origin.'&period='.$currentDate.':season&direct=true&one_way=false&schengen=true&locale=en&min_trip_duration_in_days=15&max_trip_duration_in_days=30';
 		$priceOBJ= wp_remote_get( $priceUrl );
 		if(is_wp_error( $priceOBJ)){
+		  var_dump($priceOBJ);
 			return false;
 		}
 		$priceBody= wp_remote_retrieve_body( $priceOBJ);
