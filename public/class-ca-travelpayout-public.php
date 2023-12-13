@@ -147,33 +147,6 @@ class Ca_Travelpayout_Public {
 	}
 
 	function cat_allCittyes(){
-		// try {
-			
-		// 	$cityUrl='http://api.travelpayouts.com/data/en/cities.json';
-		// 	$cityResponse=wp_remote_get($cityUrl);
-		// 	if(is_wp_error($cityResponse )){
-		// 					return false;
-		// 	}
-		// 	$cityBody=wp_remote_retrieve_body( $cityResponse );
-		// 	$citydata=json_decode($cityBody);
-		// 	if($citydata&&is_array($citydata)){
-		// 		$allcity=[];
-		// 		foreach($citydata as $city){
-		// 			$allcity[]=[
-		// 				'country_code'=>  $city->country_code,
-		// 				'city_code'=>  $city->code,
-		// 				'cityName'=>  $city->name
-		// 			];
-		// 		}
-		// 	}
-
-		// 	wp_send_json_success( $allcity, 200 );
-		// } catch (\Throwable $th) {
-		// 	//throw $th;
-		// }
-		// wp_send_json_error( "Server error", 500 );
-
-
 		// Define the path for the temporary file
 		$tempFilePath = __DIR__. '/temp/cities.json';
 
@@ -207,43 +180,40 @@ class Ca_Travelpayout_Public {
 	}
 
 	function cat_getPricess(){
-	try {
-		$originS=(array)$this->userLocatinByIP();
-		$origin=$originS['iata'];
-		$currentDate = date('Y-m-d');
-		// // $newDate = date('Y-m-d', strtotime('+10 days', strtotime($currentDate)));
+		try {
+			$originS=(array)$this->userLocatinByIP();
+			$origin=$originS['iata'];
+			$currentDate = date('Y-m-d');
+			// // $newDate = date('Y-m-d', strtotime('+10 days', strtotime($currentDate)));
 
-		$priceUrl=' http://map.aviasales.com/prices.json?origin_iata='.$origin.'&period='.$currentDate.':season&direct=true&one_way=false&schengen=true&locale=en&min_trip_duration_in_days=15&max_trip_duration_in_days=30';
-		$priceOBJ= wp_remote_get( $priceUrl );
-		if(is_wp_error( $priceOBJ)){
-		  var_dump($priceOBJ);
-			return false;
-		}
-		$priceBody= wp_remote_retrieve_body( $priceOBJ);
-		$priceDecode=json_decode($priceBody);
-         if($priceDecode&&is_array($priceDecode)){
-			$singlePrice=[];
-			foreach ($priceDecode as $price) {
-				$singlePrice[]=[
-					'value' => $price->value,
-					'origin' => $price->origin,
-					'number_of_changes' => $price->number_of_changes,
-					'destination' => $price->destination,
-					'return_date' => $price->return_date,
-					'depart_date' => $price->depart_date,
-					'airline' => $price->airline,
-					'trip_class' => $price->trip_class
-				];
+			$priceUrl=' http://map.aviasales.com/prices.json?origin_iata='.$origin.'&period='.$currentDate.':season&direct=true&one_way=false&schengen=true&locale=en&currency=bdt&min_trip_duration_in_days=15&max_trip_duration_in_days=30';
+			$priceOBJ= wp_remote_get( $priceUrl );
+			if(is_wp_error( $priceOBJ)){
+				return false;
 			}
-			wp_send_json_success( $singlePrice, 200 );
-		 }
-	} catch (\Throwable $th) {
-		//throw $th;
-	}
+			$priceBody= wp_remote_retrieve_body( $priceOBJ);
+			$priceDecode=json_decode($priceBody);
+			if($priceDecode&&is_array($priceDecode)){
+				$singlePrice=[];
+				foreach ($priceDecode as $price) {
+					$singlePrice[]=[
+						'value' => number_format($price->value, 0),
+						'origin' => $price->origin,
+						'number_of_changes' => $price->number_of_changes,
+						'destination' => $price->destination,
+						'return_date' => $price->return_date,
+						'depart_date' => $price->depart_date,
+						'airline' => $price->airline,
+						'trip_class' => $price->trip_class
+					];
+				}
+				wp_send_json_success( $singlePrice, 200 );
+			}
+		} catch (\Throwable $th) {
+			//throw $th;
+		}
 
-	wp_send_json_error( "Server error", 500 );
-
-
+		wp_send_json_error( "Server error", 500 );
 	}
 
 	function popularCountries(){
@@ -276,6 +246,38 @@ class Ca_Travelpayout_Public {
 		}
 		
 		wp_send_json_error( "Server error", 500 );
+	}
+
+	function get_flight_ticket_fromCity() {
+		try {
+			if (!isset($_GET['singleTicketData'])) {
+				return false;
+			}
+
+			$origin = $_GET['singleTicketData']['origin'];
+			$destination = $_GET['singleTicketData']['destination'];
+			$depart_date = date("Y-m", strtotime($_GET['singleTicketData']['depart_date']));
+			$return_date = date("Y-m", strtotime($_GET['singleTicketData']['return_date']));
+			$apiToken = '14a1d288b1b2f173ac139063e817575c';
+			$apiUrl = 'https://api.travelpayouts.com/aviasales/v3/prices_for_dates?origin=' . $origin . '&destination=' . $destination . '&departure_at=' . $depart_date . '&return_at=' . $return_date . '&unique=false&sorting=price&direct=false&cy=usd&limit=30&page=1&one_way=true&token=' . $apiToken . '';
+			$response = wp_remote_get($apiUrl);
+			$bodydata = wp_remote_retrieve_body( $response );
+
+			if (is_wp_error($bodydata)) {
+				return false;
+			}
+
+			$response = json_decode($bodydata);
+
+			if ($response === null) {
+				return false;
+			}
+
+			wp_send_json( $response, 200 );
+
+		} catch (\Throwable $th) {
+			throw $th;
+		}
 	}
 
 

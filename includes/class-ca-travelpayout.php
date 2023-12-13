@@ -180,6 +180,8 @@ class Ca_Travelpayout {
 		$this->loader->add_action( 'wp_ajax_nopriv_get_all_price', $plugin_public, 'cat_getPricess');
 		$this->loader->add_action( 'wp_ajax_get_allCityName', $plugin_public, 'cat_allCittyes');
 		$this->loader->add_action( 'wp_ajax_nopriv_get_allCityName', $plugin_public, 'cat_allCittyes');
+		$this->loader->add_action( 'wp_ajax_get_flight_ticket_from_city', $plugin_public, 'get_flight_ticket_fromCity');
+		$this->loader->add_action( 'wp_ajax_nopriv_get_flight_ticket_from_city', $plugin_public, 'get_flight_ticket_fromCity');
 
 
 

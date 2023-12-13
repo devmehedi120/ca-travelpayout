@@ -4,7 +4,7 @@
     </div>
     <div class="card_wraper">
         <div class="card_wraper" v-if="currentPage === 'archive'">
-            <div class="single__card" v-for="(singleCard, index) in cardData" :key="index"
+            <div class="single__card" v-for="(singleCard, index) in filteredData" :key="index"
                 @click="cityGate(singleCard.country_code)">
                 <div class="card__image">
                     <img src="https://cdn.pixabay.com/photo/2018/05/09/01/00/greece-3384386_1280.jpg" alt="">
@@ -15,7 +15,7 @@
                     </div>
                     <div class="amount__area">
                         <span>Flight from</span>
-                        <span class="taka"> BDT {{ formatPrice(singleCard.value) }} </span>
+                        <span class="taka"> BDT {{ singleCard.value }} </span>
                     </div>
                     <div class="stopeg">
                         <small v-if="singleCard.number_of_changes>0">{{singleCard.number_of_changes}}+ stops</small>
@@ -25,8 +25,13 @@
             </div>
         </div>
 
-        <div class="card_wraper"  v-if="currentPage === 'single'">
-            <div class="single__card" v-for="(singleCty, index) in singleCityes" :key="index">
+        <div class="card_wraper"  v-if="currentPage === 'single'" >
+                <div 
+                    class="single__card"
+                    v-for="(singleCty, index) in singleCityes" 
+                    :key="index"  
+                    @click="searchInsideTicket(singleCty)"
+                    >
                 <div class="card__image">
                     <img src="https://cdn.pixabay.com/photo/2018/05/09/01/00/greece-3384386_1280.jpg" alt="">
                 </div>
@@ -36,7 +41,7 @@
                     </div>
                     <div class="amount__area">
                         <span>Flight from</span>
-                        <span class="taka"> BDT {{ formatPrice(singleCty.value) }} </span>
+                        <span class="taka"> BDT {{ singleCty.value }} </span>
                     </div>
                     <div class="stopeg">
                         <small v-if="singleCty.number_of_changes>0">{{singleCty.number_of_changes}}+ stops</small>
