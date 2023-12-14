@@ -25,7 +25,7 @@
             </div>
         </div>
 
-        <div class="card_wraper"  v-if="currentPage === 'single'" >
+        <div class="card_wraper"  v-if="currentPage === 'singlecity'" >
                 <div 
                     class="single__card"
                     v-for="(singleCty, index) in singleCityes" 

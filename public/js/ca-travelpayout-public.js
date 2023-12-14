@@ -1784,10 +1784,28 @@ jQuery(function ($) {
         cardData: [],
         filteredData: [],
         singleCityes: [],
+        flightTicket:[],
+        depertTime:"",
+        returnTime:""
       };
     },
     methods: {
+      getFormattedTime(minutes) {
+          if (isNaN(minutes) || minutes < 0) {
+              return "Invalid input";
+          }
+
+          const hours = Math.floor(minutes / 60);
+          const remainingMinutes = minutes % 60;
+
+          const formattedHours = String(hours).padStart(2, '0');
+          const formattedMinutes = String(remainingMinutes).padStart(2, '0');
+
+          return `${formattedHours}:${formattedMinutes}`;
+      },
       searchInsideTicket(destinc) {
+        const self=this;
+        self.caLoading=true;
         jQuery.ajax({
           type: "get",
           url: catp_fragments.ajaxurl,
@@ -1796,10 +1814,36 @@ jQuery(function ($) {
             singleTicketData: destinc,
           },
           dataType: "json",
-          success: function (response) {},
+          success: function (response) {
+            self.caLoading=false;
+            self.currentPage = 'flightTicket';
+
+            if (response.data.length > 0) {
+              self.flightTicket = response.data.map(d => {
+                  const departureDate = new Date(d.departure_at);
+                  const returnDate = new Date(d.return_at); // Use a separate date object for return_at
+
+                  d.departure_at = `${departureDate.getHours()}:${departureDate.getMinutes()}`;
+                  d.return_at = `${returnDate.getHours()}:${returnDate.getMinutes()}`; // Use returnDate for return_at
+
+                  departureDate.setMinutes(departureDate.getMinutes() + d.duration_to);
+                  returnDate.setMinutes(returnDate.getMinutes() + d.duration_back);
+
+                  d.duration_time = `${departureDate.getHours()}:${departureDate.getMinutes()}`;
+                  d.duration_back = `${returnDate.getHours()}:${returnDate.getMinutes()}`;
+
+                  return d;
+              });
+            }
+
+          
+            console.log(self.flightTicket);
+
+          },
           error: function (error) {},
         });
       },
+
       cityGate(destination) {
         this.caLoading = true;
         setTimeout(() => {
@@ -1808,7 +1852,7 @@ jQuery(function ($) {
           );
 
           this.singleCityes = citiesWithDestination;
-          this.currentPage = "single";
+          this.currentPage = "singlecity";
           this.caLoading = false;
         }, 1000);
       },
@@ -1952,6 +1996,8 @@ jQuery(function ($) {
           self.filteredData = sortedCountries;
         }
       });
+
+     
     },
   }).mount("#caTravelFlight");
 });

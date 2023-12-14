@@ -249,7 +249,9 @@ class Ca_Travelpayout_Public {
 	}
 
 	function get_flight_ticket_fromCity() {
+
 		try {
+		
 			if (!isset($_GET['singleTicketData'])) {
 				return false;
 			}
@@ -259,7 +261,7 @@ class Ca_Travelpayout_Public {
 			$depart_date = date("Y-m", strtotime($_GET['singleTicketData']['depart_date']));
 			$return_date = date("Y-m", strtotime($_GET['singleTicketData']['return_date']));
 			$apiToken = '14a1d288b1b2f173ac139063e817575c';
-			$apiUrl = 'https://api.travelpayouts.com/aviasales/v3/prices_for_dates?origin=' . $origin . '&destination=' . $destination . '&departure_at=' . $depart_date . '&return_at=' . $return_date . '&unique=false&sorting=price&direct=false&cy=usd&limit=30&page=1&one_way=true&token=' . $apiToken . '';
+			$apiUrl = 'https://api.travelpayouts.com/aviasales/v3/prices_for_dates?origin=' . $origin . '&destination=' . $destination . '&departure_at=' . $depart_date . '&return_at=' . $return_date . '&unique=false&sorting=price&direct=false&currency=BDT&limit=30&page=1&one_way=false&token=' . $apiToken . '';
 			$response = wp_remote_get($apiUrl);
 			$bodydata = wp_remote_retrieve_body( $response );
 
@@ -275,8 +277,8 @@ class Ca_Travelpayout_Public {
 
 			wp_send_json( $response, 200 );
 
-		} catch (\Throwable $th) {
-			throw $th;
+		} catch(\Throwable $th) {
+			// throw $th;
 		}
 	}
 
