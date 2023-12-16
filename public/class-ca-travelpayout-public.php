@@ -53,12 +53,6 @@ class Ca_Travelpayout_Public {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;			
 		add_shortcode( 'flyghtShow', [$this, 'flyghtShowHtml'] );
-		
-		// echo '<pre>';
-		// var_dump($this->cat_getPricess());
-		// exit;
-		
-		
 	}
 
 	/**
@@ -80,9 +74,9 @@ class Ca_Travelpayout_Public {
 		 * class.
 		 */
 		
-		
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/ca-travelpayout-public.css', array(), $this->version, 'all' );
 		wp_enqueue_style( 'card__style', plugin_dir_url( __FILE__ ) . 'css/ca-card-section.css', array(), $this->version, 'all' );
+		wp_enqueue_style( 'vue-datepicker', 'https://unpkg.com/@vuepic/vue-datepicker@latest/dist/main.css', array(), $this->version, 'all' );
 		wp_enqueue_style( 'casearch__result', plugin_dir_url( __FILE__ ) . 'css/ca-search-result.css', array(), $this->version, 'all' );
 		
 	}
@@ -96,7 +90,8 @@ class Ca_Travelpayout_Public {
 		wp_enqueue_script( 'vueGlobal', plugin_dir_url( __FILE__ ) . 'js/vue.global.js', array(  ), $this->version, false );
 		wp_enqueue_script( 'uuidv4', plugin_dir_url( __FILE__ ) . 'js/uuidv4.js', array(  ), $this->version, false );
 		wp_enqueue_script( 'cataxios', 'https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js', array(  ), $this->version, false );
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ca-travelpayout-public.js', array( 'jquery','vueGlobal', 'cataxios' ), $this->version, false );
+		wp_enqueue_script( 'vue-datepicker', 'https://unpkg.com/@vuepic/vue-datepicker@latest', array(  ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ca-travelpayout-public.js', array( 'jquery','vueGlobal', 'cataxios' ), $this->version, true );
 		wp_localize_script( $this->plugin_name, 'catp_fragments', array(
 			'ajaxurl' => admin_url("admin-ajax.php")
 		) );

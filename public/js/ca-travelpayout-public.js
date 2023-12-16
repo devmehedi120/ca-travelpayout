@@ -1,5 +1,6 @@
 jQuery(function ($) {
   Vue.createApp({
+    components: { Datepicker: VueDatePicker },
     data() {
       return {
         currentPage: "archive",
