@@ -3,6 +3,9 @@ jQuery(function ($) {
     components: { Datepicker: VueDatePicker },
     data() {
       return {
+        selectedCity: null,
+        showOptions: false,
+        dddate:'',
         currentPage: "archive",
         caLoading: true,
         userlocation: "",
@@ -1790,7 +1793,24 @@ jQuery(function ($) {
         returnTime:""
       };
     },
+      computed: {
+                filteredCities() {
+                    if (!this.selectedCity) {
+                        return this.allCities;
+                    }
+
+                    const searchTerm = this.selectedCity.toLowerCase();
+                    return this.allCities.filter(city => city.cityName.toLowerCase().includes(searchTerm));
+                }
+            },
     methods: {
+       showDropdown() {
+                    this.showOptions = true;
+                },
+      selectCity(city) {
+                    this.selectedCity = city.city_code;
+                    this.showOptions = false;
+                },
       getFormattedTime(minutes) {
           if (isNaN(minutes) || minutes < 0) {
               return "Invalid input";
@@ -1993,6 +2013,9 @@ jQuery(function ($) {
           const sortedCountries = filteredData.sort((a, b) => {
             return parseFloat(a.value) - parseFloat(b.value);
           });
+
+          self.allCities=response.data;
+          console.log( self.allCities);
 
           self.filteredData = sortedCountries;
         }

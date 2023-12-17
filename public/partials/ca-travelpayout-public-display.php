@@ -53,7 +53,14 @@
                                 <div class="location-wrap">
                                     <label for="travelFrom">From</label>
                                     <div id="travelFrom" class="inputFild">
-                                        <Datepicker v-model="dddate"></Datepicker>
+                                        <div class="custom-select-container">
+            <input v-model="selectedCity" @focus="showDropdown" class="custom-select-input" placeholder="Select a city">
+            <div v-if="showOptions" class="custom-select-dropdown">
+                <div v-for="city in filteredCities" :key="city.city_code" @click="selectCity(city)" class="custom-select-option">
+                    {{ city.cityName }}
+                </div>
+            </div>
+        </div>
                                     </div>
                                     <div class="location-toggle">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"
@@ -106,13 +113,17 @@
                             <div class="locationSet">
                                 <div class="location-wrap">
                                     <label for="depart">Depart</label>
-                                    <input id="depart" type="text" class="inputFild">
+                                    <div id="depart" class="inputFild">
+                                        <Datepicker v-model="dddate"></Datepicker>
+                                    </div>
                                 </div>
                             </div>
                             <div class="locationSet">
                                 <div class="location-wrap">
                                     <label for="return">Return</label>
-                                    <input id="return" type="text" class="inputFild">
+                                     <div id="return" class="inputFild">
+                                        <Datepicker v-model="dddate"></Datepicker>
+                                    </div>
                                 </div>
                             </div>
                         </div>
