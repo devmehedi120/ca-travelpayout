@@ -1,6 +1,46 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500&display=swap');
 
-.searchFlightWraper{
+
+
+
+.custom-select-container {
+    position: relative;
+    width: 100%;
+}
+
+.custom-select-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.custom-select-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-top: none;
+    background-color: #fff;
+    text-align: center;
+}
+
+.custom-select-option {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.custom-select-option:hover {
+    background-color: #f2f2f2;
+}
+
+/* --------------------------------------------------------- */
+
+.searchFlightWraper {
     height: auto;
     width: 100%;
     background-color: #f7f7f7;
@@ -20,6 +60,7 @@
     justify-content: center;
     align-items: center;
 }
+
 .search-filter {
     display: flex;
     width: 100%;
@@ -30,6 +71,7 @@
     flex-direction: column;
     gap: 15px;
 }
+
 .inputBox {
     display: flex;
     gap: 15px;
@@ -40,6 +82,7 @@
     justify-content: space-between;
     gap: 4px;
 }
+
 .location-wrap {
     display: flex;
     flex-direction: column;
@@ -64,12 +107,14 @@ input.radioBtn {
     width: 25%;
     flex-direction: column;
 }
+
 form#caFlyghtSearch {
     display: flex;
     flex-direction: column;
     gap: 10px;
     width: 100%;
 }
+
 .location-toggle {
     position: absolute;
     display: flex;
@@ -94,14 +139,16 @@ input.inputFild {
     outline: none;
     background-color: #fff;
 }
-input.inputFild:focus{
+
+input.inputFild:focus {
     border: 1px solid #d6d6d6;
     transition: 0.3s ease-in-out;
 }
 
-.input__padding{
+.input__padding {
     padding: 10px;
 }
+
 form#caFlyghtSearch {
     display: flex;
     flex-direction: column;
@@ -118,6 +165,7 @@ form#caFlyghtSearch {
     border: none;
     margin-top: 10px;
 }
+
 input#submitBtn {
     border: 1px solid #d6d6d6;
     background-color: #1e90ff00;
@@ -125,15 +173,18 @@ input#submitBtn {
     border-radius: 5px;
     color: #000;
 }
+
 input#submitBtn:hover {
     color: blueviolet;
     border: 1px solid blueviolet;
     transition: 0.4s ease;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
+
 input#checkNearby {
     margin-left: 5px;
 }
+
 .checkBox__group {
     display: flex;
     justify-content: left;
@@ -166,7 +217,7 @@ input#checkNearby {
     background-color: #fff;
 }
 
-.fieldGroup input:focus{
+.fieldGroup input:focus {
     border: 1px solid #d6d6d6;
     transition: 0.3s ease-in-out;
 }

@@ -53,6 +53,10 @@ class Ca_Travelpayout_Public {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;			
 		add_shortcode( 'flyghtShow', [$this, 'flyghtShowHtml'] );
+
+
+	
+		
 	}
 
 	/**
@@ -276,6 +280,47 @@ class Ca_Travelpayout_Public {
 			// throw $th;
 		}
 	}
+
+	function get_travel_prices() {
+  try {
+
+	if(!isset($_GET['apiParam'])){
+		return false;
+	}else{
+      var_dump($_GET['apiParam']) ;
+	  exit;
+	}
+
+	  $apiKey = '14a1d288b1b2f173ac139063e817575c';
+    $origin = $GET['apiParam']['origin'];
+    $destination = $GET['apiParam']['destination'];
+    $currency = 'usd';
+
+    $apiUrl = 'https://api.travelpayouts.com/v2/prices/latest';
+    $url = "$apiUrl?token=$apiKey&origin=$origin&destination=$destination&currency=$currency";
+
+    // Make the API request
+    $response = wp_remote_get($url);
+
+    // Check if the request was successful
+    if (is_wp_error($response)) {
+        return 'Error fetching data';
+    }
+
+    // Decode the JSON response
+    $data = json_decode(wp_remote_retrieve_body($response), true);
+
+    // Check if decoding was successful
+    if ($data === null) {
+        return 'Error decoding JSON';
+    }
+
+    // Output the data
+    wp_send_json( $data, 200 );
+  } catch (\Throwable $th) {
+	//throw $th;
+  }
+}
 
 
 	function flyghtShowHtml(){	
