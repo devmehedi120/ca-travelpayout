@@ -1989,7 +1989,7 @@ jQuery(function ($) {
           });
         });
       },
-      async allCityNames() {
+      async allCityNamesHandle() {
         const self = this;
         return new Promise((resolve, reject) => {
           jQuery.ajax({
@@ -2026,7 +2026,7 @@ jQuery(function ($) {
         self.allCityPrices = response.data;
       });
 
-      await self.allCityNames().then((response) => {
+      await self.allCityNamesHandle().then((response) => {
         if (self.allCityPrices.length > 0 && response.data.length > 0) {
           const mergedData = self.allCityPrices.map((city) => {
             const matchingResponseCity = response.data.find(
@@ -2073,8 +2073,7 @@ jQuery(function ($) {
           });
 
           self.allCities = response.data;
-          console.log(self.allCities);
-
+      
           self.filteredData = sortedCountries;
         }
       });

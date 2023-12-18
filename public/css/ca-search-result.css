@@ -1,13 +1,19 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500&family=Roboto:wght@300;400;700&display=swap');
+
+p.textSelect {
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  display: flex;
+}
 
 div#flightTicketPage {
   display: flex;
   width: 100%;
-  margin:0;
+  margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
-  
+
 }
 
 div.stopsFilterWrap {
@@ -100,37 +106,40 @@ input#one__stopinc {
   height: 20px;
   width: 20px;
 }
+
 div.flightTicket {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 75%;
-  margin:0;
+  margin: 0;
   padding: 0;
-  background-color:#fff;
+  background-color: #fff;
   flex-direction: column;
   font-family: 'Poppins', sans-serif;
 
 }
 
 .ticketWrap {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-    width: 90%;
-    color: #545860;
-    flex-direction: column;
-    gap: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  width: 90%;
+  color: #545860;
+  flex-direction: column;
+  gap: 20px;
 }
+
 .doubl_ticket {
-    display: flex;   
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    border-bottom: 1px solid #e9e6e6;
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid #e9e6e6;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
+
 .logoNtime {
   width: 70%;
   display: flex;
@@ -143,6 +152,7 @@ div.flightTicket {
   flex-direction: column;
   padding: 1.5rem;
 }
+
 .flightTime {
   display: flex;
   justify-content: center;
@@ -200,20 +210,20 @@ span.svg {
   align-items: center;
 }
 
-.timeStmp{
-        font-size: 1.5rem;
-      line-height: 2rem;
-      font-weight: 400;
+.timeStmp {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 400;
 }
 
-.flghtLocation{
-      font-size: 1rem;
-      line-height: 1.5rem;
-      font-weight: 400;
-  
+.flghtLocation {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 400;
+
 }
 
-.tjNtjn{
+.tjNtjn {
   font-size: .75rem;
   line-height: 1rem;
   font-weight: 400;
@@ -251,6 +261,7 @@ button.pricebutton {
   align-items: center;
   padding: 8px;
 }
+
 button.pricebutton:hover {
   color: #ddd;
   transition: 0.3s ease;
@@ -264,8 +275,8 @@ div#ticketNavbar {
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
-  
-  
+
+
 }
 
 .ticketnav__wraper {
@@ -276,10 +287,11 @@ div#ticketNavbar {
   color: #545860;
   padding: 5px;
   border-radius: 5px;
-  width:90%;
-  box-shadow:  rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  
+  width: 90%;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
 }
+
 div.navList {
   display: inline-flex;
   align-content: center;
@@ -302,20 +314,23 @@ button.navItem {
 
 }
 
-#flightTIcke > div.ticketWrap > div.ticketPrice > button > p{
+#flightTIcke>div.ticketWrap>div.ticketPrice>button>p {
   margin: 0;
 }
-button.navItem p{
+
+button.navItem p {
   margin: 0;
 }
-.navList button:active{
+
+.navList button:active {
   background-color: #130f40;
   color: #fff;
 }
+
 .bestPricewraer {
   display: flex;
   flex-direction: column;
- 
+
 }
 
 span.best__pp, .pp_size {
@@ -323,7 +338,7 @@ span.best__pp, .pp_size {
 
 }
 
-span.best__pp{
+span.best__pp {
   margin-bottom: 10px;
 }
 
@@ -333,7 +348,7 @@ span.Best__pp__amount {
   line-height: 1.5;
 }
 
-.borderRight{
+.borderRight {
   border-right: 1px solid #b2b2b2;
 }
 
@@ -341,84 +356,86 @@ svg.LegInfo_planeEnd__ZDkxM {
   width: 18px;
 }
 
-.borderleftRadius{
+.borderleftRadius {
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
 }
-.borderrighttRadius{
+
+.borderrighttRadius {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
 }
 
-p.alertPriceUpdate{
+p.alertPriceUpdate {
   margin-bottom: 0px;
 }
 
 
 
 
-  .checkbox-wrapper-27 .checkbox {
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-  }
-  .checkbox-wrapper-27 .checkbox > input[type="checkbox"] {
-    position: absolute;
-    opacity: 0;
-    z-index: -1;
-  }
+.checkbox-wrapper-27 .checkbox {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
 
-  .checkbox-wrapper-27 .checkbox__icon {
-    display: inline-block;
-    color: #999;
-    vertical-align: middle;
-    margin-right: 5px;
-  }
-  .checkbox-wrapper-27 input[type="checkbox"]:checked ~ .checkbox__icon {
-    color: #2A7DEA;
-  }
+.checkbox-wrapper-27 .checkbox>input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
 
-  .checkbox-wrapper-27 .checkbox__icon:before {
-    font-family: "icons-27";
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    /* Better Font Rendering =========== */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+.checkbox-wrapper-27 .checkbox__icon {
+  display: inline-block;
+  color: #999;
+  vertical-align: middle;
+  margin-right: 5px;
+}
 
-  .checkbox-wrapper-27 .icon--check:before,
-  .checkbox-wrapper-27 input[type="checkbox"]:checked ~ .checkbox__icon:before {
-    content: "\e601";
-  }
+.checkbox-wrapper-27 input[type="checkbox"]:checked~.checkbox__icon {
+  color: #2A7DEA;
+}
 
-  .checkbox-wrapper-27 .icon--check-empty:before,
-  .checkbox-wrapper-27 .checkbox__icon:before {
-    content: "\e600";
-  }
+.checkbox-wrapper-27 .checkbox__icon:before {
+  font-family: "icons-27";
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-  .loadingEnimation{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    backdrop-filter: blur(2px);
-    z-index: 99999;
-  }
+.checkbox-wrapper-27 .icon--check:before,
+.checkbox-wrapper-27 input[type="checkbox"]:checked~.checkbox__icon:before {
+  content: "\e601";
+}
 
-  @font-face {
-    font-family: "icons-27";
-    font-weight: normal;
-    font-style: normal;
-    src: url("data:application/x-font-woff;charset=utf-8;base64,d09GRk9UVE8AAAR4AAoAAAAABDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABDRkYgAAAA9AAAAPgAAAD4fZUAVE9TLzIAAAHsAAAAYAAAAGAIIvy3Y21hcAAAAkwAAABMAAAATBpVzFhnYXNwAAACmAAAAAgAAAAIAAAAEGhlYWQAAAKgAAAANgAAADYAeswzaGhlYQAAAtgAAAAkAAAAJAPiAedobXR4AAAC/AAAABgAAAAYBQAAAG1heHAAAAMUAAAABgAAAAYABlAAbmFtZQAAAxwAAAE5AAABOUQYtNZwb3N0AAAEWAAAACAAAAAgAAMAAAEABAQAAQEBCGljb21vb24AAQIAAQA6+BwC+BsD+BgEHgoAGVP/i4seCgAZU/+LiwwHi2v4lPh0BR0AAAB8Dx0AAACBER0AAAAJHQAAAO8SAAcBAQgPERMWGyBpY29tb29uaWNvbW9vbnUwdTF1MjB1RTYwMHVFNjAxAAACAYkABAAGAQEEBwoNL2X8lA78lA78lA77lA6L+HQVi/yU+JSLi/iU/JSLBd83Fffsi4v77Pvsi4v37AUOi/h0FYv8lPiUi4v33zc3i/s3++yLi/fs9zeL398F9wCFFftN+05JzUdI9xr7GveR95FHzwUO+JQU+JQViwwKAAMCAAGQAAUAAAFMAWYAAABHAUwBZgAAAPUAGQCEAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAAAAAAAAQAAA5gEB4P/g/+AB4AAgAAAAAQAAAAAAAAAAAAAAIAAAAAAAAgAAAAMAAAAUAAMAAQAAABQABAA4AAAACgAIAAIAAgABACDmAf/9//8AAAAAACDmAP/9//8AAf/jGgQAAwABAAAAAAAAAAAAAAABAAH//wAPAAEAAAAAAACkYCfgXw889QALAgAAAAAAz65FuwAAAADPrkW7AAD/4AIAAeAAAAAIAAIAAAAAAAAAAQAAAeD/4AAAAgAAAAAAAgAAAQAAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAABAAAAAgAAAAIAAAAAAFAAAAYAAAAAAA4ArgABAAAAAAABAA4AAAABAAAAAAACAA4ARwABAAAAAAADAA4AJAABAAAAAAAEAA4AVQABAAAAAAAFABYADgABAAAAAAAGAAcAMgABAAAAAAAKACgAYwADAAEECQABAA4AAAADAAEECQACAA4ARwADAAEECQADAA4AJAADAAEECQAEAA4AVQADAAEECQAFABYADgADAAEECQAGAA4AOQADAAEECQAKACgAYwBpAGMAbwBtAG8AbwBuAFYAZQByAHMAaQBvAG4AIAAxAC4AMABpAGMAbwBtAG8AbwBuaWNvbW9vbgBpAGMAbwBtAG8AbwBuAFIAZQBnAHUAbABhAHIAaQBjAG8AbQBvAG8AbgBHAGUAbgBlAHIAYQB0AGUAZAAgAGIAeQAgAEkAYwBvAE0AbwBvAG4AAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==") format("woff");
-  }
+.checkbox-wrapper-27 .icon--check-empty:before,
+.checkbox-wrapper-27 .checkbox__icon:before {
+  content: "\e600";
+}
 
+.loadingEnimation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  backdrop-filter: blur(2px);
+  z-index: 99999;
+}
+
+@font-face {
+  font-family: "icons-27";
+  font-weight: normal;
+  font-style: normal;
+  src: url("data:application/x-font-woff;charset=utf-8;base64,d09GRk9UVE8AAAR4AAoAAAAABDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABDRkYgAAAA9AAAAPgAAAD4fZUAVE9TLzIAAAHsAAAAYAAAAGAIIvy3Y21hcAAAAkwAAABMAAAATBpVzFhnYXNwAAACmAAAAAgAAAAIAAAAEGhlYWQAAAKgAAAANgAAADYAeswzaGhlYQAAAtgAAAAkAAAAJAPiAedobXR4AAAC/AAAABgAAAAYBQAAAG1heHAAAAMUAAAABgAAAAYABlAAbmFtZQAAAxwAAAE5AAABOUQYtNZwb3N0AAAEWAAAACAAAAAgAAMAAAEABAQAAQEBCGljb21vb24AAQIAAQA6+BwC+BsD+BgEHgoAGVP/i4seCgAZU/+LiwwHi2v4lPh0BR0AAAB8Dx0AAACBER0AAAAJHQAAAO8SAAcBAQgPERMWGyBpY29tb29uaWNvbW9vbnUwdTF1MjB1RTYwMHVFNjAxAAACAYkABAAGAQEEBwoNL2X8lA78lA78lA77lA6L+HQVi/yU+JSLi/iU/JSLBd83Fffsi4v77Pvsi4v37AUOi/h0FYv8lPiUi4v33zc3i/s3++yLi/fs9zeL398F9wCFFftN+05JzUdI9xr7GveR95FHzwUO+JQU+JQViwwKAAMCAAGQAAUAAAFMAWYAAABHAUwBZgAAAPUAGQCEAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAAAAAAAAQAAA5gEB4P/g/+AB4AAgAAAAAQAAAAAAAAAAAAAAIAAAAAAAAgAAAAMAAAAUAAMAAQAAABQABAA4AAAACgAIAAIAAgABACDmAf/9//8AAAAAACDmAP/9//8AAf/jGgQAAwABAAAAAAAAAAAAAAABAAH//wAPAAEAAAAAAACkYCfgXw889QALAgAAAAAAz65FuwAAAADPrkW7AAD/4AIAAeAAAAAIAAIAAAAAAAAAAQAAAeD/4AAAAgAAAAAAAgAAAQAAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAABAAAAAgAAAAIAAAAAAFAAAAYAAAAAAA4ArgABAAAAAAABAA4AAAABAAAAAAACAA4ARwABAAAAAAADAA4AJAABAAAAAAAEAA4AVQABAAAAAAAFABYADgABAAAAAAAGAAcAMgABAAAAAAAKACgAYwADAAEECQABAA4AAAADAAEECQACAA4ARwADAAEECQADAA4AJAADAAEECQAEAA4AVQADAAEECQAFABYADgADAAEECQAGAA4AOQADAAEECQAKACgAYwBpAGMAbwBtAG8AbwBuAFYAZQByAHMAaQBvAG4AIAAxAC4AMABpAGMAbwBtAG8AbwBuaWNvbW9vbgBpAGMAbwBtAG8AbwBuAFIAZQBnAHUAbABhAHIAaQBjAG8AbQBvAG8AbgBHAGUAbgBlAHIAYQB0AGUAZAAgAGIAeQAgAEkAYwBvAE0AbwBvAG4AAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==") format("woff");
+}

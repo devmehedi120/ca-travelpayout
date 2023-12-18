@@ -2,3 +2,18 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
+
+.widefade {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    gap: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.widefade h1.title {
+    user-select: none;
+    font-family: sans-serif;
+}

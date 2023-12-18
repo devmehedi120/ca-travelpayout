@@ -103,7 +103,7 @@
                     </div>
                     <div class="flightTime">
                         <div class="startTimeContainer">
-                            <span class="stTime timeStmp">Time</span>
+                            <span class="stTime timeStmp">{{ticket.departure_at}}</span>
                             <span class="stlocation flghtLocation">{{ticket.origin_airport}}</span>
                         </div>
                         <div class="timeHours">
@@ -119,10 +119,12 @@
                                     </svg>
                                 </span>
                             </div>
-                            <span class="flightType tjNtjn">Direct</span>
+                            <span v-if="ticket.transfers==0" class="flightType tjNtjn">Direct</span>
+                            <span v-else class="flightType tjNtjn">{{ticket.transfers}} +stops</span>
+                           
                         </div>
                         <div class="reachTimeContainer">
-                            <span class="rchTime timeStmp">Time</span>
+                            <span class="rchTime timeStmp">{{ticket.duration_time}}</span>
                             <span class="rchLocatioon flghtLocation"> {{ticket.destination_airport}}</span>
                         </div>
                     </div>
@@ -148,7 +150,7 @@
                     </div>
                     <div class="flightTime">
                         <div class="startTimeContainer">
-                            <span class="stTime timeStmp">time</span>
+                            <span class="stTime timeStmp">{{ticket.return_at}}</span>
                             <span class="stlocation flghtLocation">{{ticket.destination_airport}}</span>
                         </div>
                         <div class="timeHours">
@@ -164,10 +166,11 @@
                                     </svg>
                                 </span>
                             </div>
-                            <span class="flightType tjNtjn">Direct</span>
+                              <span v-if="ticket.return_transfers==0" class="flightType tjNtjn">Direct</span>
+                            <span v-else  class="flightType tjNtjn">{{ticket.return_transfers}} +stops</span>
                         </div>
                         <div class="reachTimeContainer">
-                            <span class="rchTime timeStmp">Time</span>
+                            <span class="rchTime timeStmp">{{ticket.duration_back}}</span>
                             <span class="rchLocatioon flghtLocation">{{ticket.origin_airport}} </span>
                         </div>
                     </div>
@@ -175,9 +178,9 @@
                 </div>
                 <div class="ticketPrice">
                     <span class="deallenth">One deals from</span>
-                    <span class="totalAmount"> 13000 BDT</span>
+                    <span class="totalAmount"> {{ticket.price}}</span>
                     <button class="pricebutton">
-                        <p>Select</p> <svg fill="#fff" width="25px" height="25px" viewBox="0 0 24 24" id="right-arrow"
+                        <p class="textSelect">Select</p> <svg fill="#fff" width="25px" height="25px" viewBox="0 0 24 24" id="right-arrow"
                             xmlns="http://www.w3.org/2000/svg" class="icon line">
                             <path id="primary" d="M3,12H21m-3,3,3-3L18,9"
                                 style="fill: none; stroke: #fff; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2.0;">

@@ -61,18 +61,7 @@ class Ca_Travelpayout_Admin {
 	 */
 	public function enqueue_styles() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Ca_Travelpayout_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Ca_Travelpayout_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
+		
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/ca-travelpayout-admin.css', array(), $this->version, 'all' );
 
 	}
@@ -84,20 +73,30 @@ class Ca_Travelpayout_Admin {
 	 */
 	public function enqueue_scripts() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Ca_Travelpayout_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Ca_Travelpayout_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
+		
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ca-travelpayout-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
 
+	function ca_menu_page(){
+		 // Parameters for add_menu_page function
+    $page_title = 'Flight Data By Travelpayout';
+    $menu_title = 'Flight Data ';
+    $capability = 'manage_options';
+    $menu_slug = 'ca-flight-menu';
+    $icon_url = 'dashicons-airplane';
+    $position = 10;
+
+    // Add a top-level menu page
+    add_menu_page($page_title, $menu_title, $capability, $menu_slug, [$this, 'ca_flight_data_html'], $icon_url, $position);
+
+
+	}
+
+	function ca_flight_data_html(){
+		    ob_start();
+			require_once plugin_dir_path( __FILE__ )."partials/shortcode.php";
 }
+
+};

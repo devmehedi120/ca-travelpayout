@@ -53,8 +53,7 @@ class Ca_Travelpayout_Public {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;			
 		add_shortcode( 'flyghtShow', [$this, 'flyghtShowHtml'] );
-
-
+		
 	
 		
 	}
@@ -185,7 +184,7 @@ class Ca_Travelpayout_Public {
 			$currentDate = date('Y-m-d');
 			// // $newDate = date('Y-m-d', strtotime('+10 days', strtotime($currentDate)));
 
-			$priceUrl=' http://map.aviasales.com/prices.json?origin_iata='.$origin.'&period='.$currentDate.':season&direct=true&one_way=false&schengen=true&locale=en&currency=bdt&min_trip_duration_in_days=15&max_trip_duration_in_days=30';
+			$priceUrl=' http://map.aviasales.com/prices.json?origin_iata='.$origin.'&currency=bdt';
 			$priceOBJ= wp_remote_get( $priceUrl );
 			if(is_wp_error( $priceOBJ)){
 				return false;
