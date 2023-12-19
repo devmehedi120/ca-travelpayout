@@ -10,7 +10,9 @@ jQuery(function ($) {
         showOptions: false,
         showToOptions: false,
         deparedDate: null,
+        formatedDeparedDate: null,
         returnDate: null,
+        formatedReturnDate: null,
         currentPage: "archive",
         caLoading: true,
         userlocation: "",
@@ -1796,24 +1798,41 @@ jQuery(function ($) {
         flightTicket: [],
         depertTime: "",
         returnTime: "",
+        currentCurrencyCode: catp_fragments.currentCurrency,
       };
+    },
+    watch: {
+      deparedDate(value) {
+        if (value) {
+          const depDate = new Date(value);
+          const month = (depDate.getMonth() + 1).toString().padStart(2, "0");
+          const day = depDate.getDate().toString().padStart(2, "0");
+          this.formatedDeparedDate = `${depDate.getFullYear()}-${month}-${day}`;
+        }
+      },
+      returnDate(value) {
+        if (value) {
+          const returnDate = new Date(value);
+          const month = (returnDate.getMonth() + 1).toString().padStart(2, "0");
+          const day = returnDate.getDate().toString().padStart(2, "0");
+          this.formatedReturnDate = `${returnDate.getFullYear()}-${month}-${day}`;
+        }
+      },
     },
     computed: {
       filteredCities() {
-        if (!this.selectedToCity) {
-          return this.allCities;
-        }
-
+          if (!this.selectedCity) {
+            return this.allCities;
+          }
         const searchTerm = this.selectedCity.toLowerCase();
         return this.allCities.filter((city) =>
           city.cityName.toLowerCase().includes(searchTerm)
         );
       },
       filteredToCities() {
-        if (!this.selectedCity) {
-          return this.allCities;
-        }
-
+          if (!this.selectedToCity) {
+            return this.allCities;
+          }
         const searchTerm = this.selectedToCity.toLowerCase();
         return this.allCities.filter((city) =>
           city.cityName.toLowerCase().includes(searchTerm)
@@ -1833,13 +1852,13 @@ jQuery(function ($) {
         this.selectedCity = city.cityName;
         this.selectedCityCode = city.city_code;
         this.showOptions = false;
-        console.log(this.selectedCityCode);
+       
       },
       selectToCity(city) {
         this.selectedToCity = city.cityName;
         this.selectedToCityCode = city.city_code;
         this.showToOptions = false;
-        console.log(this.selectedToCityCode);
+       
       },
       getFormattedTime(minutes) {
         if (isNaN(minutes) || minutes < 0) {
@@ -1866,14 +1885,36 @@ jQuery(function ($) {
             apiParam: {
               origin: self.selectedCityCode,
               destination: self.selectedToCityCode,
-              depure: self.deparedDate,
-              return: self.returnDate,
+              depure: self.formatedDeparedDate,
+              return: self.formatedReturnDate,
             },
           },
           dataType: "json",
           success: function (response) {
             self.caLoading = false;
-            console.log(response.data);
+             if (response.data.length > 0) {
+               self.flightTicket = response.data.map((d) => {
+                 const departureDate = new Date(d.departure_at);
+                 const returnDate = new Date(d.return_at); // Use a separate date object for return_at
+
+                 d.departure_at = `${departureDate.getHours()}:${departureDate.getMinutes()}`;
+                 d.return_at = `${returnDate.getHours()}:${returnDate.getMinutes()}`; // Use returnDate for return_at
+
+                 departureDate.setMinutes(
+                   departureDate.getMinutes() + d.duration_to
+                 );
+                 returnDate.setMinutes(
+                   returnDate.getMinutes() + d.duration_back
+                 );
+
+                 d.duration_time = `${departureDate.getHours()}:${departureDate.getMinutes()}`;
+                 d.duration_back = `${returnDate.getHours()}:${returnDate.getMinutes()}`;
+
+                 return d;
+               });
+             }
+
+            self.currentPage = 'flightTicket';
           },
           erorr: function (erorr) {},
         });
@@ -1915,7 +1956,7 @@ jQuery(function ($) {
               });
             }
 
-            console.log(self.flightTicket);
+            
           },
           error: function (error) {},
         });
@@ -2073,7 +2114,7 @@ jQuery(function ($) {
           });
 
           self.allCities = response.data;
-      
+
           self.filteredData = sortedCountries;
         }
       });

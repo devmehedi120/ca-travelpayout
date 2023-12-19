@@ -40,6 +40,8 @@ class Ca_Travelpayout_Public {
 	 */
 	private $version;
 	private $travel;
+	public $currentIp;
+	public $currentCurrencyCode;
 
 	/**
 	 * Initialize the class and set its properties.
@@ -54,8 +56,17 @@ class Ca_Travelpayout_Public {
 		$this->version = $version;			
 		add_shortcode( 'flyghtShow', [$this, 'flyghtShowHtml'] );
 		
-	
-		
+		$ipObject = wp_remote_get( 'https://api.ipify.org' );
+		$ipAddress = wp_remote_retrieve_body($ipObject);
+
+		if($ipAddress){
+			$this->currentIp = $ipAddress;
+
+			$currency = wp_remote_get( "https://ipapi.co/$ipAddress/currency/" );
+			$currencyCode = wp_remote_retrieve_body($currency);
+
+			$this->currentCurrencyCode = $currencyCode;
+		}
 	}
 
 	/**
@@ -96,7 +107,8 @@ class Ca_Travelpayout_Public {
 		wp_enqueue_script( 'vue-datepicker', 'https://unpkg.com/@vuepic/vue-datepicker@latest', array(  ), $this->version, false );
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ca-travelpayout-public.js', array( 'jquery','vueGlobal', 'cataxios' ), $this->version, true );
 		wp_localize_script( $this->plugin_name, 'catp_fragments', array(
-			'ajaxurl' => admin_url("admin-ajax.php")
+			'ajaxurl' => admin_url("admin-ajax.php"),
+			'currentCurrency' => $this->currentCurrencyCode
 		) );
 	}
      
@@ -184,7 +196,7 @@ class Ca_Travelpayout_Public {
 			$currentDate = date('Y-m-d');
 			// // $newDate = date('Y-m-d', strtotime('+10 days', strtotime($currentDate)));
 
-			$priceUrl=' http://map.aviasales.com/prices.json?origin_iata='.$origin.'&currency=bdt';
+			$priceUrl=' http://map.aviasales.com/prices.json?origin_iata='.$origin.'&currency='.$this->currentCurrencyCode;
 			$priceOBJ= wp_remote_get( $priceUrl );
 			if(is_wp_error( $priceOBJ)){
 				return false;
@@ -281,45 +293,42 @@ class Ca_Travelpayout_Public {
 	}
 
 	function get_travel_prices() {
-  try {
+		try {
 
-	if(!isset($_GET['apiParam'])){
-		return false;
-	}else{
-      var_dump($_GET['apiParam']) ;
-	  exit;
+			if(!isset($_GET['apiParam'])){
+				return false;
+			}
+
+			$apiKey = '14a1d288b1b2f173ac139063e817575c';
+			$origin = $_GET['apiParam']['origin'];
+			$destination = $_GET['apiParam']['destination'];
+			$depure = $_GET['apiParam']['depure'];
+			$return = $_GET['apiParam']['return'];
+			$currency = $this->currentCurrencyCode;
+
+			$url = "https://api.travelpayouts.com/aviasales/v3/prices_for_dates?origin=$origin&destination=$destination&departure_at=$depure&return_at=$return&unique=false&sorting=price&direct=false&currency=$currency&limit=30&page=1&one_way=true&token=$apiKey";
+
+			// Make the API request
+			$response = wp_remote_get($url);
+
+			// Check if the request was successful
+			if (is_wp_error($response)) {
+				return 'Error fetching data';
+			}
+
+			// Decode the JSON response
+			$data = json_decode(wp_remote_retrieve_body($response), true);
+
+			// Check if decoding was successful
+			if ($data === null) {
+				return 'Error decoding JSON';
+			}
+			// Output the data
+			wp_send_json( $data, 200 );
+		} catch (\Throwable $th) {
+			//throw $th;
+		}
 	}
-
-	  $apiKey = '14a1d288b1b2f173ac139063e817575c';
-    $origin = $GET['apiParam']['origin'];
-    $destination = $GET['apiParam']['destination'];
-    $currency = 'usd';
-
-    $apiUrl = 'https://api.travelpayouts.com/v2/prices/latest';
-    $url = "$apiUrl?token=$apiKey&origin=$origin&destination=$destination&currency=$currency";
-
-    // Make the API request
-    $response = wp_remote_get($url);
-
-    // Check if the request was successful
-    if (is_wp_error($response)) {
-        return 'Error fetching data';
-    }
-
-    // Decode the JSON response
-    $data = json_decode(wp_remote_retrieve_body($response), true);
-
-    // Check if decoding was successful
-    if ($data === null) {
-        return 'Error decoding JSON';
-    }
-
-    // Output the data
-    wp_send_json( $data, 200 );
-  } catch (\Throwable $th) {
-	//throw $th;
-  }
-}
 
 
 	function flyghtShowHtml(){	

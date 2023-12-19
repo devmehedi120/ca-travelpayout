@@ -15,7 +15,7 @@
                     </div>
                     <div class="amount__area">
                         <span>Flight from</span>
-                        <span class="taka"> BDT {{ singleCard.value }} </span>
+                        <span class="taka"> {{currentCurrencyCode}} {{ singleCard.value }} </span>
                     </div>
                     <div class="stopeg">
                         <small v-if="singleCard.number_of_changes>0">{{singleCard.number_of_changes}}+ stops</small>
@@ -37,7 +37,7 @@
                     </div>
                     <div class="amount__area">
                         <span>Flight from</span>
-                        <span class="taka"> BDT {{ singleCty.value }} </span>
+                        <span class="taka"> {{currentCurrencyCode}} {{ singleCty.value }} </span>
                     </div>
                     <div class="stopeg">
                         <small v-if="singleCty.number_of_changes>0">{{singleCty.number_of_changes}}+ stops</small>

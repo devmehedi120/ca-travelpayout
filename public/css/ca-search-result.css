@@ -433,6 +433,12 @@ p.alertPriceUpdate {
   z-index: 99999;
 }
 
+.double_ticket_fragment {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
 @font-face {
   font-family: "icons-27";
   font-weight: normal;
