@@ -59,6 +59,7 @@
                                             <div v-if="showOptions" class="custom-select-dropdown">
                                                 <div v-for="city in filteredCities" :key="city.city_code"
                                                     @click="selectCity(city)" class="custom-select-option">
+                                                    {{ city.cityName }}
                                                     
                                                 </div>
                                             </div>
@@ -138,6 +139,11 @@
                                 </div>
                             </div>
                         </div>
+                         <div class="search__buton">
+                        <div class="search__inner">
+                            <span @click="handle_specific_ticket()" id="submitBtn" > submit </span>
+                        </div>
+                    </div>
 
                     </div>
 
@@ -179,6 +185,11 @@
                                 </div>
                             </div>
                         </div>
+                         <div class="search__buton">
+                        <div class="search__inner">
+                            <span  id="submitBtn" > submit </span>
+                        </div>
+                    </div>
 
                     </div>
 
@@ -202,13 +213,14 @@
                                 <span class="closeGroup">+</span>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="search__buton">
+                         <div class="search__buton">
                         <div class="search__inner">
-                            <input @click="handle_specific_ticket()" id="submitBtn" type="submit" value="search" class="inputFild">
+                            <span @click="handle_specific_ticket()" id="submitBtn" > submit </span>
                         </div>
                     </div>
+                    </div>
+
+                   
                 </div>
             </div>
         </div>
