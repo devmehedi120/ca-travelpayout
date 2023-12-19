@@ -13,10 +13,13 @@
 
 .custom-select-input {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     font-size: 16px;
     text-align: center;
     border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: sans-serif;
+    cursor: pointer;
 }
 
 .custom-select-dropdown {
@@ -48,14 +51,14 @@
     height: auto;
     width: 100%;
     background-color: #f7f7f7;
-    padding: 30px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 0px;
     font-family: 'Poppins', sans-serif;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
-    border-radius: 10px;
+
 }
 
 #filteWraper {

@@ -35,7 +35,7 @@
                     <div class="inputBox">
                         <div class="inputWraper">
                             <input type="radio" id="return" value="return" v-model="tab" class="radioBtn" checked>
-                            <label for="return">One Way</label>
+                            <label for="return">Rturn</label>
                         </div>
                         <div class="inputWraper">
                             <input type="radio" name="" id="oneWay" value="oneway" v-model="tab" class="radioBtn">
@@ -59,7 +59,7 @@
                                             <div v-if="showOptions" class="custom-select-dropdown">
                                                 <div v-for="city in filteredCities" :key="city.city_code"
                                                     @click="selectCity(city)" class="custom-select-option">
-                                                    {{ city.cityName }}
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -74,7 +74,7 @@
 
                                     </div>
                                 </div>
-                                <div class="checkbox__wrap">
+                                <!-- <div class="checkbox__wrap">
                                     <div class="checkBox__group">
                                         <div class="checkbox-wrapper-27">
                                             <label class="checkbox">
@@ -93,7 +93,7 @@
                                             </label>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="locationSet">
                                 <div class="location-wrap">
@@ -109,7 +109,7 @@
                                             </div>
                                         </div>
                                 </div>
-                                <div class="checkbox__wrap">
+                                <!-- <div class="checkbox__wrap">
                                     <div class="checkBox__group">
                                         <div class="checkbox-wrapper-27">
                                             <label class="checkbox">
@@ -119,7 +119,7 @@
                                             </label>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="locationSet">
                                 <div class="location-wrap">

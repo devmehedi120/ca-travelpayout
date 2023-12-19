@@ -1,6 +1,22 @@
 <div class="cardSection" id="cardSection">
     <div class="Searchspan">
-        <b>Search Results</b>
+        <div class="searchHeading">
+            <b>Search Results</b>
+        </div>
+        <div class="fligtableCityFilter">
+            <div class="custom-select-container">
+            <input v-model="selectedoriginCity" @focus="showoriginDropdown" class="custom-select-input" :placeholder="selectedoriginCity?selectedoriginCity:originLocation">
+            <div v-if="showOriginOptions" class="custom-select-dropdown">
+                <div v-for="city in filteredOriginCities" :key="city.city_code" @click="selectOriginCity(city)" 
+                    class="custom-select-option">
+                    <span >{{ city.cityName }}</span>
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+
     </div>
     <div class="card_wraper">
         <div class="card_wraper" v-if="currentPage === 'archive'">

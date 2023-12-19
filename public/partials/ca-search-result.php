@@ -52,7 +52,7 @@
     </div>
     <div id="flightTIcke" class="flightTicket">
         <div id="ticketNavbar" class="ticketNavbar">
-            <div class="ticketnav__wraper">
+            <div class="ticketnav__wraper"  v-show="navdisbled">
                 <div class="navList">
                     <button class="navItem borderleftRadius">
                         <div class="bestPricewraer">
@@ -154,7 +154,7 @@
                             <span class="stlocation flghtLocation">{{ticket.destination_airport}}</span>
                         </div>
                         <div class="timeHours">
-                            <span class="tJTime  tjNtjn">5 hrs</span>
+                            <span class="tJTime  tjNtjn">{{ticket.duration}}</span>
                             <div class="leantGroup">
                                 <span class="timeLeanth"></span>
                                 <span class="svg">

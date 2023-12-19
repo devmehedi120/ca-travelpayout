@@ -42,6 +42,7 @@ class Ca_Travelpayout_Public {
 	private $travel;
 	public $currentIp;
 	public $currentCurrencyCode;
+	public $originLocation;
 
 	/**
 	 * Initialize the class and set its properties.
@@ -63,10 +64,19 @@ class Ca_Travelpayout_Public {
 			$this->currentIp = $ipAddress;
 
 			$currency = wp_remote_get( "https://ipapi.co/$ipAddress/currency/" );
-			$currencyCode = wp_remote_retrieve_body($currency);
-
+			$currencyCode = wp_remote_retrieve_body($currency);	
 			$this->currentCurrencyCode = $currencyCode;
+
+			$originCity=$this->userLocatinByIP();
+			if ($originCity) {
+				$originCityName = $originCity->name;
+				$this->originLocation =$originCityName;
+			}
+
 		}
+
+
+	
 	}
 
 	/**
@@ -108,7 +118,8 @@ class Ca_Travelpayout_Public {
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ca-travelpayout-public.js', array( 'jquery','vueGlobal', 'cataxios' ), $this->version, true );
 		wp_localize_script( $this->plugin_name, 'catp_fragments', array(
 			'ajaxurl' => admin_url("admin-ajax.php"),
-			'currentCurrency' => $this->currentCurrencyCode
+			'currentCurrency' => $this->currentCurrencyCode,
+			'originLocation' =>$this->originLocation,
 		) );
 	}
      
@@ -192,7 +203,7 @@ class Ca_Travelpayout_Public {
 	function cat_getPricess(){
 		try {
 			$originS=(array)$this->userLocatinByIP();
-			$origin=$originS['iata'];
+			$origin = isset($_GET['originCode']) ? $_GET['originCode'] : $originS['iata'];
 			$currentDate = date('Y-m-d');
 			// // $newDate = date('Y-m-d', strtotime('+10 days', strtotime($currentDate)));
 
