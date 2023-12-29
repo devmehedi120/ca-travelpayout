@@ -5,7 +5,7 @@
         </div>
         <div class="fligtableCityFilter">
             <div class="custom-select-container">
-            <input v-model="selectedoriginCity" @focus="showoriginDropdown" class="custom-select-input" :placeholder="selectedoriginCity?selectedoriginCity:originLocation">
+            <input v-model="selectedoriginCity" @focus="showoriginDropdown" class="custom-select-input-1" :placeholder="selectedoriginCity?selectedoriginCity:originLocation">
             <div v-if="showOriginOptions" class="custom-select-dropdown">
                 <div v-for="city in filteredOriginCities" :key="city.city_code" @click="selectOriginCity(city)" 
                     class="custom-select-option">

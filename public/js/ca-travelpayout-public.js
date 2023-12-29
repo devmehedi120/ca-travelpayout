@@ -1875,6 +1875,7 @@ jQuery(function ($) {
             },
             dataType: "json",
             success: function (response) {
+              self.caLoading = false;
               if (self.allCities.length > 0 && response.data.length > 0) {
                 const mergedData = response.data.map((city) => {
                   const matchingResponseCity = self.allCities.find(
@@ -1932,7 +1933,7 @@ jQuery(function ($) {
               }
             },
             error: (error) => {
-              // Reject the promise with the error
+              self.caLoading = false;
               reject(error);
             },
           });
