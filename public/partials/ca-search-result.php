@@ -80,7 +80,10 @@
             </div>
         </div>
         <div class="ticketWrap">
-            <div class="doubl_ticket" v-for="(ticket , index) in flightTicket" :key="index">
+            <div class="backBtn" @click="backPreviousCity()">
+                <span>Back</span>
+            </div>
+           <div class="doubl_ticket" v-if="flightTicket !== '' " v-for="(ticket, index) in flightTicket" :key="index">
                 <div class="double_ticket_fragment">
                     <div class="logoNtime">
                         <div class="flightLogo">
@@ -170,6 +173,7 @@
                     </a>
                 </div>
             </div>
+            <div  v-else class="erorrMessage"><h1>No flight ticket available</h1></div>
 
         </div>
     </div>

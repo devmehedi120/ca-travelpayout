@@ -3,9 +3,10 @@ jQuery(function ($) {
     components: { Datepicker: VueDatePicker },
     data() {
       return {
+        errMsg:null,
         selectedoriginCity: null,
         showOriginOptions: false,
-
+        isTicket:false,
         navdisbled: false,
         selectedCityCode: "",
         selectedToCityCode: "",
@@ -1856,6 +1857,18 @@ jQuery(function ($) {
       },
     },
     methods: {
+      backTicket(){
+        this.currentPage = "flightTicket";
+
+      },
+      backPreviousCity(){
+        this.currentPage = 'singlecity';
+        this.isTicket=true;
+      },
+      backPrevious(){
+        this.currentPage ="archive";
+
+      },
       showoriginDropdown() {
         this.showOriginOptions = true;
       },
@@ -1971,65 +1984,56 @@ jQuery(function ($) {
         return `${formattedHours}:${formattedMinutes}`;
       },
       // ticket area
-      async handleSpecificTicket() {
-        return new Promise((resolve, reject) => {
-          const self = this;
-          self.caLoading = true;
+      handleSpecificTicket() {
+        const self = this;
+        self.flightTicket= [];
+        self.currentPage = "flightTicket";
+        self.caLoading = true;
 
-          jQuery.ajax({
-            type: "get",
-            url: catp_fragments.ajaxurl,
-            data: {
-              action: "get_specific_ticket",
-              apiParam: {
-                origin: self.selectedCityCode,
-                destination: self.selectedToCityCode,
-                depure: self.formatedDeparedDate,
-                return: self.formatedReturnDate,
-              },
+        jQuery.ajax({
+          type: "get",
+          url: catp_fragments.ajaxurl,
+          data: {
+            action: "get_specific_ticket",
+            apiParam: {
+              origin: self.selectedCityCode,
+              destination: self.selectedToCityCode,
+              depure: self.formattedDepartureDate, // Corrected typo in variable name
+              return: self.formattedReturnDate, // Corrected typo in variable name
             },
-            dataType: "json",
-            success: function (response) {
-              self.caLoading = false;
+          },
+          dataType: "json",
+          success: function (response) {
+            self.caLoading = false;
+            self.currentPage = "flightTicket";
 
-              if (response.data.length > 0) {
-                self.flightTicket = response.data.map((d) => {
-                  const departureDate = new Date(d.departure_at);
-                  const returnDate = new Date(d.return_at); // Use a separate date object for return_at
+            if (response.data.length > 0) {
+              self.flightTicket = response.data.map((d) => {    j 
+                
+                const departureDate = new Date(d.departure_at);
+                const returnDate = new Date(d.return_at); // Use a separate date object for return_at
 
-                  d.departure_at = `${departureDate.getHours()}:${departureDate.getMinutes()}`;
-                  d.return_at = `${returnDate.getHours()}:${returnDate.getMinutes()}`; // Use returnDate for return_at
+                d.departure_at = `${departureDate.getHours()}:${departureDate.getMinutes()}`;
+                d.return_at = `${returnDate.getHours()}:${returnDate.getMinutes()}`; // Use returnDate for return_at
 
-                  departureDate.setMinutes(
-                    departureDate.getMinutes() + d.duration_to
-                  );
-                  returnDate.setMinutes(
-                    returnDate.getMinutes() + d.duration_back
-                  );
+                departureDate.setMinutes(
+                  departureDate.getMinutes() + d.duration_to
+                );
+                returnDate.setMinutes(
+                  returnDate.getMinutes() + d.duration_back
+                );
 
-                  d.duration_time = `${departureDate.getHours()}:${departureDate.getMinutes()}`;
-                  d.duration_back = `${returnDate.getHours()}:${returnDate.getMinutes()}`;
+                d.duration_time = `${departureDate.getHours()}:${departureDate.getMinutes()}`;
+                d.duration_back = `${returnDate.getHours()}:${returnDate.getMinutes()}`;
 
-                  return d;
-                });
-
-                // Resolve the promise with the modified data
-                resolve(self.flightTicket);
-              } else {
-                // Resolve the promise with an empty array if no data
-                resolve([]);
-              }
-
-              // Set the current page
-              self.currentPage = "flightTicket";
-            },
-            error: function (error) {
-              // Reject the promise with the error
-              reject(error);
-            },
-          });
+                return d;
+              });
+            }
+          },
+          error: function (error) {},
         });
-      },
+},
+
 
       searchInsideTicket(destinc) {
         const self = this;
@@ -2226,6 +2230,7 @@ jQuery(function ($) {
           self.allCities = response.data;
 
           self.filteredData = sortedCountries;
+          console.log(self.filteredData);
         }
       });
     },

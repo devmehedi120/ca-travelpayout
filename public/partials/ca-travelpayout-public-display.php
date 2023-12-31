@@ -141,7 +141,7 @@
                         </div>
                          <div class="search__buton">
                         <div class="search__inner">
-                            <span @click="handle_specific_ticket()" id="submitBtn" > submit </span>
+                            <span @click="handleSpecificTicket()" id="submitBtn" > submit </span>
                         </div>
                     </div>
 

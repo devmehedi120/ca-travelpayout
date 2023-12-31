@@ -139,7 +139,7 @@ div.flightTicket {
   justify-content: center;
   align-items: center;
   border-radius: 5px;
-  width: 90%;
+  width: 100%;
   color: #545860;
   flex-direction: column;
   gap: 20px;
@@ -155,9 +155,14 @@ div.flightTicket {
 }
 
 .logoNtime {
-  width: 70%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
+  gap: 20px;
+}
+
+div.flightLogo>div>span {
+  max-width: 100%;
 }
 
 .ticketPrice {
@@ -451,6 +456,27 @@ p.alertPriceUpdate {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  width: 50%;
+}
+
+.city_card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.backBtn {
+  width: 100px;
+  background-color: #373737db;
+  text-align: center;
+  color: #fff;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.backbtnwraper {
+  display: flex;
+  justify-content: space-between;
 }
 
 @font-face {
