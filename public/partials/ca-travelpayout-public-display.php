@@ -153,8 +153,20 @@
                         <div class="flight-location-select">
                             <div class="locationSet">
                                 <div class="location-wrap">
-                                    <label for="travelFrom">From</label>
-                                    <input id="travelFrom" type="text" class="inputFild">
+                                     <label for="travelFrom">From</label>
+                                    <div id="travelFrom" class="inputFild">
+                                        <div class="custom-select-container">
+                                            <input v-model="selectedCity" @focus="showDropdown"
+                                                class="custom-select-input" placeholder="Select a city">
+                                            <div v-if="showOptions" class="custom-select-dropdown">
+                                                <div v-for="city in filteredCities" :key="city.city_code"
+                                                    @click="selectCity(city)" class="custom-select-option">
+                                                    {{ city.cityName }}
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="location-toggle" v-if="tab===''">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"
                                             style="width: 1rem; height: 1rem;">
@@ -168,14 +180,25 @@
                             </div>
                             <div class="locationSet">
                                 <div class="location-wrap">
-                                    <label for="travelTO">To</label>
-                                    <input id="travelTo" type="text" class="inputFild">
+                                      <label for="travelTO">To</label>
+                                     <div class="custom-select-container">
+                                            <input v-model="selectedToCity" @focus="showToDropdown"
+                                                class="custom-select-input" placeholder="Select a city">
+                                            <div v-if="showToOptions" class="custom-select-dropdown">
+                                                <div v-for="city in filteredToCities" :key="city.city_code"
+                                                    @click="selectToCity(city)" class="custom-select-option">
+                                                    {{ city.cityName }}
+                                                </div>
+                                            </div>
+                                        </div>
                                 </div>
                             </div>
                             <div class="locationSet">
                                 <div class="location-wrap">
-                                    <label for="depart">Depart</label>
-                                    <input id="depart" type="text" class="inputFild" disabled>
+                                     <label for="depart">Depart</label>
+                                    <div id="depart" class="inputFild">
+                                        <Datepicker v-model="deparedDate" ></Datepicker>
+                                    </div>
                                 </div>
                             </div>
                             <div class="locationSet">
@@ -187,7 +210,7 @@
                         </div>
                          <div class="search__buton">
                         <div class="search__inner">
-                            <span  id="submitBtn" > submit </span>
+                            <span @click="handleOneWayTicket()" id="submitBtn" > submit </span>
                         </div>
                     </div>
 

@@ -83,7 +83,7 @@
             <div class="backBtn" @click="backPreviousCity()">
                 <span>Back</span>
             </div>
-           <div class="doubl_ticket" v-if="flightTicket !== '' " v-for="(ticket, index) in flightTicket" :key="index">
+           <div class="doubl_ticket" v-if="ticket==='double'"  v-for="(ticket, index) in flightTicket" :key="index">
                 <div class="double_ticket_fragment">
                     <div class="logoNtime">
                         <div class="flightLogo">
@@ -173,8 +173,65 @@
                     </a>
                 </div>
             </div>
-            <div  v-else class="erorrMessage"><h1>No flight ticket available</h1></div>
 
+
+            <!-- single ticket -->
+             <div class="single_ticket" v-if="ticket==='single'"  v-for="(ticket, index) in flightTicket" :key="index">
+                <div class="double_ticket_fragment">
+                    <div class="logoNtime">
+                        <div class="flightLogo">
+                            <div class="logoImg">
+                                <span>
+                                   <img :src="'https://pics.avs.io/200/200/' + ticket.airline + '.png'" alt="">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="flightTime">
+                            <div class="startTimeContainer">
+                                <span class="stTime timeStmp">{{ticket.departure_at}}</span>
+                                <span class="stlocation flghtLocation">{{ticket.origin_airport}}</span>
+                            </div>
+                            <div class="timeHours">
+                                <span class="tJTime  tjNtjn">{{ticket.duration_to}}</span>
+                                <div class="leantGroup">
+                                    <span class="timeLeanth"></span>
+                                    <span class="svg">
+                                        <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 12 12"
+                                            class="LegInfo_planeEnd__ZDkxM">
+                                            <path fill="#545860"
+                                                d="M3.922 12h.499a.52.52 0 0 0 .444-.247L7.949 6.8l3.233-.019A.8.8 0 0 0 12 6a.8.8 0 0 0-.818-.781L7.949 5.2 4.866.246A.525.525 0 0 0 4.421 0h-.499a.523.523 0 0 0-.489.71L5.149 5.2H2.296l-.664-1.33a.523.523 0 0 0-.436-.288L0 3.509 1.097 6 0 8.491l1.196-.073a.523.523 0 0 0 .436-.288l.664-1.33h2.853l-1.716 4.49a.523.523 0 0 0 .489.71">
+                                            </path>
+                                        </svg>
+                                    </span>
+                                </div>
+                                <span v-if="ticket.transfers==0" class="flightType tjNtjn">Direct</span>
+                                <span v-else class="flightType tjNtjn">{{ticket.transfers}} +stops</span>
+
+                            </div>
+                            <div class="reachTimeContainer">
+                                <span class="rchTime timeStmp">{{ticket.duration_time}}</span>
+                                <span class="rchLocatioon flghtLocation"> {{ticket.destination_airport}}</span>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                <div class="ticketPrice">
+                    <span class="deallenth">One deals from</span>
+                    <span class="totalAmount">{{currentCurrencyCode}} {{ticket.price}}</span>
+                    <a :href="'https://aviasales.com' + ticket.link">
+                        <button class="pricebutton">
+                            <p class="textSelect">Select</p>
+                            <svg fill="#fff" width="25px" height="25px" viewBox="0 0 24 24" id="right-arrow"
+                                xmlns="http://www.w3.org/2000/svg" class="icon line">
+                                <path id="primary" d="M3,12H21m-3,3,3-3L18,9"
+                                    style="fill: none; stroke: #fff; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2.0;">
+                                </path>
+                            </svg>
+                        </button>
+                    </a>
+                </div>
+            </div>
+            
         </div>
     </div>
 </div>

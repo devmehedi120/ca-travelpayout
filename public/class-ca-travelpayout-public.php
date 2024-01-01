@@ -307,10 +307,11 @@ class Ca_Travelpayout_Public {
 			$origin = $_GET['apiParam']['origin'];
 			$destination = $_GET['apiParam']['destination'];
 			$depure = $_GET['apiParam']['depure'];
-			$return = $_GET['apiParam']['return'];
+			$return = isset($_GET['apiParam']['return'])?$_GET['apiParam']['return']:'';
+			$oneWay=isset($_GET['apiParam']['oneway'])?$_GET['apiParam']['oneway']:true;
 			$currency = $this->currentCurrencyCode;
 
-			$url = "https://api.travelpayouts.com/aviasales/v3/prices_for_dates?origin=$origin&destination=$destination&departure_at=$depure&return_at=$return&unique=false&sorting=price&direct=false&currency=$currency&limit=30&page=1&one_way=true&token=$apiKey";
+			$url = "https://api.travelpayouts.com/aviasales/v3/prices_for_dates?origin=$origin&destination=$destination&departure_at=$depure&return_at=$return&unique=false&sorting=price&direct=false&currency=$currency&limit=50&page=2&one_way=$oneWay&token=$apiKey";
 
 			// Make the API request
 			$response = wp_remote_get($url);

@@ -3,6 +3,7 @@ jQuery(function ($) {
     components: { Datepicker: VueDatePicker },
     data() {
       return {
+        ticket:'',
         errMsg:null,
         selectedoriginCity: null,
         showOriginOptions: false,
@@ -1984,10 +1985,58 @@ jQuery(function ($) {
         return `${formattedHours}:${formattedMinutes}`;
       },
       // ticket area
+      handleOneWayTicket(){
+          const self = this;
+          self.flightTicket = [];
+          self.currentPage = "flightTicket";
+          self.ticket='single'
+
+          self.caLoading = true;
+
+          jQuery.ajax({
+            type: "get",
+            url: catp_fragments.ajaxurl,
+            data: {
+              action: "get_specific_ticket",
+              apiParam: {
+                origin: self.selectedCityCode,
+                destination: self.selectedToCityCode,
+                depure: self.formattedDepartureDate, // Corrected typo in variable name
+               
+              },
+            },
+            dataType: "json",
+            success: function (response) {
+              self.caLoading = false;
+              self.currentPage = "flightTicket";
+               self.ticket = "single";
+
+              if (response.data.length > 0) {
+                self.flightTicket = response.data.map((d) => {
+                                    const departureDate = new Date(d.departure_at);
+                   // Use a separate date object for return_at
+
+                  d.departure_at = `${departureDate.getHours()}:${departureDate.getMinutes()}`;
+                 // Use returnDate for return_at
+                  departureDate.setMinutes(
+                    departureDate.getMinutes() + d.duration_to
+                  );
+                d.duration_time = `${departureDate.getHours()}:${departureDate.getMinutes()}`;
+                  
+                  return d;
+                });
+              }
+              
+            },
+            error: function (error) {},
+          });
+
+      },
       handleSpecificTicket() {
         const self = this;
         self.flightTicket= [];
         self.currentPage = "flightTicket";
+        self.ticket = "double";
         self.caLoading = true;
 
         jQuery.ajax({
@@ -2000,15 +2049,17 @@ jQuery(function ($) {
               destination: self.selectedToCityCode,
               depure: self.formattedDepartureDate, // Corrected typo in variable name
               return: self.formattedReturnDate, // Corrected typo in variable name
+              oneway:false
             },
           },
           dataType: "json",
           success: function (response) {
             self.caLoading = false;
             self.currentPage = "flightTicket";
+            self.ticket = "double";
 
             if (response.data.length > 0) {
-              self.flightTicket = response.data.map((d) => {    j 
+              self.flightTicket = response.data.map((d) => {   
                 
                 const departureDate = new Date(d.departure_at);
                 const returnDate = new Date(d.return_at); // Use a separate date object for return_at
@@ -2029,6 +2080,7 @@ jQuery(function ($) {
                 return d;
               });
             }
+            console.log(self.flightTicket);
           },
           error: function (error) {},
         });
@@ -2117,7 +2169,7 @@ jQuery(function ($) {
             },
             dataType: "json",
             success: function (response) {
-              console.log(response);
+              
               resolve(response);
             },
             error: (error) => {
@@ -2230,7 +2282,7 @@ jQuery(function ($) {
           self.allCities = response.data;
 
           self.filteredData = sortedCountries;
-          console.log(self.filteredData);
+          
         }
       });
     },
