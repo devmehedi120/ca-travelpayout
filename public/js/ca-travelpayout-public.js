@@ -1831,16 +1831,15 @@ jQuery(function ($) {
       },
     },
     computed: {
-      filteredCurrency(){
+      filteredCurrency() {
         if (!this.selectedCurrency) {
           return this.uniqueCurrencies;
         }
 
-         const searchTerm = this.selectedCurrency.toLowerCase();
-         return this.uniqueCurrencies.filter((cur) =>
-           cur.toLowerCase().includes(searchTerm)
-         );
-
+        const searchTerm = this.selectedCurrency.toLowerCase();
+        return this.uniqueCurrencies.filter((cur) =>
+          cur.toLowerCase().includes(searchTerm)
+        );
       },
       filteredOriginCities() {
         if (!this.selectedoriginCity) {
@@ -1872,46 +1871,59 @@ jQuery(function ($) {
       },
     },
     methods: {
-       extractUniqueCurrencies() {
-        this.uniqueCurrencies = [...new Set(this.countriesCodesnames.map(country => country.currency))];
+      selectCurrency(currency) {
+         this.selectedCurrency = currency;
       },
-      backTicket(){
+      selectedCityIATA(citycode) {
+          this.selectedoriginCity = citycode;
+      },
+      extractUniqueCurrencies() {
+        this.uniqueCurrencies = [
+          ...new Set(
+            this.countriesCodesnames.map((country) => country.currency)
+          ),
+        ];
+      },
+      backTicket() {
         this.currentPage = "flightTicket";
-
       },
-      backPreviousCity(){
-        this.currentPage = 'singlecity';
-        this.isTicket=true;
+      backPreviousCity() {
+        this.currentPage = "singlecity";
+        this.isTicket = true;
       },
-      backPrevious(){
-        this.currentPage ="archive";
-
+      backPrevious() {
+        this.currentPage = "archive";
       },
       showoriginDropdown() {
         this.showOriginOptions = true;
         this.showCurrencyOptions = false;
+        this.showOptions = false;
+        this.showToOptions = false;
       },
-      showCurrencyDropdown(){
-          this.showCurrencyOptions = true;
-          this.showOriginOptions = false;
-
+      showCurrencyDropdown() {
+        this.showCurrencyOptions = true;
+        this.showOriginOptions = false;
+        this.showOptions = false;
+        this.showToOptions = false;
       },
-      async selectOriginCity(city) {
+      async selectOriginCity() {
+        this.currentCurrencyCode = this.selectedCurrency;
         return new Promise((resolve, reject) => {
           const self = this;
           self.caLoading = true;
-          self.selectedoriginCity = city.cityName;
-          self.showOriginOptions = false;
+           self.showOriginOptions = false;
 
           jQuery.ajax({
             type: "get",
             url: catp_fragments.ajaxurl,
             data: {
               action: "get_all_price",
-              originCode: city.city_code,
+              originCode: self.selectedoriginCity,
+              currency: self.selectedCurrency,
             },
             dataType: "json",
             success: function (response) {
+
               self.caLoading = false;
               if (self.allCities.length > 0 && response.data.length > 0) {
                 const mergedData = response.data.map((city) => {
@@ -1979,20 +1991,28 @@ jQuery(function ($) {
       showDropdown() {
         this.showOptions = true;
         this.showToOptions = false;
+        this.showCurrencyOptions = false;
+        this.showOriginOptions = false;
       },
       showToDropdown() {
         this.showOptions = false;
         this.showToOptions = true;
+        this.showCurrencyOptions = false;
+        this.showOriginOptions = false;
       },
       selectCity(city) {
         this.selectedCity = city.cityName;
         this.selectedCityCode = city.city_code;
         this.showOptions = false;
+        this.showCurrencyOptions = false;
+        this.showOriginOptions = false;
       },
       selectToCity(city) {
         this.selectedToCity = city.cityName;
         this.selectedToCityCode = city.city_code;
         this.showToOptions = false;
+        this.showCurrencyOptions = false;
+        this.showOriginOptions = false;
       },
       getFormattedTime(minutes) {
         if (isNaN(minutes) || minutes < 0) {
@@ -2008,56 +2028,53 @@ jQuery(function ($) {
         return `${formattedHours}:${formattedMinutes}`;
       },
       // ticket area
-      handleOneWayTicket(){
-          const self = this;
-          self.flightTicket = [];
-          self.currentPage = "flightTicket";
-          self.ticket='single'
+      handleOneWayTicket() {
+        const self = this;
+        self.flightTicket = [];
+        self.currentPage = "flightTicket";
+        self.ticket = "single";
 
-          self.caLoading = true;
+        self.caLoading = true;
 
-          jQuery.ajax({
-            type: "get",
-            url: catp_fragments.ajaxurl,
-            data: {
-              action: "get_specific_ticket",
-              apiParam: {
-                origin: self.selectedCityCode,
-                destination: self.selectedToCityCode,
-                depure: self.formattedDepartureDate, // Corrected typo in variable name
-               
-              },
+        jQuery.ajax({
+          type: "get",
+          url: catp_fragments.ajaxurl,
+          data: {
+            action: "get_specific_ticket",
+            apiParam: {
+              origin: self.selectedCityCode,
+              destination: self.selectedToCityCode,
+              depure: self.formattedDepartureDate, // Corrected typo in variable name
             },
-            dataType: "json",
-            success: function (response) {
-              self.caLoading = false;
-              self.currentPage = "flightTicket";
-               self.ticket = "single";
+          },
+          dataType: "json",
+          success: function (response) {
+            self.caLoading = false;
+            self.currentPage = "flightTicket";
+            self.ticket = "single";
 
-              if (response.data.length > 0) {
-                self.flightTicket = response.data.map((d) => {
-                                    const departureDate = new Date(d.departure_at);
-                   // Use a separate date object for return_at
+            if (response.data.length > 0) {
+              self.flightTicket = response.data.map((d) => {
+                const departureDate = new Date(d.departure_at);
+                // Use a separate date object for return_at
 
-                  d.departure_at = `${departureDate.getHours()}:${departureDate.getMinutes()}`;
-                 // Use returnDate for return_at
-                  departureDate.setMinutes(
-                    departureDate.getMinutes() + d.duration_to
-                  );
+                d.departure_at = `${departureDate.getHours()}:${departureDate.getMinutes()}`;
+                // Use returnDate for return_at
+                departureDate.setMinutes(
+                  departureDate.getMinutes() + d.duration_to
+                );
                 d.duration_time = `${departureDate.getHours()}:${departureDate.getMinutes()}`;
-                  
-                  return d;
-                });
-              }
-              
-            },
-            error: function (error) {},
-          });
 
+                return d;
+              });
+            }
+          },
+          error: function (error) {},
+        });
       },
       handleSpecificTicket() {
         const self = this;
-        self.flightTicket= [];
+        self.flightTicket = [];
         self.currentPage = "flightTicket";
         self.ticket = "double";
         self.caLoading = true;
@@ -2072,7 +2089,7 @@ jQuery(function ($) {
               destination: self.selectedToCityCode,
               depure: self.formattedDepartureDate, // Corrected typo in variable name
               return: self.formattedReturnDate, // Corrected typo in variable name
-              oneway:false
+              oneway: false,
             },
           },
           dataType: "json",
@@ -2082,8 +2099,7 @@ jQuery(function ($) {
             self.ticket = "double";
 
             if (response.data.length > 0) {
-              self.flightTicket = response.data.map((d) => {   
-                
+              self.flightTicket = response.data.map((d) => {
                 const departureDate = new Date(d.departure_at);
                 const returnDate = new Date(d.return_at); // Use a separate date object for return_at
 
@@ -2107,10 +2123,9 @@ jQuery(function ($) {
           },
           error: function (error) {},
         });
-},
+      },
 
-
-      searchInsideTicket(destinc) {
+     async searchInsideTicket(destinc) {
         const self = this;
         self.caLoading = true;
         jQuery.ajax({
@@ -2124,6 +2139,8 @@ jQuery(function ($) {
           success: function (response) {
             self.caLoading = false;
             self.currentPage = "flightTicket";
+            self.ticket = "double";
+            
 
             if (response.data.length > 0) {
               self.flightTicket = response.data.map((d) => {
@@ -2192,7 +2209,6 @@ jQuery(function ($) {
             },
             dataType: "json",
             success: function (response) {
-              
               resolve(response);
             },
             error: (error) => {
@@ -2305,34 +2321,23 @@ jQuery(function ($) {
           self.allCities = response.data;
 
           self.filteredData = sortedCountries;
-          
         }
       });
     },
     mounted() {
-      // Attach a global click event listener to the document
-      // document.addEventListener("click", function(event){
-      //   if (event.target.classList.contains("custom-select-dropdown")) {
-      //     this.showOriginOptions = false;
-      //     this.showOptions = false;
-      //     this.showToOptions = false;
-      //   }
-        
-      // });
-     document.addEventListener("click", (event) => {
-       const dropdown = document.querySelector(".custom-select-dropdown");
+      document.addEventListener("click", (event) => {
+        if (
+          event.target.className !== "custom-select-container" &&
+          event.target.className !== "custom-select-input-1" &&
+          event.target.className !== "custom-select-input"
+        ) {
+          this.showCurrencyOptions = false;
+          this.showOriginOptions = false;
+          this.showOptions = false;
+          this.showToOptions = false;
+        }
+      });
 
-       // Check if the clicked element is inside the dropdown or not
-       if (event.target !== dropdown) {
-         // If not, hide the dropdown
-         this.showCurrencyOptions = false;
-         this.showOriginOptions = false;
-         this.showOptions = false;
-         this.showToOptions = false;
-       }
-     });
-
-    
       this.extractUniqueCurrencies();
     },
   }).mount("#caTravelFlight");

@@ -8,7 +8,8 @@
 
 .custom-select-container {
     position: relative;
-    width: 100%;
+     display: flex;
+    flex-direction: column;
 }
 
 .custom-select-input {
@@ -57,7 +58,7 @@
     justify-content: center;
     font-family: 'Poppins', sans-serif;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
-    border: 1px solid blueviolet;
+    border: 1px solid #ddd;
 }
 
 #filteWraper {

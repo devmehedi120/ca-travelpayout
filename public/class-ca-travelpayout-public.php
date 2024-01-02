@@ -198,9 +198,11 @@ class Ca_Travelpayout_Public {
 			$originS=(array)$this->userLocatinByIP();
 			$origin = isset($_GET['originCode']) ? $_GET['originCode'] : $originS['iata'];
 			$currentDate = date('Y-m-d');
+			$currency=isset($_GET['currency'])?$_GET['currency']:$this->currentCurrencyCode;
 			// // $newDate = date('Y-m-d', strtotime('+10 days', strtotime($currentDate)));
+			$this->currentCurrencyCode=$currency;
 
-			$priceUrl=' http://map.aviasales.com/prices.json?origin_iata='.$origin.'&currency='.$this->currentCurrencyCode;
+			$priceUrl=' http://map.aviasales.com/prices.json?origin_iata='.$origin.'&currency='.$currency;
 			$priceOBJ= wp_remote_get($priceUrl);
 			if(is_wp_error( $priceOBJ)){
 				return false;

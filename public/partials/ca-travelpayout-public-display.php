@@ -139,9 +139,9 @@
                                 </div>
                             </div>
                         </div>
-                         <div class="search__buton">
+                         <div class="search__buton" @click="handleSpecificTicket()">
                         <div class="search__inner">
-                            <span @click="handleSpecificTicket()" id="submitBtn" > submit </span>
+                            <span  id="submitBtn" > submit </span>
                         </div>
                     </div>
 
