@@ -201,7 +201,7 @@ class Ca_Travelpayout_Public {
 			// // $newDate = date('Y-m-d', strtotime('+10 days', strtotime($currentDate)));
 
 			$priceUrl=' http://map.aviasales.com/prices.json?origin_iata='.$origin.'&currency='.$this->currentCurrencyCode;
-			$priceOBJ= wp_remote_get( $priceUrl );
+			$priceOBJ= wp_remote_get($priceUrl);
 			if(is_wp_error( $priceOBJ)){
 				return false;
 			}

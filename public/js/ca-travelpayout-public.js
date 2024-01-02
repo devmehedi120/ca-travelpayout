@@ -3,11 +3,11 @@ jQuery(function ($) {
     components: { Datepicker: VueDatePicker },
     data() {
       return {
-        ticket:'',
-        errMsg:null,
+        ticket: "",
+        errMsg: null,
         selectedoriginCity: null,
         showOriginOptions: false,
-        isTicket:false,
+        isTicket: false,
         navdisbled: false,
         selectedCityCode: "",
         selectedToCityCode: "",
@@ -15,6 +15,7 @@ jQuery(function ($) {
         selectedToCity: null,
         showOptions: false,
         showToOptions: false,
+        showCurrencyOptions: false,
         deparedDate: null,
         formatedDeparedDate: null,
         returnDate: null,
@@ -1807,6 +1808,8 @@ jQuery(function ($) {
         currentCurrencyCode: catp_fragments.currentCurrency,
         originLocation: catp_fragments.originLocation,
         originDefaultCode: catp_fragments.originLocationIatacode,
+        uniqueCurrencies: [],
+        selectedCurrency: null,
       };
     },
     watch: {
@@ -1828,6 +1831,17 @@ jQuery(function ($) {
       },
     },
     computed: {
+      filteredCurrency(){
+        if (!this.selectedCurrency) {
+          return this.uniqueCurrencies;
+        }
+
+         const searchTerm = this.selectedCurrency.toLowerCase();
+         return this.uniqueCurrencies.filter((cur) =>
+           cur.toLowerCase().includes(searchTerm)
+         );
+
+      },
       filteredOriginCities() {
         if (!this.selectedoriginCity) {
           return this.allCities;
@@ -1858,6 +1872,9 @@ jQuery(function ($) {
       },
     },
     methods: {
+       extractUniqueCurrencies() {
+        this.uniqueCurrencies = [...new Set(this.countriesCodesnames.map(country => country.currency))];
+      },
       backTicket(){
         this.currentPage = "flightTicket";
 
@@ -1872,6 +1889,12 @@ jQuery(function ($) {
       },
       showoriginDropdown() {
         this.showOriginOptions = true;
+        this.showCurrencyOptions = false;
+      },
+      showCurrencyDropdown(){
+          this.showCurrencyOptions = true;
+          this.showOriginOptions = false;
+
       },
       async selectOriginCity(city) {
         return new Promise((resolve, reject) => {
@@ -2286,16 +2309,31 @@ jQuery(function ($) {
         }
       });
     },
-    // mounted() {
-    //   // Attach a global click event listener to the document
-    //   document.addEventListener("click", function(event){
-    //     if (event.target.classList.contains("custom-select-dropdown")) {
-    //       this.showOriginOptions = false;
-    //       this.showOptions = false;
-    //       this.showToOptions = false;
-    //     }
+    mounted() {
+      // Attach a global click event listener to the document
+      // document.addEventListener("click", function(event){
+      //   if (event.target.classList.contains("custom-select-dropdown")) {
+      //     this.showOriginOptions = false;
+      //     this.showOptions = false;
+      //     this.showToOptions = false;
+      //   }
         
-    //   });
-    // },
+      // });
+     document.addEventListener("click", (event) => {
+       const dropdown = document.querySelector(".custom-select-dropdown");
+
+       // Check if the clicked element is inside the dropdown or not
+       if (event.target !== dropdown) {
+         // If not, hide the dropdown
+         this.showCurrencyOptions = false;
+         this.showOriginOptions = false;
+         this.showOptions = false;
+         this.showToOptions = false;
+       }
+     });
+
+    
+      this.extractUniqueCurrencies();
+    },
   }).mount("#caTravelFlight");
 });

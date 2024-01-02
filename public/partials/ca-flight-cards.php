@@ -3,22 +3,42 @@
         <div class="searchHeading">
             <b>Search Results</b>
         </div>
-
-
-    </div>
-    <div class="card_wraper">
         <div class="fligtableCityFilter" v-if="currentPage === 'archive'">
+
+            
             <div class="custom-select-container">
-                <input v-model="selectedoriginCity" @focus="showoriginDropdown" class="custom-select-input-1"
+                <label for="selectcurrency"><b>Select a currency</b></label>
+                <input id="selectcurrency" v-model="selectedCurrency" @focus="showCurrencyDropdown" class="custom-select-input-1"
+                    :placeholder="selectedCurrency?selectedCurrency:currentCurrencyCode">
+                <div v-if="showCurrencyOptions" class="custom-select-dropdown">
+                    <div v-for="currency in filteredCurrency" :key="currency" 
+                        class="custom-select-option">
+                        <span>{{ currency }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="custom-select-container">
+                <label for="selectCity"><b>Select a city</b></label>
+                <input id="selectCity" v-model="selectedoriginCity" @focus="showoriginDropdown" class="custom-select-input-1"
                     :placeholder="selectedoriginCity?selectedoriginCity:originLocation">
                 <div v-if="showOriginOptions" class="custom-select-dropdown">
-                    <div v-for="city in filteredOriginCities" :key="city.city_code" @click="selectOriginCity(city)"
+                    <div v-for="city in filteredOriginCities" :key="city.city_code" 
                         class="custom-select-option">
                         <span>{{ city.cityName }}</span>
                     </div>
                 </div>
             </div>
+
+             <div class="custom-select-container">
+            <!-- @click="selectOriginCity()" -->
+            <button >Search</button>
         </div>
+        </div>
+       
+
+    </div>
+    <div class="card_wraper">
+        
         <div class="card_wraper" v-if="currentPage === 'archive'">
             <div class="single__card" v-for="(singleCard, index) in filteredData" :key="index"
                 @click="cityGate(singleCard.country_code)">

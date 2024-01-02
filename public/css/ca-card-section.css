@@ -44,3 +44,10 @@ div.Searchspan {
     display: flex;
     justify-content: space-between;
 }
+
+.fligtableCityFilter {
+    display: flex;
+    width: 60%;
+    justify-content: center;
+    align-items: center;
+}
