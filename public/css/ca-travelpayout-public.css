@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500&display=swap');
 
+h1.flightHeading {
+    font-size: 20px;
+}
 
 .dp__pointer {
     cursor: pointer;
@@ -8,7 +11,7 @@
 
 .custom-select-container {
     position: relative;
-     display: flex;
+    display: flex;
     flex-direction: column;
 }
 
@@ -95,6 +98,8 @@
     flex-direction: column;
     width: 100%;
     position: relative;
+    justify-content: center;
+    align-items: center;
 }
 
 input.radioBtn {
@@ -105,13 +110,13 @@ input.radioBtn {
 .flight-location-select {
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
+
 }
 
 .locationSet {
     display: flex;
     gap: 2px;
-    width: 25%;
+    max-width: 100%;
     flex-direction: column;
 }
 
@@ -164,10 +169,12 @@ form#caFlyghtSearch {
 
 .search__buton {
     border: 1px solid #ddd;
-    width: 150px;
-    padding: 5px;
+    width: 100px;
+    padding: 10px;
     text-align: center;
     background-color: #fff;
+    margin-top: 25px;
+    cursor: pointer;
 }
 
 .search__buton:hover {

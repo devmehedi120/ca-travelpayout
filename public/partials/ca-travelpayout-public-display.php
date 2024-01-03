@@ -31,7 +31,7 @@
 
         <div id="filteWraper" class="filterWraper">
             <div class="search-filter">
-                <div action="" id="caFlyghtSearch">
+                <div id="caFlyghtSearch">
                     <div class="inputBox">
                         <div class="inputWraper">
                             <input type="radio" id="return" value="return" v-model="tab" class="radioBtn" checked>
@@ -60,7 +60,7 @@
                                                 <div v-for="city in filteredCities" :key="city.city_code"
                                                     @click="selectCity(city)" class="custom-select-option">
                                                     {{ city.cityName }}
-                                                    
+
                                                 </div>
                                             </div>
                                         </div>
@@ -99,16 +99,16 @@
                             <div class="locationSet">
                                 <div class="location-wrap">
                                     <label for="travelTO">To</label>
-                                     <div class="custom-select-container">
-                                            <input v-model="selectedToCity" @focus="showToDropdown"
-                                                class="custom-select-input" placeholder="Select a city">
-                                            <div v-if="showToOptions" class="custom-select-dropdown">
-                                                <div v-for="city in filteredToCities" :key="city.city_code"
-                                                    @click="selectToCity(city)" class="custom-select-option">
-                                                    {{ city.cityName }}
-                                                </div>
+                                    <div class="custom-select-container">
+                                        <input v-model="selectedToCity" @focus="showToDropdown"
+                                            class="custom-select-input" placeholder="Select a city">
+                                        <div v-if="showToOptions" class="custom-select-dropdown">
+                                            <div v-for="city in filteredToCities" :key="city.city_code"
+                                                @click="selectToCity(city)" class="custom-select-option">
+                                                {{ city.cityName }}
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
                                 <!-- <div class="checkbox__wrap">
                                     <div class="checkBox__group">
@@ -126,7 +126,7 @@
                                 <div class="location-wrap">
                                     <label for="depart">Depart</label>
                                     <div id="depart" class="inputFild">
-                                        <Datepicker v-model="deparedDate" ></Datepicker>
+                                        <Datepicker v-model="deparedDate"></Datepicker>
                                     </div>
                                 </div>
                             </div>
@@ -138,12 +138,57 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="locationSet">
+                                <div class="location-wrap">
+                                    <div class="custom-select-container">
+                                        <label for="selectcurrency">currency</label>
+                                        <input id="selectcurrency" v-model="selectedCurrency"
+                                            @focus="showCurrencyDropdown" class="custom-select-input-1"
+                                            :placeholder="selectedCurrency?selectedCurrency:currentCurrencyCode">
+                                        <span class="arrowSvg"><svg width="20px" height="20px" viewBox="0 0 1024 1024"
+                                                class="icon " version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M903.232 256l56.768 50.432L512 768 64 306.432 120.768 256 512 659.072z"
+                                                    fill="#000" />
+                                            </svg></span>
+                                        <div v-if="showCurrencyOptions" class="custom-select-dropdown">
+                                            <div v-for="currency in filteredCurrency" :key="currency"
+                                                class="custom-select-option" @click="selectCurrency(currency)">
+                                                <span>{{ currency }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="locationSet">
+                                <div class="location-wrap">
+                                    <label for="currency">Trip Class</label>
+                                    <div id="currency" class="inputFild">
+                                        <select v-model="selectedOption">
+                                            <option value="0">Economy</option>
+                                            <option value="1">Business</option>
+                                            <option value="2">High</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="locationSet">
+                                <div class="location-wrap">
+                                    <div class="search__buton" @click="handleSpecificTicket()">
+                                        <div class="search__inner">
+                                            <span id="submitBtn"> submit </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
-                         <div class="search__buton" @click="handleSpecificTicket()">
-                        <div class="search__inner">
-                            <span  id="submitBtn" > submit </span>
-                        </div>
-                    </div>
+                        <!-- <div class="search__buton" @click="handleSpecificTicket()">
+                            <div class="search__inner">
+                                <span id="submitBtn"> submit </span>
+                            </div>
+                        </div> -->
 
                     </div>
 
@@ -153,7 +198,7 @@
                         <div class="flight-location-select">
                             <div class="locationSet">
                                 <div class="location-wrap">
-                                     <label for="travelFrom">From</label>
+                                    <label for="travelFrom">From</label>
                                     <div id="travelFrom" class="inputFild">
                                         <div class="custom-select-container">
                                             <input v-model="selectedCity" @focus="showDropdown"
@@ -162,7 +207,7 @@
                                                 <div v-for="city in filteredCities" :key="city.city_code"
                                                     @click="selectCity(city)" class="custom-select-option">
                                                     {{ city.cityName }}
-                                                    
+
                                                 </div>
                                             </div>
                                         </div>
@@ -180,24 +225,24 @@
                             </div>
                             <div class="locationSet">
                                 <div class="location-wrap">
-                                      <label for="travelTO">To</label>
-                                     <div class="custom-select-container">
-                                            <input v-model="selectedToCity" @focus="showToDropdown"
-                                                class="custom-select-input" placeholder="Select a city">
-                                            <div v-if="showToOptions" class="custom-select-dropdown">
-                                                <div v-for="city in filteredToCities" :key="city.city_code"
-                                                    @click="selectToCity(city)" class="custom-select-option">
-                                                    {{ city.cityName }}
-                                                </div>
+                                    <label for="travelTO">To</label>
+                                    <div class="custom-select-container">
+                                        <input v-model="selectedToCity" @focus="showToDropdown"
+                                            class="custom-select-input" placeholder="Select a city">
+                                        <div v-if="showToOptions" class="custom-select-dropdown">
+                                            <div v-for="city in filteredToCities" :key="city.city_code"
+                                                @click="selectToCity(city)" class="custom-select-option">
+                                                {{ city.cityName }}
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="locationSet">
                                 <div class="location-wrap">
-                                     <label for="depart">Depart</label>
+                                    <label for="depart">Depart</label>
                                     <div id="depart" class="inputFild">
-                                        <Datepicker v-model="deparedDate" ></Datepicker>
+                                        <Datepicker v-model="deparedDate"></Datepicker>
                                     </div>
                                 </div>
                             </div>
@@ -208,11 +253,11 @@
                                 </div>
                             </div>
                         </div>
-                         <div class="search__buton">
-                        <div class="search__inner">
-                            <span @click="handleOneWayTicket()" id="submitBtn" > submit </span>
+                        <div class="search__buton">
+                            <div class="search__inner">
+                                <span @click="handleOneWayTicket()" id="submitBtn"> submit </span>
+                            </div>
                         </div>
-                    </div>
 
                     </div>
 
@@ -236,14 +281,14 @@
                                 <span class="closeGroup">+</span>
                             </div>
                         </div>
-                         <div class="search__buton">
-                        <div class="search__inner">
-                            <span @click="handle_specific_ticket()" id="submitBtn" > submit </span>
+                        <div class="search__buton">
+                            <div class="search__inner">
+                                <span @click="handle_specific_ticket()" id="submitBtn"> submit </span>
+                            </div>
                         </div>
                     </div>
-                    </div>
 
-                   
+
                 </div>
             </div>
         </div>

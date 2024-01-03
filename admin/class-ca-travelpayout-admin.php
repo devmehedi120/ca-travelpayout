@@ -90,13 +90,46 @@ class Ca_Travelpayout_Admin {
 
     // Add a top-level menu page
     add_menu_page($page_title, $menu_title, $capability, $menu_slug, [$this, 'ca_flight_data_html'], $icon_url, $position);
+	register_setting('travelpayoutSection', 'catpapiCode');
+    register_setting('travelpayoutSection', 'catpredirectURL');
 
+    add_settings_section('travelpayoutSection', '', '', 'travelpayoutPage');
+    add_settings_field('pluginShortcode', 'Plugin Shortcode', [$this, 'plugin_shortcode'], 'travelpayoutPage', 'travelpayoutSection');
+    add_settings_field('catpapiCode', 'Enter API code', [$this, 'catpAPI_cb'], 'travelpayoutPage', 'travelpayoutSection');
+    add_settings_field('catpredirectURL', 'Enter redirect URL', [$this, 'cat_url_cb'], 'travelpayoutPage', 'travelpayoutSection');
 
 	}
 
+	function plugin_shortcode(){
+		echo "<p><code>[flyghtShow]</code></p>";
+	}
+	
+	function catpAPI_cb(){
+		echo '<input class="widefat" type="text" name="catpapiCode" value="'.get_option('catpapiCode').'">';
+	}
+
+	function cat_url_cb(){
+		echo '<input class="widefat" type="url" name="catpredirectURL" value="'.get_option('catpredirectURL').'">';
+	}
+   
 	function ca_flight_data_html(){
-		    ob_start();
-			require_once plugin_dir_path( __FILE__ )."partials/shortcode.php";
-}
+		?>
+		<h3>Settings</h3>
+		<hr>
+
+		<form style="width: 50%" action="options.php" method="post">
+			<?php
+			settings_fields( "travelpayoutSection" );
+			do_settings_sections( "travelpayoutPage" );
+			submit_button( "Save changes", "button-primary" );
+			?>
+		</form>
+		<?php
+	}
+
+// 	function ca_flight_data_html(){
+// 		    ob_start();
+// 			require_once plugin_dir_path( __FILE__ )."partials/shortcode.php";
+// }
 
 };

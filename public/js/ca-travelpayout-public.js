@@ -1808,6 +1808,8 @@ jQuery(function ($) {
         currentCurrencyCode: catp_fragments.currentCurrency,
         originLocation: catp_fragments.originLocation,
         originDefaultCode: catp_fragments.originLocationIatacode,
+        redirectLink: catp_fragments.redirectLink,
+
         uniqueCurrencies: [],
         selectedCurrency: null,
       };

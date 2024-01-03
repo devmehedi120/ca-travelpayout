@@ -109,10 +109,11 @@ class Ca_Travelpayout_Public {
 		wp_enqueue_script( 'vue-datepicker', 'https://unpkg.com/@vuepic/vue-datepicker@latest', array(  ), $this->version, false );
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ca-travelpayout-public.js', array( 'jquery','vueGlobal', 'cataxios' ), $this->version, true );
 		wp_localize_script( $this->plugin_name, 'catp_fragments', array(
-			'ajaxurl' => admin_url("admin-ajax.php"),
-			'currentCurrency' => $this->currentCurrencyCode,
-			'originLocation' =>$this->originLocation,
-			'originLocationIatacode'=>$this->originCityIATA
+			'ajaxurl'                => admin_url("admin-ajax.php"),
+			'currentCurrency'        => $this->currentCurrencyCode,
+			'originLocation'         =>$this->originLocation,
+			'originLocationIatacode' =>$this->originCityIATA,
+			'redirectLink'           =>get_option('catpredirectURL'),
 		) );
 	}
      
@@ -234,9 +235,11 @@ class Ca_Travelpayout_Public {
 
 	function popularCountries(){
 		try {
+			
+			$apiCode=get_option('catpapiCode');
 			$data=(array)$this->userLocatinByIP();
 			$iata=$data['iata'];
-			$url= 'http://api.travelpayouts.com/v1/city-directions?origin='.$iata.'&currency=BDT&token=14a1d288b1b2f173ac139063e817575c';
+			$url= 'http://api.travelpayouts.com/v1/city-directions?origin='.$iata.'&currency=BDT&token='.$apiCode;
 			$dataResponse=wp_remote_get( $url);
 			if(is_wp_error( $dataResponse )){
 				return false;
@@ -276,7 +279,7 @@ class Ca_Travelpayout_Public {
 			$destination = $_GET['singleTicketData']['destination'];
 			$depart_date = date("Y-m", strtotime($_GET['singleTicketData']['depart_date']));
 			$return_date = date("Y-m", strtotime($_GET['singleTicketData']['return_date']));
-			$apiToken = '14a1d288b1b2f173ac139063e817575c';
+			$apiToken = get_option('catpapiCode');
 			$apiUrl = 'https://api.travelpayouts.com/aviasales/v3/prices_for_dates?origin=' . $origin . '&destination=' . $destination . '&departure_at=' . $depart_date . '&return_at=' . $return_date . '&unique=false&sorting=price&direct=false&currency=BDT&limit=30&page=1&one_way=false&token=' . $apiToken . '';
 			$response = wp_remote_get($apiUrl);
 			$bodydata = wp_remote_retrieve_body( $response );
@@ -305,7 +308,7 @@ class Ca_Travelpayout_Public {
 				return false;
 			}
 
-			$apiKey = '14a1d288b1b2f173ac139063e817575c';
+			$apiKey = get_option('catpapiCode');
 			$origin = $_GET['apiParam']['origin'];
 			$destination = $_GET['apiParam']['destination'];
 			$depure = $_GET['apiParam']['depure'];
