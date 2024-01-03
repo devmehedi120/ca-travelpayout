@@ -16,6 +16,7 @@ jQuery(function ($) {
         showOptions: false,
         showToOptions: false,
         showCurrencyOptions: false,
+        showCurOptions:false,
         deparedDate: null,
         formatedDeparedDate: null,
         returnDate: null,
@@ -1812,6 +1813,7 @@ jQuery(function ($) {
 
         uniqueCurrencies: [],
         selectedCurrency: null,
+
       };
     },
     watch: {
@@ -1901,6 +1903,13 @@ jQuery(function ($) {
         this.showCurrencyOptions = false;
         this.showOptions = false;
         this.showToOptions = false;
+      },
+      showCurDropdown(){
+          this.showCurOptions = true;
+        this.showOriginOptions = false;
+        this.showOptions = false;
+        this.showToOptions = false;
+        this.showCurrencyOptions=false;
       },
       showCurrencyDropdown() {
         this.showCurrencyOptions = true;
@@ -2337,6 +2346,7 @@ jQuery(function ($) {
           this.showOriginOptions = false;
           this.showOptions = false;
           this.showToOptions = false;
+           this.showCurOptions= false;
         }
       });
 

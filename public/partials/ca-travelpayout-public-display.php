@@ -143,7 +143,7 @@
                                     <div class="custom-select-container">
                                         <label for="selectcurrency">currency</label>
                                         <input id="selectcurrency" v-model="selectedCurrency"
-                                            @focus="showCurrencyDropdown" class="custom-select-input-1"
+                                            @focus="showCurDropdown" class="custom-select-input"
                                             :placeholder="selectedCurrency?selectedCurrency:currentCurrencyCode">
                                         <span class="arrowSvg"><svg width="20px" height="20px" viewBox="0 0 1024 1024"
                                                 class="icon " version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -151,7 +151,7 @@
                                                     d="M903.232 256l56.768 50.432L512 768 64 306.432 120.768 256 512 659.072z"
                                                     fill="#000" />
                                             </svg></span>
-                                        <div v-if="showCurrencyOptions" class="custom-select-dropdown">
+                                        <div v-if="showCurOptions" class="custom-select-dropdown">
                                             <div v-for="currency in filteredCurrency" :key="currency"
                                                 class="custom-select-option" @click="selectCurrency(currency)">
                                                 <span>{{ currency }}</span>

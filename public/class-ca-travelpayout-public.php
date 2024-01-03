@@ -94,6 +94,7 @@ class Ca_Travelpayout_Public {
 		wp_enqueue_style( 'card__style', plugin_dir_url( __FILE__ ) . 'css/ca-card-section.css', array(), $this->version, 'all' );
 		wp_enqueue_style( 'vue-datepicker', 'https://unpkg.com/@vuepic/vue-datepicker@latest/dist/main.css', array(), $this->version, 'all' );
 		wp_enqueue_style( 'casearch__result', plugin_dir_url( __FILE__ ) . 'css/ca-search-result.css', array(), $this->version, 'all' );
+		wp_enqueue_style( 'ca_breakpoint', plugin_dir_url( __FILE__ ) . 'css/breakpoints.css', array(), $this->version, 'all' );
 		
 	}
 

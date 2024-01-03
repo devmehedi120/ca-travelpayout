@@ -36,6 +36,7 @@ h1.flightHeading {
     border: 1px solid #ccc;
     border-top: none;
     background-color: #fff;
+    z-index: 9999;
 
 }
 
@@ -99,7 +100,7 @@ h1.flightHeading {
     width: 100%;
     position: relative;
     justify-content: center;
-    align-items: center;
+    
 }
 
 input.radioBtn {
