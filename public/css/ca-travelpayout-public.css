@@ -4,10 +4,7 @@ h1.flightHeading {
     font-size: 20px;
 }
 
-.dp__pointer {
-    cursor: pointer;
-    padding: 12px !important;
-}
+
 
 .custom-select-container {
     position: relative;
@@ -17,9 +14,9 @@ h1.flightHeading {
 
 .custom-select-input {
     width: 100%;
-    padding: 12px;
+    padding: 6px;
     font-size: 16px;
-    text-align: center;
+    text-align: left;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-family: sans-serif;
@@ -31,7 +28,7 @@ h1.flightHeading {
     top: 100%;
     left: 0;
     width: 100%;
-    max-height: 400px;
+    max-height: 200px;
     overflow-y: auto;
     border: 1px solid #ccc;
     border-top: none;
@@ -100,7 +97,7 @@ h1.flightHeading {
     width: 100%;
     position: relative;
     justify-content: center;
-    
+
 }
 
 input.radioBtn {
@@ -134,9 +131,9 @@ form#caFlyghtSearch {
     justify-content: center;
     align-items: center;
     margin: 0;
-    height: 35px;
-    top: 42%;
-    width: 35px;
+    height: 30px;
+    top: 46%;
+    width: 30px;
     border-radius: 50%;
     border: 2px solid #d6d6d6;
     transform: translateX(-50%);
@@ -248,4 +245,40 @@ div#caFlyghtSearch {
     display: flex;
     flex-direction: column;
     width: 100%;
+}
+
+input.submitBTn {
+    border: 1px solid #ddd;
+    outline: none;
+    width: 150px;
+    border-radius: 4px;
+    background-color: dodgerblue;
+    transition: 0.3s;
+    padding: 10px;
+}
+
+input.submitBTn:hover {
+    background-color: rgb(11, 75, 139);
+    transition: 0.3s;
+
+}
+
+.dp__month_year_wrap {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 20%;
+}
+
+.dp__action_buttons {
+    display: flex;
+    flex: unset !important;
+    align-items: center;
+    justify-content: flex-end;
+    margin-inline-start: auto;
+}
+
+.dp__btn {
+    background: none;
+    padding: unset !important;
 }

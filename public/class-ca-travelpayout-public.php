@@ -89,12 +89,14 @@ class Ca_Travelpayout_Public {
 	 */
 	public function enqueue_styles() {
 
-		
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/ca-travelpayout-public.css', array(), $this->version, 'all' );
 		wp_enqueue_style( 'card__style', plugin_dir_url( __FILE__ ) . 'css/ca-card-section.css', array(), $this->version, 'all' );
 		wp_enqueue_style( 'vue-datepicker', 'https://unpkg.com/@vuepic/vue-datepicker@latest/dist/main.css', array(), $this->version, 'all' );
-		wp_enqueue_style( 'casearch__result', plugin_dir_url( __FILE__ ) . 'css/ca-search-result.css', array(), $this->version, 'all' );
 		wp_enqueue_style( 'ca_breakpoint', plugin_dir_url( __FILE__ ) . 'css/breakpoints.css', array(), $this->version, 'all' );
+		wp_enqueue_style( 'casearch__result', plugin_dir_url( __FILE__ ) . 'css/ca-search-result.css', array(), $this->version, 'all' );
+		
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/ca-travelpayout-public.css', array(), $this->version, 'all' );
+		
+		
 		
 	}
 
@@ -108,7 +110,7 @@ class Ca_Travelpayout_Public {
 		wp_enqueue_script( 'uuidv4', plugin_dir_url( __FILE__ ) . 'js/uuidv4.js', array(  ), $this->version, false );
 		wp_enqueue_script( 'cataxios', 'https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js', array(  ), $this->version, false );
 		wp_enqueue_script( 'vue-datepicker', 'https://unpkg.com/@vuepic/vue-datepicker@latest', array(  ), $this->version, false );
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ca-travelpayout-public.js', array( 'jquery','vueGlobal', 'cataxios' ), $this->version, true );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ca-travelpayout-public.js', array( 'jquery','vueGlobal', 'cataxios','vue-datepicker' ), $this->version, true );
 		wp_localize_script( $this->plugin_name, 'catp_fragments', array(
 			'ajaxurl'                => admin_url("admin-ajax.php"),
 			'currentCurrency'        => $this->currentCurrencyCode,
@@ -315,11 +317,14 @@ class Ca_Travelpayout_Public {
 			$origin = $_GET['apiParam']['origin'];
 			$destination = $_GET['apiParam']['destination'];
 			$depure = $_GET['apiParam']['depure'];
-			$return = isset($_GET['apiParam']['return'])?$_GET['apiParam']['return']:'';
-			$oneWay=isset($_GET['apiParam']['oneway'])?$_GET['apiParam']['oneway']:true;
-			$currency = $this->currentCurrencyCode;
+			$return = (isset($_GET['apiParam']['return'])?$_GET['apiParam']['return']:'');
+			$oneW=isset($_GET['apiParam']['oneway'])?$_GET['apiParam']['oneway']:'';
+			$oneWay=(!empty($oneW)?$oneW:true);
 
-			$url = "https://api.travelpayouts.com/aviasales/v3/prices_for_dates?origin=$origin&destination=$destination&departure_at=$depure&return_at=$return&unique=false&sorting=price&direct=false&currency=$currency&limit=100&page=2&one_way=$oneWay&token=$apiKey";
+			$curr=isset($_GET ['apiParam']['currency'])?$_GET ['apiParam']['currency']:'';
+			$currency =(!empty($curr)?$curr:$this->currentCurrencyCode);
+
+			$url = "https://api.travelpayouts.com/aviasales/v3/prices_for_dates?origin=$origin&destination=$destination&departure_at=$depure&return_at=$return&unique=false&sorting=price&direct=false&currency=$currency&limit=100&page=3&one_way=$oneWay&token=$apiKey";
 
 			// Make the API request
 			$response = wp_remote_get($url);

@@ -16,7 +16,7 @@ jQuery(function ($) {
         showOptions: false,
         showToOptions: false,
         showCurrencyOptions: false,
-        showCurOptions:false,
+        showCurOptions: false,
         deparedDate: null,
         formatedDeparedDate: null,
         returnDate: null,
@@ -1813,7 +1813,6 @@ jQuery(function ($) {
 
         uniqueCurrencies: [],
         selectedCurrency: null,
-
       };
     },
     watch: {
@@ -1876,10 +1875,10 @@ jQuery(function ($) {
     },
     methods: {
       selectCurrency(currency) {
-         this.selectedCurrency = currency;
+        this.selectedCurrency = currency;
       },
       selectedCityIATA(citycode) {
-          this.selectedoriginCity = citycode;
+        this.selectedoriginCity = citycode;
       },
       extractUniqueCurrencies() {
         this.uniqueCurrencies = [
@@ -1904,12 +1903,12 @@ jQuery(function ($) {
         this.showOptions = false;
         this.showToOptions = false;
       },
-      showCurDropdown(){
-          this.showCurOptions = true;
+      showCurDropdown() {
+        this.showCurOptions = true;
         this.showOriginOptions = false;
         this.showOptions = false;
         this.showToOptions = false;
-        this.showCurrencyOptions=false;
+        this.showCurrencyOptions = false;
       },
       showCurrencyDropdown() {
         this.showCurrencyOptions = true;
@@ -1922,7 +1921,7 @@ jQuery(function ($) {
         return new Promise((resolve, reject) => {
           const self = this;
           self.caLoading = true;
-           self.showOriginOptions = false;
+          self.showOriginOptions = false;
 
           jQuery.ajax({
             type: "get",
@@ -1934,7 +1933,6 @@ jQuery(function ($) {
             },
             dataType: "json",
             success: function (response) {
-
               self.caLoading = false;
               if (self.allCities.length > 0 && response.data.length > 0) {
                 const mergedData = response.data.map((city) => {
@@ -2055,7 +2053,8 @@ jQuery(function ($) {
             apiParam: {
               origin: self.selectedCityCode,
               destination: self.selectedToCityCode,
-              depure: self.formattedDepartureDate, // Corrected typo in variable name
+              depure: self.formattedDepartureDate,
+              currency: self.selectedCurrency,
             },
           },
           dataType: "json",
@@ -2100,6 +2099,7 @@ jQuery(function ($) {
               destination: self.selectedToCityCode,
               depure: self.formattedDepartureDate, // Corrected typo in variable name
               return: self.formattedReturnDate, // Corrected typo in variable name
+              currency: self.selectedCurrency,
               oneway: false,
             },
           },
@@ -2136,7 +2136,7 @@ jQuery(function ($) {
         });
       },
 
-     async searchInsideTicket(destinc) {
+      async searchInsideTicket(destinc) {
         const self = this;
         self.caLoading = true;
         jQuery.ajax({
@@ -2151,7 +2151,6 @@ jQuery(function ($) {
             self.caLoading = false;
             self.currentPage = "flightTicket";
             self.ticket = "double";
-            
 
             if (response.data.length > 0) {
               self.flightTicket = response.data.map((d) => {
@@ -2346,7 +2345,7 @@ jQuery(function ($) {
           this.showOriginOptions = false;
           this.showOptions = false;
           this.showToOptions = false;
-           this.showCurOptions= false;
+          this.showCurOptions = false;
         }
       });
 
