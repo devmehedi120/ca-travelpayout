@@ -197,10 +197,12 @@ class Ca_Travelpayout_Public {
 
 	function cat_getPricess(){
 		try {
+			$currencys=$_GET['currency'];
 			$originS=(array)$this->userLocatinByIP();
 			$origin = isset($_GET['originCode']) ? $_GET['originCode'] : $originS['iata'];
 			$currentDate = date('Y-m-d');
-			$currency=isset($_GET['currency'])?$_GET['currency']:$this->currentCurrencyCode;
+			$currency = (isset($currencys) && !empty($currencys)) ? $currencys : $this->currentCurrencyCode;
+
 			// // $newDate = date('Y-m-d', strtotime('+10 days', strtotime($currentDate)));
 			$this->currentCurrencyCode=$currency;
 
@@ -317,7 +319,7 @@ class Ca_Travelpayout_Public {
 			$oneWay=isset($_GET['apiParam']['oneway'])?$_GET['apiParam']['oneway']:true;
 			$currency = $this->currentCurrencyCode;
 
-			$url = "https://api.travelpayouts.com/aviasales/v3/prices_for_dates?origin=$origin&destination=$destination&departure_at=$depure&return_at=$return&unique=false&sorting=price&direct=false&currency=$currency&limit=50&page=2&one_way=$oneWay&token=$apiKey";
+			$url = "https://api.travelpayouts.com/aviasales/v3/prices_for_dates?origin=$origin&destination=$destination&departure_at=$depure&return_at=$return&unique=false&sorting=price&direct=false&currency=$currency&limit=100&page=2&one_way=$oneWay&token=$apiKey";
 
 			// Make the API request
 			$response = wp_remote_get($url);
@@ -344,7 +346,12 @@ class Ca_Travelpayout_Public {
 
 	function flyghtShowHtml(){	
  		ob_start( );
-     	require_once plugin_dir_path(__FILE__)."partials/ca-travelpayout-public-display.php" ;
+		if(isset($_GET['ticket'])&&!empty($_GET['ticket'])){
+           echo "hello ";
+		}else{
+     		require_once plugin_dir_path(__FILE__)."partials/ca-travelpayout-public-display.php" ;
+		}
+		return ob_get_clean();
 	}
 
 	
