@@ -160,7 +160,7 @@
                 <div class="ticketPrice">
                     <span class="deallenth">One deals from</span>
                     <span class="totalAmount">{{currentCurrencyCode}} {{ticket.price}}</span>
-                    <?php $redirect = '' ?>
+                    <?php $redirect = get_option('catpredirectURL') ?>
                     <a  target="_blank"  href="<?php echo ((!empty($redirect)) ? $redirect: '?ticket=true'); ?>">
                         <button class="pricebutton">
                             <p class="textSelect">Select</p>
@@ -219,7 +219,8 @@
                 <div class="ticketPrice">
                     <span class="deallenth">One deals from</span>
                     <span class="totalAmount">{{currentCurrencyCode}} {{ticket.price}}</span>
-                    <a :href="'https://aviasales.com' + ticket.link">
+                    <?php $redirect = get_option('catpredirectURL')?>;
+                    <a target="_blank"  href="<?php echo ((!empty($redirect)) ? $redirect: '?ticket=true') ?>" >
                         <button class="pricebutton">
                             <p class="textSelect">Select</p>
                             <svg fill="#fff" width="25px" height="25px" viewBox="0 0 24 24" id="right-arrow"

@@ -85,6 +85,10 @@
     }
 
     .stopsFilterWrap {
+        display: none !important;
+    }
+
+    .stopsFilterWrap {
         display: none;
     }
 
@@ -94,11 +98,16 @@
     }
 
     .single_ticket {
+        padding: 4px;
+    }
+
+    .single_ticket {
+        padding: 4px;
         flex-direction: column;
     }
 
     .double_ticket_fragment {
-        width: 100%;
+        width: 100% !important;
     }
 
     .double_ticket_fragment {
@@ -154,11 +163,15 @@
     }
 
     span.deallenth {
-        font-size: 10px;
+        font-size: 12px;
     }
 
     span.totalAmount {
-        font-size: 12px;
+        font-size: 15px;
+    }
+
+    span.totalAmount {
+        font-size: 15px;
     }
 
     a {
@@ -167,6 +180,10 @@
 
     button.pricebutton {
         padding: 2px;
+    }
+
+    .location-wrap {
+        flex-direction: row;
     }
 
     p.textSelect {

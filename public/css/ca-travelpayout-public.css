@@ -107,7 +107,7 @@ input.radioBtn {
 
 .flight-location-select {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 
 }
 

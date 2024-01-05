@@ -91,11 +91,13 @@ class Ca_Travelpayout_Public {
 
 		wp_enqueue_style( 'card__style', plugin_dir_url( __FILE__ ) . 'css/ca-card-section.css', array(), $this->version, 'all' );
 		wp_enqueue_style( 'vue-datepicker', 'https://unpkg.com/@vuepic/vue-datepicker@latest/dist/main.css', array(), $this->version, 'all' );
-		wp_enqueue_style( 'ca_breakpoint', plugin_dir_url( __FILE__ ) . 'css/breakpoints.css', array(), $this->version, 'all' );
+		
 		wp_enqueue_style( 'casearch__result', plugin_dir_url( __FILE__ ) . 'css/ca-search-result.css', array(), $this->version, 'all' );
 		
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/ca-travelpayout-public.css', array(), $this->version, 'all' );
-		
+
+		wp_enqueue_style( 'ca_breakpoint', plugin_dir_url( __FILE__ ) . 'css/breakpoints.css', array(), $this->version, 'all' );
+		wp_register_style( 'ca_breakpoint', plugin_dir_url( __FILE__ ) . 'css/breakpoints.css', array(), $this->version, 'all');
 		
 		
 	}
@@ -200,14 +202,13 @@ class Ca_Travelpayout_Public {
 	function cat_getPricess(){
 		try {
 			$currencys=$_GET['currency'];
+			
 			$originS=(array)$this->userLocatinByIP();
 			$origin = isset($_GET['originCode']) ? $_GET['originCode'] : $originS['iata'];
 			$currentDate = date('Y-m-d');
 			$currency = (isset($currencys) && !empty($currencys)) ? $currencys : $this->currentCurrencyCode;
 
-			// // $newDate = date('Y-m-d', strtotime('+10 days', strtotime($currentDate)));
-			$this->currentCurrencyCode=$currency;
-
+			
 			$priceUrl=' http://map.aviasales.com/prices.json?origin_iata='.$origin.'&currency='.$currency;
 			$priceOBJ= wp_remote_get($priceUrl);
 			if(is_wp_error( $priceOBJ)){
@@ -350,6 +351,7 @@ class Ca_Travelpayout_Public {
 
 
 	function flyghtShowHtml(){	
+		wp_enqueue_style( 'ca_breakpoint');
  		ob_start( );
 		if(isset($_GET['ticket'])&&!empty($_GET['ticket'])){
            echo "hello ";

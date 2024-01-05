@@ -41,10 +41,7 @@
                             <input type="radio" name="" id="oneWay" value="oneway" v-model="tab" class="radioBtn">
                             <label for="oneWay">One Way</label>
                         </div>
-                        <div class="inputWraper">
-                            <input type="radio" name="" id="multiCity" value="multicity" v-model="tab" class="radioBtn">
-                            <label for="multiCity"> Multy-City</label>
-                        </div>
+                       
                     </div>
                     <!-- tab one -->
                     <div class="flightLocationInput" v-show="tab === 'return' || tab ===''">
@@ -75,26 +72,7 @@
 
                                     </div>
                                 </div>
-                                <!-- <div class="checkbox__wrap">
-                                    <div class="checkBox__group">
-                                        <div class="checkbox-wrapper-27">
-                                            <label class="checkbox">
-                                                <input type="checkbox">
-                                                <span class="checkbox__icon"></span>
-                                                check Nearby
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="checkBox__group">
-                                        <div class="checkbox-wrapper-27">
-                                            <label class="checkbox">
-                                                <input type="checkbox">
-                                                <span class="checkbox__icon"></span>
-                                                Direct flight only
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div> -->
+                                
                             </div>
                             <div class="locationSet">
                                 <div class="location-wrap">
@@ -110,17 +88,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="checkbox__wrap">
-                                    <div class="checkBox__group">
-                                        <div class="checkbox-wrapper-27">
-                                            <label class="checkbox">
-                                                <input type="checkbox">
-                                                <span class="checkbox__icon"></span>
-                                                Add nearby airport
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div> -->
+                              
                             </div>
                             <div class="locationSet">
                                 <div class="location-wrap">
@@ -161,15 +129,7 @@
                                 </div>
                             </div>
                             
-                            <!-- <div class="locationSet">
-                                <div class="location-wrap">
-                                    <div class="search__buton" @click="handleSpecificTicket()">
-                                        <div class="search__inner">
-                                            <span id="submitBtn"> submit </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
+                          
 
                         </div>
                         <div class="locationSet">
@@ -181,7 +141,7 @@
 
                     </div>
 
-                    <!-- tab number two -->
+                   
 
                     <div class="flightLocationInput" v-show="tab === 'oneway'">
                         <div class="flight-location-select">
@@ -277,34 +237,7 @@
                             </div>
 
                     </div>
-
-
-                    <!-- tab number three -->
-
-                    <div class="multiCitysection" v-show="tab === 'multicity'">
-                        <div class="multiCityWraper">
-                            <div class="fieldGroup">
-                                <input type="text" placeholder="From">
-                                <input type="text" placeholder="To">
-                                <input type="text" placeholder="Depart">
-                                <span class="closeGroup">+</span>
-                            </div>
-                        </div>
-                        <div class="multiCityWraper">
-                            <div class="fieldGroup">
-                                <input type="text" placeholder="From">
-                                <input type="text" placeholder="To">
-                                <input type="text" placeholder="Depart">
-                                <span class="closeGroup">+</span>
-                            </div>
-                        </div>
-                        <div class="search__buton">
-                            <div class="search__inner">
-                                <span @click="handle_specific_ticket()" id="submitBtn"> submit </span>
-                            </div>
-                        </div>
-                    </div>
-
+               
 
                 </div>
             </div>
