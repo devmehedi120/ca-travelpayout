@@ -4,27 +4,7 @@
             <b>Latest Round Trip Ticket Price</b>
         </div>
         <div class="fligtableCityFilter" v-if="currentPage === 'archive'">
-            <div class="custom-select-container">
-                <label for="selectcurrency"><b>Select a currency</b></label>
-                
-                <input id="selectcurrency" v-model="selectedCurrency" @focus="showCurrencyDropdown" class="custom-select-input-1"
-                    :placeholder="selectedCurrency?selectedCurrency:currentCurrencyCode">
-                     <span class="arrowSvg"><svg width="20px" height="20px" viewBox="0 0 1024 1024" class="icon "
-                            version="1.1" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M903.232 256l56.768 50.432L512 768 64 306.432 120.768 256 512 659.072z"
-                                fill="#000" />
-                        </svg></span>
-                <div v-if="showCurrencyOptions" class="custom-select-dropdown">
-                    <div v-for="currency in filteredCurrency" 
-                        :key="currency" 
-                        class="custom-select-option"
-                        @click="selectCurrency(currency)"
-                        >
-                        <span>{{ currency }}</span>
-                    </div>
-                </div>
-            </div>
-            <div class="custom-select-container">
+                 <div class="custom-select-container">
                 <label for="selectCity"><b>Select a city</b></label>
                 <input id="selectCity" v-model="selectedoriginCity" @focus="showoriginDropdown" class="custom-select-input-1"
                     :placeholder="selectedoriginCity?selectedoriginCity:originLocation">
@@ -37,17 +17,14 @@
                     <div v-for="city in filteredOriginCities"
                          :key="city.city_code" 
                         class="custom-select-option"
-                        @click="selectedCityIATA(city.city_code)">
+                        @click="selectOriginCity(city.city_code)"
+                       >
                         <span>{{ city.cityName }}</span>
                     </div>
                 </div>
             </div>
 
-              <div class="filter__buton" @click="selectOriginCity()" >
-                                    <div class="search__inner">
-                            <span  id="submitBtn" > submit </span>
-                        </div>
-                    </div>
+             
         
         </div>
        
@@ -64,7 +41,7 @@
                 </div>
                 <div class="description__area">
                     <div class="country__name">
-                        <h4>{{ singleCard.countryName }}</h4>
+                        <p class="countryName">{{ singleCard.countryName }}</p>
                     </div>
                     <div class="amount__area">
                         <span>Flight from</span>

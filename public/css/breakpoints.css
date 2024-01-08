@@ -182,9 +182,6 @@
         padding: 2px;
     }
 
-    .location-wrap {
-        flex-direction: row;
-    }
 
     p.textSelect {
         font-size: 10px;

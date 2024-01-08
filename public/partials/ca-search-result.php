@@ -51,7 +51,7 @@
 
     </div>
     <div id="flightTIcke" class="flightTicket">
-        <div id="ticketNavbar" class="ticketNavbar">
+        <!-- <div id="ticketNavbar" class="ticketNavbar">
             <div class="ticketnav__wraper" v-show="navdisbled">
                 <div class="navList">
                     <button class="navItem borderleftRadius">
@@ -78,7 +78,7 @@
 
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="ticketWrap">
             <div class="backBtn" @click="backPreviousCity()">
                 <span>Back</span>
@@ -163,7 +163,7 @@
                     <?php $redirect = get_option('catpredirectURL') ?>
                     <a  target="_blank"  href="<?php echo ((!empty($redirect)) ? $redirect: '?ticket=true'); ?>">
                         <button class="pricebutton">
-                            <p class="textSelect">Select</p>
+                            <p class="textSelect">Book </p>
                             <svg fill="#fff" width="25px" height="25px" viewBox="0 0 24 24" id="right-arrow"
                                 xmlns="http://www.w3.org/2000/svg" class="icon line">
                                 <path id="primary" d="M3,12H21m-3,3,3-3L18,9"
@@ -222,7 +222,7 @@
                     <?php $redirect = get_option('catpredirectURL')?>;
                     <a target="_blank"  href="<?php echo ((!empty($redirect)) ? $redirect: '?ticket=true') ?>" >
                         <button class="pricebutton">
-                            <p class="textSelect">Select</p>
+                            <p class="textSelect">Book</p>
                             <svg fill="#fff" width="25px" height="25px" viewBox="0 0 24 24" id="right-arrow"
                                 xmlns="http://www.w3.org/2000/svg" class="icon line">
                                 <path id="primary" d="M3,12H21m-3,3,3-3L18,9"

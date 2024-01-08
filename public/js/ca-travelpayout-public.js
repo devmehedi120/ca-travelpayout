@@ -5,7 +5,7 @@ jQuery(function ($) {
       return {
         ticket: "",
         errMsg: null,
-        selectedoriginCity: null,
+        selectedoriginCity:null,
         showOriginOptions: false,
         isTicket: false,
         navdisbled: false,
@@ -1877,9 +1877,7 @@ jQuery(function ($) {
       selectCurrency(currency) {
         this.selectedCurrency = currency;
       },
-      selectedCityIATA(citycode) {
-        this.selectedoriginCity = citycode;
-      },
+    
       extractUniqueCurrencies() {
         this.uniqueCurrencies = [
           ...new Set(
@@ -1916,8 +1914,8 @@ jQuery(function ($) {
         this.showOptions = false;
         this.showToOptions = false;
       },
-      async selectOriginCity() {
-        this.currentCurrencyCode = this.selectedCurrency;
+      async selectOriginCity(cityCode) {
+        
         return new Promise((resolve, reject) => {
           const self = this;
           self.caLoading = true;
@@ -1928,12 +1926,13 @@ jQuery(function ($) {
             url: catp_fragments.ajaxurl,
             data: {
               action: "get_all_price",
-              originCode: self.selectedoriginCity,
-              currency: self.selectedCurrency,
+              originCode: cityCode,
+              
             },
             dataType: "json",
             success: function (response) {
               self.caLoading = false;
+
               if (self.allCities.length > 0 && response.data.length > 0) {
                 const mergedData = response.data.map((city) => {
                   const matchingResponseCity = self.allCities.find(
@@ -2042,7 +2041,6 @@ jQuery(function ($) {
         self.flightTicket = [];
         self.currentPage = "flightTicket";
         self.ticket = "single";
-
         self.caLoading = true;
 
         jQuery.ajax({
@@ -2062,7 +2060,7 @@ jQuery(function ($) {
             self.caLoading = false;
             self.currentPage = "flightTicket";
             self.ticket = "single";
-
+             self.currentCurrencyCode = self.selectedCurrency;
             if (response.data.length > 0) {
               self.flightTicket = response.data.map((d) => {
                 const departureDate = new Date(d.departure_at);
@@ -2084,6 +2082,7 @@ jQuery(function ($) {
       },
       handleSpecificTicket() {
         const self = this;
+        self.currentCurrencyCode = self.selectedCurrency;
         self.flightTicket = [];
         self.currentPage = "flightTicket";
         self.ticket = "double";
@@ -2108,6 +2107,7 @@ jQuery(function ($) {
             self.caLoading = false;
             self.currentPage = "flightTicket";
             self.ticket = "double";
+             self.currentCurrencyCode = self.selectedCurrency;
 
             if (response.data.length > 0) {
               self.flightTicket = response.data.map((d) => {
@@ -2190,24 +2190,8 @@ jQuery(function ($) {
           this.caLoading = false;
         }, 1000);
       },
-      async getPopularLocations() {
-        return new Promise((resolve, reject) => {
-          jQuery.ajax({
-            type: "get",
-            url: catp_fragments.ajaxurl,
-            data: {
-              action: "getpopuplar_locations",
-            },
-            dataType: "json",
-            success: function (response) {
-              resolve(response);
-            },
-            error: (error) => {
-              reject(error);
-            },
-          });
-        });
-      },
+      // 
+      
 
       async allCountries() {
         return new Promise((resolve, reject) => {

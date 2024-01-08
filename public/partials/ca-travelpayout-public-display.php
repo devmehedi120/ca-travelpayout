@@ -134,8 +134,8 @@
                         </div>
                         <div class="locationSet">
                                 <div class="location-wrap">
-                                    <label for="return"></label>
-                                    <input @click="handleSpecificTicket()"  type="submit" class="submitBTn" >
+                                 <button class="submitBTn" @click="handleSpecificTicket()"> Search</button>                                    
+                                    
                                 </div>
                             </div>
 
@@ -231,8 +231,8 @@
 
                         <div class="locationSet">
                                 <div class="location-wrap">
-                                    <label for="return"></label>
-                                    <input @click="handleOneWayTicket()"  type="submit" class="submitBTn" >
+                                   <button @click="handleOneWayTicket()"  class="submitBTn">Search</button>
+                                    
                                 </div>
                             </div>
 

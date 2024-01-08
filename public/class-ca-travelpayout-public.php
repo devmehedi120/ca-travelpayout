@@ -202,7 +202,7 @@ class Ca_Travelpayout_Public {
 	function cat_getPricess(){
 		try {
 			$currencys=$_GET['currency'];
-			
+					
 			$originS=(array)$this->userLocatinByIP();
 			$origin = isset($_GET['originCode']) ? $_GET['originCode'] : $originS['iata'];
 			$currentDate = date('Y-m-d');
@@ -239,39 +239,39 @@ class Ca_Travelpayout_Public {
 		wp_send_json_error( "Server error", 500 );
 	}
 
-	function popularCountries(){
-		try {
+	// function popularCountries(){
+	// 	try {
 			
-			$apiCode=get_option('catpapiCode');
-			$data=(array)$this->userLocatinByIP();
-			$iata=$data['iata'];
-			$url= 'http://api.travelpayouts.com/v1/city-directions?origin='.$iata.'&currency=BDT&token='.$apiCode;
-			$dataResponse=wp_remote_get( $url);
-			if(is_wp_error( $dataResponse )){
-				return false;
-			}
-			$bodydata=wp_remote_retrieve_body( $dataResponse );
-			$decodedData=json_decode($bodydata);
+	// 		$apiCode=get_option('catpapiCode');
+	// 		$data=(array)$this->userLocatinByIP();
+	// 		$iata=$data['iata'];
+	// 		$url= 'http://api.travelpayouts.com/v1/city-directions?origin='.$iata.'&currency=BDT&token='.$apiCode;
+	// 		$dataResponse=wp_remote_get( $url);
+	// 		if(is_wp_error( $dataResponse )){
+	// 			return false;
+	// 		}
+	// 		$bodydata=wp_remote_retrieve_body( $dataResponse );
+	// 		$decodedData=json_decode($bodydata);
 
-			$countries = [];
-			if($decodedData && is_object($decodedData->data)){
-				foreach($decodedData->data as $country){
-					$countries[] = [
-						'origin' => $country->origin,
-						'destination' => $country->destination,
-						'price' => $country->price,
-						'transfers' => $country->transfers,
-					];
-				}
-			}
+	// 		$countries = [];
+	// 		if($decodedData && is_object($decodedData->data)){
+	// 			foreach($decodedData->data as $country){
+	// 				$countries[] = [
+	// 					'origin' => $country->origin,
+	// 					'destination' => $country->destination,
+	// 					'price' => $country->price,
+	// 					'transfers' => $country->transfers,
+	// 				];
+	// 			}
+	// 		}
 
-			wp_send_json_success( $countries, 200 );
-		} catch (\Throwable $th) {
-			//throw $th;
-		}
+	// 		wp_send_json_success( $countries, 200 );
+	// 	} catch (\Throwable $th) {
+	// 		//throw $th;
+	// 	}
 		
-		wp_send_json_error( "Server error", 500 );
-	}
+	// 	wp_send_json_error( "Server error", 500 );
+	// }
 
 	function get_flight_ticket_fromCity() {
 
