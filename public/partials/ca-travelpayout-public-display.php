@@ -41,26 +41,26 @@
                             <input type="radio" name="" id="oneWay" value="oneway" v-model="tab" class="radioBtn">
                             <label for="oneWay">One Way</label>
                         </div>
-                       
+
                     </div>
                     <!-- tab one -->
                     <div class="flightLocationInput" v-show="tab === 'return' || tab ===''">
                         <div class="flight-location-select">
                             <div class="locationSet">
                                 <div class="location-wrap">
-                                    <label for="travelFrom">From</label>
                                     <div id="travelFrom" class="inputFild">
-                                        <div class="custom-select-container">
-                                            <input v-model="selectedCity" @focus="showDropdown"
-                                                class="custom-select-input" placeholder="Select a city">
-                                            <div v-if="showOptions" class="custom-select-dropdown">
-                                                <div v-for="city in filteredCities" :key="city.city_code"
-                                                    @click="selectCity(city)" class="custom-select-option">
-                                                    {{ city.cityName }}
 
-                                                </div>
-                                            </div>
+                                        <div class="custom-select-container">
+                                            <label for="travelFrom"><b>From</b></label>
+                                            <input id="travelFrom" class="custom-select-input" @focus="showDropdown"
+                                                v-model="selectedCity" @input="searchFromPlaces"
+                                                :placeholder="selectedCity !==''?selectedCity:'Select A City'">
+                                            <ul class="custom-select-dropdown" v-if="showOptions">
+                                                <li class="custom-select-option" @click="selectCity(place)"
+                                                    v-for="place in places" :key="place.id">{{ place.name }}</li>
+                                            </ul>
                                         </div>
+
                                     </div>
                                     <div class="location-toggle">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"
@@ -72,23 +72,21 @@
 
                                     </div>
                                 </div>
-                                
                             </div>
                             <div class="locationSet">
                                 <div class="location-wrap">
-                                    <label for="travelTO">To</label>
-                                    <div class="custom-select-container">
-                                        <input v-model="selectedToCity" @focus="showToDropdown"
-                                            class="custom-select-input" placeholder="Select a city">
-                                        <div v-if="showToOptions" class="custom-select-dropdown">
-                                            <div v-for="city in filteredToCities" :key="city.city_code"
-                                                @click="selectToCity(city)" class="custom-select-option">
-                                                {{ city.cityName }}
-                                            </div>
+                                          <div class="custom-select-container">
+                                            <label for="travelTO"><b>To</b></label>
+                                            <input id="travelTO" class="custom-select-input" @focus="showToDropdown"
+                                                v-model="selectedToCity" @input="searchToPlaces"
+                                                :placeholder="selectedToCity !==''?selectedToCity:'Select A city'">
+                                            <ul class="custom-select-dropdown" v-if="showToOptions">
+                                                <li class="custom-select-option" @click="selectToCity(place)"
+                                                    v-for="place in places" :key="place.id">{{ place.name }}</li>
+                                            </ul>
                                         </div>
-                                    </div>
                                 </div>
-                              
+
                             </div>
                             <div class="locationSet">
                                 <div class="location-wrap">
@@ -110,8 +108,8 @@
                                 <div class="location-wrap">
                                     <div class="custom-select-container">
                                         <label for="selectcurrency">currency</label>
-                                        <input id="selectcurrency" v-model="selectedCurrency"
-                                            @focus="showCurDropdown" class="custom-select-input"
+                                        <input id="selectcurrency" v-model="selectedCurrency" @focus="showCurDropdown"
+                                            class="custom-select-input"
                                             :placeholder="selectedCurrency?selectedCurrency:currentCurrencyCode">
                                         <span class="arrowSvg"><svg width="20px" height="20px" viewBox="0 0 1024 1024"
                                                 class="icon " version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -128,39 +126,34 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                          
+
 
                         </div>
                         <div class="locationSet">
-                                <div class="location-wrap">
-                                 <button class="submitBTn" @click="handleSpecificTicket()"> Search</button>                                    
-                                    
-                                </div>
+                            <div class="button_wrp">
+                                <button class="submitBTn" @click="handleSpecificTicket()"> Search</button>
+
                             </div>
+                        </div>
 
                     </div>
 
-                   
 
+<!-- tab no two -->
                     <div class="flightLocationInput" v-show="tab === 'oneway'">
                         <div class="flight-location-select">
                             <div class="locationSet">
                                 <div class="location-wrap">
-                                    <label for="travelFrom">From</label>
-                                    <div id="travelFrom" class="inputFild">
                                         <div class="custom-select-container">
-                                            <input v-model="selectedCity" @focus="showDropdown"
-                                                class="custom-select-input" placeholder="Select a city">
-                                            <div v-if="showOptions" class="custom-select-dropdown">
-                                                <div v-for="city in filteredCities" :key="city.city_code"
-                                                    @click="selectCity(city)" class="custom-select-option">
-                                                    {{ city.cityName }}
-
-                                                </div>
-                                            </div>
+                                            <label for="travelFrom"><b>From</b></label>
+                                            <input id="travelFrom" class="custom-select-input" @focus="showDropdown"
+                                                v-model="selectedCity" @input="searchFromPlaces"
+                                                :placeholder="selectedCity !==''?selectedCity:'Select A City'">
+                                            <ul class="custom-select-dropdown" v-if="showOptions">
+                                                <li class="custom-select-option" @click="selectCity(place)"
+                                                    v-for="place in places" :key="place.id">{{ place.name }}</li>
+                                            </ul>
                                         </div>
-                                    </div>
                                     <div class="location-toggle" v-if="tab===''">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"
                                             style="width: 1rem; height: 1rem;">
@@ -174,17 +167,16 @@
                             </div>
                             <div class="locationSet">
                                 <div class="location-wrap">
-                                    <label for="travelTO">To</label>
-                                    <div class="custom-select-container">
-                                        <input v-model="selectedToCity" @focus="showToDropdown"
-                                            class="custom-select-input" placeholder="Select a city">
-                                        <div v-if="showToOptions" class="custom-select-dropdown">
-                                            <div v-for="city in filteredToCities" :key="city.city_code"
-                                                @click="selectToCity(city)" class="custom-select-option">
-                                                {{ city.cityName }}
-                                            </div>
+                                     <div class="custom-select-container">
+                                            <label for="travelTO"><b>To</b></label>
+                                            <input id="travelTO" class="custom-select-input" @focus="showToDropdown"
+                                                v-model="selectedToCityCode" @input="searchToPlaces"
+                                                :placeholder="selectedToCity !==''?selectedToCity:'Select A city'">
+                                            <ul class="custom-select-dropdown" v-if="showToOptions">
+                                                <li class="custom-select-option" @click="selectToCity(place)"
+                                                    v-for="place in places" :key="place.id">{{ place.name }}</li>
+                                            </ul>
                                         </div>
-                                    </div>
                                 </div>
                             </div>
                             <div class="locationSet">
@@ -196,19 +188,19 @@
                                 </div>
                             </div>
                             <div class="locationSet">
-                                <div class="location-wrap" >
+                                <div class="location-wrap">
                                     <label for="return">Return</label>
                                     <Datepicker :min-date="new Date()" v-model="returnDate" disabled></Datepicker>
-                                    
+
                                 </div>
                             </div>
 
-                             <div class="locationSet">
+                            <div class="locationSet">
                                 <div class="location-wrap">
                                     <div class="custom-select-container">
                                         <label for="selectcurrency">currency</label>
-                                        <input id="selectcurrency" v-model="selectedCurrency"
-                                            @focus="showCurDropdown" class="custom-select-input"
+                                        <input id="selectcurrency" v-model="selectedCurrency" @focus="showCurDropdown"
+                                            class="custom-select-input"
                                             :placeholder="selectedCurrency?selectedCurrency:currentCurrencyCode">
                                         <span class="arrowSvg"><svg width="20px" height="20px" viewBox="0 0 1024 1024"
                                                 class="icon " version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -225,19 +217,19 @@
                                     </div>
                                 </div>
                             </div>
-                             
+
                         </div>
-                      
+
 
                         <div class="locationSet">
-                                <div class="location-wrap">
-                                   <button @click="handleOneWayTicket()"  class="submitBTn">Search</button>
-                                    
-                                </div>
+                            <div class="button_wrp">
+                                <button @click="handleOneWayTicket()" class="submitBTn">Search</button>
+
                             </div>
+                        </div>
 
                     </div>
-               
+
 
                 </div>
             </div>

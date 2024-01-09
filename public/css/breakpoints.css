@@ -1,7 +1,8 @@
-@media (max-width: 360px) {
+@media (max-width: 480px) {
     h1.flightHeading {
         text-align: center;
     }
+
 
     div#caFlyghtSearch {
         display: flex;
@@ -72,6 +73,11 @@
     .card_wraper {
         margin-top: 10px;
         flex-direction: column;
+    }
+
+    p.countryName {
+        margin: 0 !important;
+        font-size: 14px;
     }
 
     .single__card {
@@ -266,5 +272,18 @@
 
     div#flightTIcke {
         width: 100%;
+    }
+
+    .amount__area {
+
+        flex-direction: column;
+    }
+
+    .amount__area span {
+        font-size: 12px;
+    }
+
+    h1.flightHeading {
+        text-align: center;
     }
 }

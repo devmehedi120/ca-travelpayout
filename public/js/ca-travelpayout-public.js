@@ -1,18 +1,27 @@
+
+
+
 jQuery(function ($) {
+
+
+  // Register the vue-multiselect component globally
+  
   Vue.createApp({
     components: { Datepicker: VueDatePicker },
     data() {
       return {
+        searchTerm:this.originLocation?originLocation: "",
+        places: [],
         ticket: "",
         errMsg: null,
-        selectedoriginCity:null,
+        selectedoriginCity: null,
         showOriginOptions: false,
         isTicket: false,
         navdisbled: false,
         selectedCityCode: "",
         selectedToCityCode: "",
-        selectedCity: null,
-        selectedToCity: null,
+        selectedCity: '',
+        selectedToCity: '',
         showOptions: false,
         showToOptions: false,
         showCurrencyOptions: false,
@@ -1844,40 +1853,74 @@ jQuery(function ($) {
           cur.toLowerCase().includes(searchTerm)
         );
       },
-      filteredOriginCities() {
-        if (!this.selectedoriginCity) {
-          return this.allCities;
-        }
-
-        const searchTerm = this.selectedoriginCity.toLowerCase();
-        return this.allCities.filter((city) =>
-          city.cityName.toLowerCase().includes(searchTerm)
-        );
-      },
-      filteredCities() {
-        if (!this.selectedCity) {
-          return this.allCities;
-        }
-        const searchTerm = this.selectedCity.toLowerCase();
-        return this.allCities.filter((city) =>
-          city.cityName.toLowerCase().includes(searchTerm)
-        );
-      },
-      filteredToCities() {
-        if (!this.selectedToCity) {
-          return this.allCities;
-        }
-        const searchTerm = this.selectedToCity.toLowerCase();
-        return this.allCities.filter((city) =>
-          city.cityName.toLowerCase().includes(searchTerm)
-        );
-      },
+      
     },
     methods: {
+      async searchPlaces() {
+        try {
+          const response = await axios.get(
+            "https://autocomplete.travelpayouts.com/places2",
+            {
+              params: {
+                locale: "en",
+                types: ["city"],
+                term: ((this.searchTerm !=="") ? this.searchTerm : this.originLocation),
+              },
+            }
+          );
+
+          this.places = response.data;
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      },
+      async searchFromPlaces() {
+        try {
+          const response = await axios.get(
+            "https://autocomplete.travelpayouts.com/places2",
+            {
+              params: {
+                locale: "en",
+                types: ["city"],
+                term:
+                  this.selectedCity !== ""
+                    ? this.selectedCity
+                    : this.originLocation,
+              },
+            }
+          );
+
+          this.places = response.data;
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      },
+      async searchToPlaces() {
+        try {
+          const response = await axios.get(
+            "https://autocomplete.travelpayouts.com/places2",
+            {
+              params: {
+                locale: "en",
+                types: ["city"],
+                term:
+                  this.selectedToCityCode !== ""
+                    ? this.selectedToCityCode
+                    : this.originLocation,
+              },
+            }
+          );
+
+          this.places = response.data;
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      },
+
       selectCurrency(currency) {
         this.selectedCurrency = currency;
       },
-    
+
       extractUniqueCurrencies() {
         this.uniqueCurrencies = [
           ...new Set(
@@ -1914,8 +1957,8 @@ jQuery(function ($) {
         this.showOptions = false;
         this.showToOptions = false;
       },
-      async selectOriginCity(cityCode) {
-        
+      async selectOriginCity(city) {
+        this.selectedoriginCity = city.name;
         return new Promise((resolve, reject) => {
           const self = this;
           self.caLoading = true;
@@ -1926,8 +1969,7 @@ jQuery(function ($) {
             url: catp_fragments.ajaxurl,
             data: {
               action: "get_all_price",
-              originCode: cityCode,
-              
+              originCode: city.code,
             },
             dataType: "json",
             success: function (response) {
@@ -2009,15 +2051,16 @@ jQuery(function ($) {
         this.showOriginOptions = false;
       },
       selectCity(city) {
-        this.selectedCity = city.cityName;
-        this.selectedCityCode = city.city_code;
+        this.selectedCity = city.name;
+        this.searchTerm=city.name;
+        this.selectedCityCode = city.code;
         this.showOptions = false;
         this.showCurrencyOptions = false;
         this.showOriginOptions = false;
       },
       selectToCity(city) {
-        this.selectedToCity = city.cityName;
-        this.selectedToCityCode = city.city_code;
+        this.selectedToCity = city.name;
+        this.selectedToCityCode = city.code;
         this.showToOptions = false;
         this.showCurrencyOptions = false;
         this.showOriginOptions = false;
@@ -2060,7 +2103,7 @@ jQuery(function ($) {
             self.caLoading = false;
             self.currentPage = "flightTicket";
             self.ticket = "single";
-             self.currentCurrencyCode = self.selectedCurrency;
+            self.currentCurrencyCode = self.selectedCurrency;
             if (response.data.length > 0) {
               self.flightTicket = response.data.map((d) => {
                 const departureDate = new Date(d.departure_at);
@@ -2107,7 +2150,7 @@ jQuery(function ($) {
             self.caLoading = false;
             self.currentPage = "flightTicket";
             self.ticket = "double";
-             self.currentCurrencyCode = self.selectedCurrency;
+            self.currentCurrencyCode = self.selectedCurrency;
 
             if (response.data.length > 0) {
               self.flightTicket = response.data.map((d) => {
@@ -2130,7 +2173,6 @@ jQuery(function ($) {
                 return d;
               });
             }
-            console.log(self.flightTicket);
           },
           error: function (error) {},
         });
@@ -2190,8 +2232,7 @@ jQuery(function ($) {
           this.caLoading = false;
         }, 1000);
       },
-      // 
-      
+      //
 
       async allCountries() {
         return new Promise((resolve, reject) => {
@@ -2318,7 +2359,7 @@ jQuery(function ($) {
         }
       });
     },
-    mounted() {
+    async mounted() {
       document.addEventListener("click", (event) => {
         if (
           event.target.className !== "custom-select-container" &&

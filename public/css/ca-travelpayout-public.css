@@ -14,7 +14,7 @@ h1.flightHeading {
 
 .custom-select-input {
     width: 100%;
-    padding: 6px;
+    padding: 9px;
     font-size: 16px;
     text-align: left;
     border: 1px solid #ddd;
@@ -27,8 +27,8 @@ h1.flightHeading {
     position: absolute;
     top: 100%;
     left: 0;
-    width: 100%;
-    max-height: 200px;
+    width: 250px;
+    max-height: 300px;
     overflow-y: auto;
     border: 1px solid #ccc;
     border-top: none;
@@ -41,6 +41,8 @@ h1.flightHeading {
     padding: 10px;
     cursor: pointer;
     transition: background-color 0.3s;
+    list-style: none;
+    
 }
 
 .custom-select-option:hover {
@@ -127,7 +129,7 @@ form#caFlyghtSearch {
 
 .location-toggle {
     position: absolute;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     margin: 0;
@@ -282,3 +284,18 @@ input.submitBTn:hover {
     background: none;
     padding: unset !important;
 }
+
+button.submitBTn {
+    width: 100%;
+    background-color: yellowgreen;
+    color: #000;
+    border: 1px solid #ddd;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+button.submitBTn:hover {
+    border: 1px solid #999;
+   
+}
+

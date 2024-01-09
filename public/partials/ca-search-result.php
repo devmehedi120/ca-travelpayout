@@ -161,7 +161,7 @@
                     <span class="deallenth">One deals from</span>
                     <span class="totalAmount">{{currentCurrencyCode}} {{ticket.price}}</span>
                     <?php $redirect = get_option('catpredirectURL') ?>
-                    <a  target="_blank"  href="<?php echo ((!empty($redirect)) ? $redirect: '?ticket=true'); ?>">
+                    <a  target="_blank"  href="<?php echo ((!empty($redirect)) ? $redirect: '?ticket=true') ?>">
                         <button class="pricebutton">
                             <p class="textSelect">Book </p>
                             <svg fill="#fff" width="25px" height="25px" viewBox="0 0 24 24" id="right-arrow"
@@ -219,7 +219,7 @@
                 <div class="ticketPrice">
                     <span class="deallenth">One deals from</span>
                     <span class="totalAmount">{{currentCurrencyCode}} {{ticket.price}}</span>
-                    <?php $redirect = get_option('catpredirectURL')?>;
+                    <?php $redirect = get_option('catpredirectURL')?>
                     <a target="_blank"  href="<?php echo ((!empty($redirect)) ? $redirect: '?ticket=true') ?>" >
                         <button class="pricebutton">
                             <p class="textSelect">Book</p>
