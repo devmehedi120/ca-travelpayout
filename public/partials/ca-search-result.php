@@ -51,34 +51,7 @@
 
     </div>
     <div id="flightTIcke" class="flightTicket">
-        <!-- <div id="ticketNavbar" class="ticketNavbar">
-            <div class="ticketnav__wraper" v-show="navdisbled">
-                <div class="navList">
-                    <button class="navItem borderleftRadius">
-                        <div class="bestPricewraer">
-                            <span class="best__pp pp_size">Best</span>
-                            <span class="Best__pp__amount">1300 BDT</span>
-                            <span class="note">oh 20 ticket</span>
-                        </div>
-                    </button>
-                    <button class="navItem ">
-                        <div class="bestPricewraer">
-                            <span class="best__pp pp_size">Chepest</span>
-                            <span class="Best__pp__amount">1200 BDT</span>
-                            <span class="note">oh 25 ticket</span>
-                        </div>
-                    </button>
-                    <button class="navItem borderrighttRadius ">
-                        <div class="bestPricewraer">
-                            <span class="best__pp pp_size">Fastest</span>
-                            <span class="Best__pp__amount">1300 BDT</span>
-                            <span class="note">oh 20 ticket</span>
-                        </div>
-                    </button>
-
-                </div>
-            </div>
-        </div> -->
+       
         <div class="ticketWrap">
             <div class="backBtn" @click="backPreviousCity()">
                 <span>Back</span>

@@ -48,263 +48,17 @@
 
 /* --------------------------------------------------------- */
 .searchFlightWraper {
-    background-color: aqua;
+    background-color: transparent;
     padding: 10px;
-}
-
-/* 
- .searchFlightWraper {
-    height: auto;
-    width: 100%;
-    background-color: #ffffff;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    font-family: 'Poppins', sans-serif;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
     border: 1px solid #ddd;
 }
 
-#filteWraper {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-}
-
-.search-filter {
-    display: flex;
-    width: 100%;
-}
-
-.flightLocationInput {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.inputBox {
-    display: flex;
-    gap: 15px;
-}
-
-.inputWraper {
-    display: flex;
-    justify-content: space-between;
-    gap: 4px;
-}
-
-.location-wrap {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    position: relative;
-    justify-content: center;
-
-}
-
-input.radioBtn {
-    width: 20px;
-    height: 20px;
-}
-
-.flight-location-select {
-    display: flex;
-    justify-content: center;
-
-}
-
-.locationSet {
-    display: flex;
-    gap: 2px;
-    max-width: 100%;
-    flex-direction: column;
-} */
-
-/* form#caFlyghtSearch {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-}
-
-.location-toggle {
-    position: absolute;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    height: 30px;
-    top: 46%;
-    width: 30px;
-    border-radius: 50%;
-    border: 2px solid #d6d6d6;
-    transform: translateX(-50%);
-    left: 100%;
-    z-index: 99;
-    left: 100%;
-    color: #fff;
-    background-color: #ffffff;
-}
-
-input.inputFild {
-    border: 1px solid #ddd;
-    outline: none;
-    background-color: #fff;
-}
-
-input.inputFild:focus {
-    border: 1px solid #d6d6d6;
-    transition: 0.3s ease-in-out;
-}
-
-.input__padding {
-    padding: 10px;
-}
-
-form#caFlyghtSearch {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.search__buton {
-    border: 1px solid #ddd;
-    width: 100px;
-    padding: 10px;
-    text-align: center;
-    background-color: #fff;
-    margin-top: 25px;
-    cursor: pointer;
-}
-
-.search__buton:hover {
-    color: blueviolet;
-    border: 1px solid blueviolet;
-    transition: 0.4s ease;
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-}
-
-input#checkNearby {
-    margin-left: 5px;
-}
-
-.checkBox__group {
-    display: flex;
-    justify-content: left;
-    align-items: center;
-}
-
-.multiCitysection {
-    display: flex;
-    width: 100%;
-    justify-content: left;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.multiCityWraper {
-    display: flex;
-    width: 100%;
-}
-
-.fieldGroup {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-}
-
-.fieldGroup input {
-    border: 1px solid #d6d6d6;
-    outline: none;
-    width: 100%;
-    background-color: #fff;
-}
-
-.fieldGroup input:focus {
-    border: 1px solid #d6d6d6;
-    transition: 0.3s ease-in-out;
-}
-
-span.closeGroup {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px;
-    transform: rotate(45deg);
-    color: rgb(240, 91, 91);
-    font-weight: 400;
-    padding: 10px;
-    cursor: pointer;
-    user-select: none;
-}
-
-span.closeGroup:hover {
-    color: #953636;
-    transition: 0.3s ease-in-out;
-}
-
-div#caFlyghtSearch {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-input.submitBTn {
-    border: 1px solid #ddd;
-    outline: none;
-    width: 150px;
-    border-radius: 4px;
-    background-color: dodgerblue;
-    transition: 0.3s;
-    padding: 10px;
-}
-
-input.submitBTn:hover {
-    background-color: rgb(11, 75, 139);
-    transition: 0.3s;
-
-}
-
-.dp__month_year_wrap {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    gap: 20%;
-} */
-/* 
-.dp__action_buttons {
-    display: flex;
-    flex: unset !important;
-    align-items: center;
-    justify-content: flex-end;
-    margin-inline-start: auto;
-}
-
-.dp__btn {
-    background: none;
-    padding: unset !important;
-}
-
-button.submitBTn {
-    width: 100%;
-    background-color: yellowgreen;
-    color: #000;
-    border: 1px solid #ddd;
-    transition: 0.3s ease-in-out;
-    cursor: pointer;
-}
-
-button.submitBTn:hover {
-    border: 1px solid #999;
-    
-}  */
 
 h1.flightHeading {
     font-size: 18px;
     padding: 0 !important;
     margin: 0 !important;
+    text-align: left;
 }
 
 .inputBox {
@@ -358,13 +112,17 @@ h1.flightHeading {
 
 .locationSet div input:focus {
     outline: 1px solid #ddd;
-    box-shadow: 0 0 5pt 2pt #D3D3D3;
+    box-shadow: 0 0 10px #f78da7;
+}
+
+input#selectcurrency {
+    padding: 10px 4px;
 }
 
 .locationSet div input:hover,
 input[type="submit"]:hover {
     outline: 1px solid #ddd;
-    box-shadow: 0 0 5pt 2pt #D3D3D3;
+    box-shadow: 0 0 10px #f78da7;
 }
 
 .location-toggle {
@@ -385,8 +143,25 @@ input[type="submit"]:hover {
     padding: 8px 0px !important;
     border: none !important;
     outline: 1px solid #ddd !important;
-    background-color: #fff !important;
+    background-color: #f78da7 !important;
     border-radius: 2px !important;
     margin-top: 20px;
+    color: #222121;
+    transition: 0.3s ease-in-out;
 
+}
+
+.locationSet.submitBtnWrap .submitButtonfirst:hover {
+    outline: 1px solid #ddd !important;
+    background-color: #e63964 !important;
+}
+
+input.dp__pointer.dp__input_readonly.dp__input.dp__input_icon_pad.dp__input_reg {
+    padding: 7px 4px !important;
+}
+
+.card__image {
+    margin: 0;
+    padding: 0;
+    line-height: 0;
 }

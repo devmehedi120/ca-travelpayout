@@ -1907,8 +1907,8 @@ jQuery(function ($) {
                 locale: "en",
                 types: ["city"],
                 term:
-                  this.selectedToCityCode !== ""
-                    ? this.selectedToCityCode
+                  this.selectedToCity !== ""
+                    ? this.selectedToCity
                     : this.originLocation,
               },
             }

@@ -35,7 +35,7 @@
                     <div class="inputBox">
                         <div class="inputWraper">
                             <input type="radio" id="return" value="return" v-model="tab" class="radioBtn" checked>
-                            <label for="return">Rturn</label>
+                            <label for="return">Round Ticket</label>
                         </div>
                         <div class="inputWraper">
                             <input type="radio" name="" id="oneWay" value="oneway" v-model="tab" class="radioBtn">
@@ -170,9 +170,9 @@
                             <div class="locationSet">
                                 <div class="location-wrap">
                                     <div class="custom-select-container">
-                                        <label for="travelTO"><b>To</b></label>
+                                        <label for="travelTO">To</label>
                                         <input id="travelTO" class="custom-select-input" @focus="showToDropdown"
-                                            v-model="selectedToCityCode" @input="searchToPlaces"
+                                            v-model="selectedToCity" @input="searchToPlaces"
                                             :placeholder="selectedToCity !==''?selectedToCity:'Select A city'">
                                         <ul class="custom-select-dropdown" v-if="showToOptions">
                                             <li class="custom-select-option" @click="selectToCity(place)"
@@ -189,13 +189,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="locationSet">
+                            <!-- <div class="locationSet">
                                 <div class="location-wrap">
                                     <label for="return">Return</label>
                                     <Datepicker :min-date="new Date()" v-model="returnDate" disabled></Datepicker>
 
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div class="locationSet">
                                 <div class="location-wrap">
@@ -219,17 +219,14 @@
                                     </div>
                                 </div>
                             </div>
-
-                        </div>
-
-
-                        <div class="locationSet">
-                            <div class="button_wrp">
-                                <button @click="handleOneWayTicket()" class="submitBTn">Search</button>
-
+                               <div class="locationSet submitBtnWrap"> 
+                                <button class="submitButtonfirst" @click="handleOneWayTicket()"> Search</button>                               
+                                    
+                                                                
                             </div>
-                        </div>
 
+
+                        </div>
                     </div>
 
 

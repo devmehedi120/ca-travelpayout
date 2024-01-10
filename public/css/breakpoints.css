@@ -1,32 +1,11 @@
 @media (max-width: 480px) {
-    /* h1.flightHeading {
-        text-align: center;
-    }
-
-
-    div#caFlyghtSearch {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-    }
-
-    .inputWraper {
-        display: flex;
-        justify-content: left;
-        gap: 4px;
-    }
-
     .flight-location-select {
         flex-direction: column;
     }
 
-    .location-toggle {
-        display: none;
-    }
-
-    input.submitBTn {
+    .locationSet {
         width: 100%;
-    } */
+    }
 
     /* card section */
     div#cardSection {
@@ -36,6 +15,10 @@
 
     .Searchspan {
         flex-direction: column;
+    }
+
+    h1.flightHeading {
+        text-align: left;
     }
 
     .searchHeading {
@@ -204,7 +187,7 @@
 
 
 @media (max-width: 767px) {
-    /* h1.flightHeading {
+    h1.flightHeading {
         font-size: 15px;
     }
 
@@ -221,30 +204,13 @@
         height: 23px;
     }
 
-    .flight-location-select {
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-    }
 
-    .locationSet {
-        width: 80%;
-        /* text-align: center; */
-    /* } */
 
     .location-toggle {
         display: none;
     }
 
-    input.submitBTn {
-        width: 100%;
-        display: flex;
-        /* flex-direction: column; */
-        justify-content: center;
-        align-items: center;
-        margin-left: 65px;
-        text-align: center;
-    } */
+
 
     div#cardSection {
         margin-top: 20px;
@@ -274,6 +240,11 @@
         width: 100%;
     }
 
+    .double_ticket_fragment {
+        width: 65%;
+        padding: 5px;
+    }
+
     .amount__area {
 
         flex-direction: column;
@@ -283,7 +254,41 @@
         font-size: 12px;
     }
 
+    span.stTime.timeStmp,
+    span.rchTime.timeStmp {
+        font-size: 15px;
+    }
+
+    button.pricebutton {
+        padding: 5px;
+        width: 100%;
+    }
+
+    .ticketPrice {
+        padding: 5px;
+        width: 30%;
+    }
+
+    span.deallenth {
+        font-size: 15px;
+        font-weight: 500;
+    }
+
     h1.flightHeading {
         text-align: center;
+    }
+}
+
+@media(min-width:480px) {
+    .flight-location-select {
+        flex-direction: row;
+    }
+
+    .locationSet {
+        width: 50%;
+    }
+
+    .single__card {
+        width: 48%;
     }
 }
