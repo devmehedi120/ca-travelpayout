@@ -7,8 +7,8 @@
 
             <div class="custom-select-container">
                 <label for="selectCity"><b>Select a city</b></label>
-                <input id="selectCity" class="custom-select-input-1" @focus="showoriginDropdown" v-model="searchTerm"
-                    @input="searchPlaces" :placeholder="selectedoriginCity?selectedoriginCity:originLocation">
+                <input id="selectCity" class="custom-select-input-1" @focus="showoriginDropdown" v-model="selectedoriginCity"
+                    @input="searchPlaces" :placeholder="selectedoriginCity!=''?selectedoriginCity:originLocation">
                 <ul class="custom-select-dropdown" v-if="showOriginOptions">
                     <li class="custom-select-option" @click="selectOriginCity(place)" v-for="place in places"
                         :key="place.id">{{ place.name }}</li>
@@ -19,7 +19,7 @@
         </div>
 
     </div>
-    <div class="card_wraper">
+    <div class="card_wraper_main">
 
         <div class="card_wraper" v-if="currentPage === 'archive'">
             <div class="single__card" v-for="(singleCard, index) in filteredData" :key="index"

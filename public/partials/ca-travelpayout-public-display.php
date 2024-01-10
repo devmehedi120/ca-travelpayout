@@ -23,7 +23,7 @@
             </svg>
         </div>
     </div>
-    <div class=" searchFlightWraper shadow-lg shadow-indigo-500/40 bg-indigo-500">
+    <div class="searchFlightWraper">
         <div>
             <h1 class='flightHeading'>Flight</h1>
         </div>
@@ -45,13 +45,14 @@
                     </div>
                     <!-- tab one -->
                     <div class="flightLocationInput" v-show="tab === 'return' || tab ===''">
+
                         <div class="flight-location-select">
                             <div class="locationSet">
                                 <div class="location-wrap">
                                     <div id="travelFrom" class="inputFild">
 
                                         <div class="custom-select-container">
-                                            <label for="travelFrom"><b>From</b></label>
+                                            <label for="travelFrom">From</label>
                                             <input id="travelFrom" class="custom-select-input" @focus="showDropdown"
                                                 v-model="selectedCity" @input="searchFromPlaces"
                                                 :placeholder="selectedCity !==''?selectedCity:'Select A City'">
@@ -75,16 +76,16 @@
                             </div>
                             <div class="locationSet">
                                 <div class="location-wrap">
-                                          <div class="custom-select-container">
-                                            <label for="travelTO"><b>To</b></label>
-                                            <input id="travelTO" class="custom-select-input" @focus="showToDropdown"
-                                                v-model="selectedToCity" @input="searchToPlaces"
-                                                :placeholder="selectedToCity !==''?selectedToCity:'Select A city'">
-                                            <ul class="custom-select-dropdown" v-if="showToOptions">
-                                                <li class="custom-select-option" @click="selectToCity(place)"
-                                                    v-for="place in places" :key="place.id">{{ place.name }}</li>
-                                            </ul>
-                                        </div>
+                                    <div class="custom-select-container">
+                                        <label for="travelTO">To</label>
+                                        <input id="travelTO" class="custom-select-input" @focus="showToDropdown"
+                                            v-model="selectedToCity" @input="searchToPlaces"
+                                            :placeholder="selectedToCity !==''?selectedToCity:'Select A city'">
+                                        <ul class="custom-select-dropdown" v-if="showToOptions">
+                                            <li class="custom-select-option" @click="selectToCity(place)"
+                                                v-for="place in places" :key="place.id">{{ place.name }}</li>
+                                        </ul>
+                                    </div>
                                 </div>
 
                             </div>
@@ -127,33 +128,34 @@
                                 </div>
                             </div>
 
-
-                        </div>
-                        <div class="locationSet">
-                            <div class="button_wrp">
-                                <button class="submitBTn" @click="handleSpecificTicket()"> Search</button>
-
+                            <div class="locationSet submitBtnWrap"> 
+                                <button class="submitButtonfirst" @click="handleSpecificTicket()"> Search</button>                               
+                                    
+                                                                
                             </div>
+
+
                         </div>
+
 
                     </div>
 
 
-<!-- tab no two -->
+                    <!-- tab no two -->
                     <div class="flightLocationInput" v-show="tab === 'oneway'">
                         <div class="flight-location-select">
                             <div class="locationSet">
                                 <div class="location-wrap">
-                                        <div class="custom-select-container">
-                                            <label for="travelFrom"><b>From</b></label>
-                                            <input id="travelFrom" class="custom-select-input" @focus="showDropdown"
-                                                v-model="selectedCity" @input="searchFromPlaces"
-                                                :placeholder="selectedCity !==''?selectedCity:'Select A City'">
-                                            <ul class="custom-select-dropdown" v-if="showOptions">
-                                                <li class="custom-select-option" @click="selectCity(place)"
-                                                    v-for="place in places" :key="place.id">{{ place.name }}</li>
-                                            </ul>
-                                        </div>
+                                    <div class="custom-select-container">
+                                        <label for="travelFrom"><b>From</b></label>
+                                        <input id="travelFrom" class="custom-select-input" @focus="showDropdown"
+                                            v-model="selectedCity" @input="searchFromPlaces"
+                                            :placeholder="selectedCity !==''?selectedCity:'Select A City'">
+                                        <ul class="custom-select-dropdown" v-if="showOptions">
+                                            <li class="custom-select-option" @click="selectCity(place)"
+                                                v-for="place in places" :key="place.id">{{ place.name }}</li>
+                                        </ul>
+                                    </div>
                                     <div class="location-toggle" v-if="tab===''">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"
                                             style="width: 1rem; height: 1rem;">
@@ -167,16 +169,16 @@
                             </div>
                             <div class="locationSet">
                                 <div class="location-wrap">
-                                     <div class="custom-select-container">
-                                            <label for="travelTO"><b>To</b></label>
-                                            <input id="travelTO" class="custom-select-input" @focus="showToDropdown"
-                                                v-model="selectedToCityCode" @input="searchToPlaces"
-                                                :placeholder="selectedToCity !==''?selectedToCity:'Select A city'">
-                                            <ul class="custom-select-dropdown" v-if="showToOptions">
-                                                <li class="custom-select-option" @click="selectToCity(place)"
-                                                    v-for="place in places" :key="place.id">{{ place.name }}</li>
-                                            </ul>
-                                        </div>
+                                    <div class="custom-select-container">
+                                        <label for="travelTO"><b>To</b></label>
+                                        <input id="travelTO" class="custom-select-input" @focus="showToDropdown"
+                                            v-model="selectedToCityCode" @input="searchToPlaces"
+                                            :placeholder="selectedToCity !==''?selectedToCity:'Select A city'">
+                                        <ul class="custom-select-dropdown" v-if="showToOptions">
+                                            <li class="custom-select-option" @click="selectToCity(place)"
+                                                v-for="place in places" :key="place.id">{{ place.name }}</li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                             <div class="locationSet">
@@ -237,6 +239,7 @@
     </div>
 
     <?php
+    
     require_once plugin_dir_path( __FILE__ )."/ca-flight-cards.php";
     require_once plugin_dir_path( __FILE__ )."/ca-search-result.php";
   ?>

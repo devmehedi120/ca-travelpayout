@@ -44,6 +44,7 @@ class Ca_Travelpayout_Public {
 	public $currentCurrencyCode;
 	public $originLocation;
 	public $originCityIATA;
+	
 
 	/**
 	 * Initialize the class and set its properties.
@@ -71,7 +72,7 @@ class Ca_Travelpayout_Public {
 			$originCity=$this->userLocatinByIP();
 			if ($originCity) {
 				$originCityName = $originCity->name;
-				$originCityiatacode = $originCity->name;
+				$originCityiatacode = $originCity->iata;
 				$this->originLocation =$originCityName;
 				$this->originCityIATA =$originCityiatacode;
 			}
@@ -126,7 +127,10 @@ class Ca_Travelpayout_Public {
 	function userLocatinByIP(){
 		$ipObject = wp_remote_get( 'https://api.ipify.org?format=json' );
 		$ipObject = wp_remote_retrieve_body($ipObject);
+		
+
 		$ipAddress = json_decode($ipObject)->ip;
+		
         $locationURL = 'http://www.travelpayouts.com/whereami?locale=en&ip='.$ipAddress;
 		$countryData=wp_remote_get( $locationURL);
 		if(is_wp_error($countryData)){
@@ -134,7 +138,7 @@ class Ca_Travelpayout_Public {
 		}
 		$mainData=wp_remote_retrieve_body($countryData);
 		$useralocationdata=json_decode($mainData);
-
+		
 		return $useralocationdata;
 	}
 	// retrive country data

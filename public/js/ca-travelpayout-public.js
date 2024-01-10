@@ -14,7 +14,7 @@ jQuery(function ($) {
         places: [],
         ticket: "",
         errMsg: null,
-        selectedoriginCity: null,
+        selectedoriginCity: '',
         showOriginOptions: false,
         isTicket: false,
         navdisbled: false,
@@ -1864,7 +1864,10 @@ jQuery(function ($) {
               params: {
                 locale: "en",
                 types: ["city"],
-                term: ((this.searchTerm !=="") ? this.searchTerm : this.originLocation),
+                term:
+                  this.selectedoriginCity !== ""
+                    ? this.selectedoriginCity
+                    : this.originLocation,
               },
             }
           );

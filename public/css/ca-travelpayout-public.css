@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500&display=swap');
 
-h1.flightHeading {
-    font-size: 20px;
-}
 
 
 
@@ -12,7 +9,7 @@ h1.flightHeading {
     flex-direction: column;
 }
 
-.custom-select-input {
+/* .custom-select-input {
     width: 100%;
     padding: 9px;
     font-size: 16px;
@@ -21,7 +18,7 @@ h1.flightHeading {
     border-radius: 5px;
     font-family: sans-serif;
     cursor: pointer;
-}
+} */
 
 .custom-select-dropdown {
     position: absolute;
@@ -42,7 +39,7 @@ h1.flightHeading {
     cursor: pointer;
     transition: background-color 0.3s;
     list-style: none;
-    
+
 }
 
 .custom-select-option:hover {
@@ -50,8 +47,13 @@ h1.flightHeading {
 }
 
 /* --------------------------------------------------------- */
-
 .searchFlightWraper {
+    background-color: aqua;
+    padding: 10px;
+}
+
+/* 
+ .searchFlightWraper {
     height: auto;
     width: 100%;
     background-color: #ffffff;
@@ -118,9 +120,9 @@ input.radioBtn {
     gap: 2px;
     max-width: 100%;
     flex-direction: column;
-}
+} */
 
-form#caFlyghtSearch {
+/* form#caFlyghtSearch {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -270,8 +272,8 @@ input.submitBTn:hover {
     width: 100%;
     justify-content: center;
     gap: 20%;
-}
-
+} */
+/* 
 .dp__action_buttons {
     display: flex;
     flex: unset !important;
@@ -296,6 +298,95 @@ button.submitBTn {
 
 button.submitBTn:hover {
     border: 1px solid #999;
-   
+    
+}  */
+
+h1.flightHeading {
+    font-size: 18px;
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
+.inputBox {
+    display: flex;
+    gap: 15px;
+}
+
+.inputWraper {
+    display: flex;
+    justify-content: space-between;
+    gap: 4px;
+}
+
+
+
+
+
+/* new design */
+
+.flightLocationInput {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border: 1px solid #fff;
+}
+
+.flight-location-select {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.locationSet {
+    width: 49%;
+}
+
+.locationSet label {
+    color: #070606;
+}
+
+.locationSet div input,
+.locationSet div input[type="submit"] {
+    width: 95%;
+    padding: 9px 4px;
+    border: none;
+    outline: 1px solid #ddd;
+    background-color: #fff;
+    transition: 0.2s ease-in;
+    border-radius: 2px;
+}
+
+.locationSet div input:focus {
+    outline: 1px solid #ddd;
+    box-shadow: 0 0 5pt 2pt #D3D3D3;
+}
+
+.locationSet div input:hover,
+input[type="submit"]:hover {
+    outline: 1px solid #ddd;
+    box-shadow: 0 0 5pt 2pt #D3D3D3;
+}
+
+.location-toggle {
+    display: none;
+}
+
+.locationSet.submitBtnWrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+    padding-right: 15px;
+}
+
+.locationSet.submitBtnWrap .submitButtonfirst {
+
+    width: 100% !important;
+    padding: 8px 0px !important;
+    border: none !important;
+    outline: 1px solid #ddd !important;
+    background-color: #fff !important;
+    border-radius: 2px !important;
+    margin-top: 20px;
+
+}

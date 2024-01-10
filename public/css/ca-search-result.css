@@ -3,7 +3,7 @@ div.ticketPrice>a {
   text-decoration: none;
 }
 
-.custom-select-input-1 {
+/* .custom-select-input-1 {
   .custom-select-input {
     width: 200px;
     font-size: 16px;
@@ -11,7 +11,7 @@ div.ticketPrice>a {
     cursor: pointer;
     color: black;
   }
-}
+} */
 
 p.textSelect {
   margin: 0;

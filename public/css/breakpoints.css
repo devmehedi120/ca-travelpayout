@@ -1,5 +1,5 @@
 @media (max-width: 480px) {
-    h1.flightHeading {
+    /* h1.flightHeading {
         text-align: center;
     }
 
@@ -26,7 +26,7 @@
 
     input.submitBTn {
         width: 100%;
-    }
+    } */
 
     /* card section */
     div#cardSection {
@@ -204,7 +204,7 @@
 
 
 @media (max-width: 767px) {
-    h1.flightHeading {
+    /* h1.flightHeading {
         font-size: 15px;
     }
 
@@ -230,7 +230,7 @@
     .locationSet {
         width: 80%;
         /* text-align: center; */
-    }
+    /* } */
 
     .location-toggle {
         display: none;
@@ -244,7 +244,7 @@
         align-items: center;
         margin-left: 65px;
         text-align: center;
-    }
+    } */
 
     div#cardSection {
         margin-top: 20px;
