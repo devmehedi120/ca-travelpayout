@@ -165,3 +165,7 @@ input.dp__pointer.dp__input_readonly.dp__input.dp__input_icon_pad.dp__input_reg 
     padding: 0;
     line-height: 0;
 }
+
+.inputBox .inputWraper label{
+    color:#000
+}

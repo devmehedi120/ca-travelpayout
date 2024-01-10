@@ -292,3 +292,13 @@
         width: 48%;
     }
 }
+
+/* @media(min-width:1024px) {
+    .locationSet {
+        width: 16%;
+    }
+
+    .single__card {
+        width: 32%;
+    }
+} */
