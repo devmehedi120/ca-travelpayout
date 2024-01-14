@@ -121,7 +121,7 @@
                                         <div v-if="showCurOptions" class="custom-select-dropdown">
                                             <div v-for="currency in filteredCurrency" :key="currency"
                                                 class="custom-select-option" @click="selectCurrency(currency)">
-                                                <span>{{ currency }}</span>
+                                                <span class="currency">{{ currency }}</span>
                                             </div>
                                         </div>
                                     </div>

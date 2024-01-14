@@ -53,35 +53,32 @@ class Ca_Travelpayout_Public {
 	 * @param      string    $plugin_name       The name of the plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct( $plugin_name, $version ) {
+	public function __construct($plugin_name, $version) {
+    $this->plugin_name = $plugin_name;
+    $this->version = $version;
 
-		$this->plugin_name = $plugin_name;
-		$this->version = $version;			
-		add_shortcode( 'flyghtShow', [$this, 'flyghtShowHtml'] );
-		
-		$ipObject = wp_remote_get( 'https://api.ipify.org' );
-		$ipAddress = wp_remote_retrieve_body($ipObject);
+    add_shortcode('flyghtShow', [$this, 'flyghtShowHtml']);
 
-		if($ipAddress){
-			$this->currentIp = $ipAddress;
+    $this->setUserLocationAndCurrency();
+}
 
-			$currency = wp_remote_get( "https://ipapi.co/$ipAddress/currency/" );
-			$currencyCode = wp_remote_retrieve_body($currency);	
-			$this->currentCurrencyCode = $currencyCode;
+private function setUserLocationAndCurrency() {
+    $ipObject = wp_remote_get('https://api.ipify.org');
+    $ipAddress = wp_remote_retrieve_body($ipObject) ?? $_SERVER['REMOTE_ADDR'];
 
-			$originCity=$this->userLocatinByIP();
-			if ($originCity) {
-				$originCityName = $originCity->name;
-				$originCityiatacode = $originCity->iata;
-				$this->originLocation =$originCityName;
-				$this->originCityIATA =$originCityiatacode;
-			}
+    if ($ipAddress) {
+        $this->currentIp = $ipAddress;
 
-		}
+        $currency = wp_remote_get("https://ipapi.co/$ipAddress/currency/");
+        $this->currentCurrencyCode = wp_remote_retrieve_body($currency);
 
-
-	
-	}
+        $originCity = $this->userLocatinByIP();
+        if ($originCity) {
+            $this->originLocation = $originCity->name;
+            $this->originCityIATA = $originCity->iata;
+        }
+    }
+}
 
 	/**
 	 * Register the stylesheets for the public-facing side of the site.
@@ -128,9 +125,11 @@ class Ca_Travelpayout_Public {
 		$ipObject = wp_remote_get( 'https://api.ipify.org?format=json' );
 		$ipObject = wp_remote_retrieve_body($ipObject);
 		
+		
 
 		$ipAddress = json_decode($ipObject)->ip;
 		
+				
         $locationURL = 'http://www.travelpayouts.com/whereami?locale=en&ip='.$ipAddress;
 		$countryData=wp_remote_get( $locationURL);
 		if(is_wp_error($countryData)){
@@ -138,7 +137,7 @@ class Ca_Travelpayout_Public {
 		}
 		$mainData=wp_remote_retrieve_body($countryData);
 		$useralocationdata=json_decode($mainData);
-		
+				
 		return $useralocationdata;
 	}
 	// retrive country data
@@ -326,11 +325,9 @@ class Ca_Travelpayout_Public {
 	function flyghtShowHtml(){	
 		wp_enqueue_style( 'ca_breakpoint');
  		ob_start( );
-		if(isset($_GET['ticket'])&&!empty($_GET['ticket'])){
-           echo "hello ";
-		}else{
+		
      		require_once plugin_dir_path(__FILE__)."partials/ca-travelpayout-public-display.php" ;
-		}
+		
 		return ob_get_clean();
 	}
 

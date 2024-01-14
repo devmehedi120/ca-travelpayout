@@ -16,7 +16,7 @@
  * Plugin Name:        Custom API Travelpayout
  * Plugin URI:        https://https://www.fiverr.com/wpdevmehedi
  * Description:       This is a description of the plugin.
- * Version:           1.0.3
+ * Version:           1.0.4
  * Author:            Mehedi Hasan
  * Author URI:        https://https://www.fiverr.com/wpdevmehedi/
  * License:           GPL-2.0+

@@ -279,7 +279,7 @@
     }
 }
 
-@media(min-width:480px) {
+@media(max-width:990px) {
     .flight-location-select {
         flex-direction: row;
     }
