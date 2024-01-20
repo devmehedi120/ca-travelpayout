@@ -2178,7 +2178,7 @@ jQuery(function ($) {
 
 
             }
-            console.log(self.flightTicket);
+            
           },
           error: function (error) {},
         });
@@ -2366,7 +2366,7 @@ jQuery(function ($) {
       });
     },
     async mounted() {
-      console.log(this.flightTicket);
+      
       document.addEventListener("click", (event) => {
         if (
           event.target.className !== "custom-select-container" &&

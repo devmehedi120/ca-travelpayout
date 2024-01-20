@@ -1,6 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500&display=swap');
 
 
+div.amount__area>span,
+div.description__area>div.stopeg>small,
+#caFlyghtSearch>span,
+#cardSection>div.Searchspan>div.fligtableCityFilter>div>ul>li,
+#travelFrom>div>ul>li,
+.custom-select-input,
+#caFlyghtSearch div>div>div>div>span,
+li.custom-select-option,
+p.countryName {
+    color: #0a0a0a !important;
+
+}
 
 
 .custom-select-container {
@@ -166,6 +178,6 @@ input.dp__pointer.dp__input_readonly.dp__input.dp__input_icon_pad.dp__input_reg 
     line-height: 0;
 }
 
-.inputBox .inputWraper label{
-    color:#000
+.inputBox .inputWraper label {
+    color: #000
 }

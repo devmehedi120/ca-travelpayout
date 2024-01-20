@@ -96,7 +96,7 @@ class Ca_Travelpayout_Admin {
     add_settings_section('travelpayoutSection', '', '', 'travelpayoutPage');
     add_settings_field('pluginShortcode', 'Plugin Shortcode', [$this, 'plugin_shortcode'], 'travelpayoutPage', 'travelpayoutSection');
     add_settings_field('catpapiCode', 'Enter API code', [$this, 'catpAPI_cb'], 'travelpayoutPage', 'travelpayoutSection');
-    add_settings_field('catpredirectURL', 'Enter redirect URL', [$this, 'cat_url_cb'], 'travelpayoutPage', 'travelpayoutSection');
+    // add_settings_field('catpredirectURL', 'Enter redirect URL', [$this, 'cat_url_cb'], 'travelpayoutPage', 'travelpayoutSection');
 
 	}
 
@@ -108,9 +108,9 @@ class Ca_Travelpayout_Admin {
 		echo '<input class="widefat" type="text" name="catpapiCode" value="'.get_option('catpapiCode').'">';
 	}
 
-	function cat_url_cb(){
-		echo '<input class="widefat" type="url" name="catpredirectURL" value="'.get_option('catpredirectURL').'">';
-	}
+	// function cat_url_cb(){
+	// 	echo '<input class="widefat" type="url" name="catpredirectURL" value="'.get_option('catpredirectURL').'">';
+	// }
    
 	function ca_flight_data_html(){
 		?>

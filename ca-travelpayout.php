@@ -9,14 +9,14 @@
  * that starts the plugin.
  *
  * @link              https://https://www.fiverr.com/wpdevmehedi
- * @since             1.0.3
+ * @since             1.0.0
  * @package           Ca_Travelpayout
  *
  * @wordpress-plugin
  * Plugin Name:        Custom API Travelpayout
  * Plugin URI:        https://https://www.fiverr.com/wpdevmehedi
  * Description:       This is a description of the plugin.
- * Version:           1.0.4
+ * Version:           1.2
  * Author:            Mehedi Hasan
  * Author URI:        https://https://www.fiverr.com/wpdevmehedi/
  * License:           GPL-2.0+
