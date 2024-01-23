@@ -55,7 +55,7 @@
 
     .card_wraper {
         margin-top: 10px;
-        flex-direction: column;
+        
     }
 
     p.countryName {
@@ -64,7 +64,7 @@
     }
 
     .single__card {
-        width: 100%;
+        width: 48% !important;
     }
 
     /* ticket page */

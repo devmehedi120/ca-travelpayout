@@ -3,6 +3,16 @@
         <div class="searchHeading">
             <b>Latest Round Trip Ticket Price</b>
         </div>
+        <div class="PriceTaxonomy">
+           <div class="custom-select-container">
+             <label for="short"><b>Short Price </b> </label>
+                <select class="custom-select-input-1" id="short" @change="handleSortChange">
+      <option>choose an option</option>
+      <option value="lowToHigh">Low To High</option>
+      <option value="highToLow">High To Low</option>
+    </select>
+           </div>
+        </div>
         <div class="fligtableCityFilter" v-if="currentPage === 'archive'">
 
             <div class="custom-select-container">
@@ -82,3 +92,5 @@
     </div>
 
 </div>
+
+

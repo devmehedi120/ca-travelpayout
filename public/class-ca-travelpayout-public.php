@@ -86,7 +86,9 @@ private  function getUserIP () {
 private function setUserLocationAndCurrency() {
     $ipObject = wp_remote_get('https://api.ipify.org');
     // $ipAddress = wp_remote_retrieve_body($ipObject) ?? $_SERVER['REMOTE_ADDR'];
-    $ipAddress = $this->getUserIP();
+    // $ipAddress = $this->getUserIP();
+    $ipAddress = '156.146.59.28';
+
 
     if ($ipAddress) {
         $this->currentIp = $ipAddress;
@@ -130,7 +132,6 @@ private function setUserLocationAndCurrency() {
 	public function enqueue_scripts() {
 		wp_enqueue_script( 'vueGlobal', plugin_dir_url( __FILE__ ) . 'js/vue.global.js', array(  ), $this->version, false );
 		
-		wp_enqueue_script( 'uuidv4', plugin_dir_url( __FILE__ ) . 'js/uuidv4.js', array(  ), $this->version, false );
 		wp_enqueue_script( 'cataxios', 'https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js', array(  ), $this->version, false );
 		wp_enqueue_script( 'vue-datepicker', 'https://unpkg.com/@vuepic/vue-datepicker@latest', array(  ), $this->version, false );
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ca-travelpayout-public.js', array( 'jquery','vueGlobal', 'cataxios','vue-datepicker' ), $this->version, true );
@@ -147,9 +148,8 @@ private function setUserLocationAndCurrency() {
 		$ipObject = wp_remote_get( 'https://api.ipify.org?format=json' );
 		$ipObject = wp_remote_retrieve_body($ipObject);
 		
-		
-
-		$ipAddress = $this->getUserIP();
+		$ipAddress='156.146.59.28';
+		// $ipAddress = $this->getUserIP();
 		
 				
         $locationURL = 'http://www.travelpayouts.com/whereami?locale=en&ip='.$ipAddress;
@@ -274,13 +274,14 @@ private function setUserLocationAndCurrency() {
 			if (!isset($_GET['singleTicketData'])) {
 				return false;
 			}
-
+			
+			$currency=$this->currentCurrencyCode;
 			$origin = $_GET['singleTicketData']['origin'];
 			$destination = $_GET['singleTicketData']['destination'];
 			$depart_date = date("Y-m", strtotime($_GET['singleTicketData']['depart_date']));
 			$return_date = date("Y-m", strtotime($_GET['singleTicketData']['return_date']));
 			$apiToken = get_option('catpapiCode');
-			$apiUrl = 'https://api.travelpayouts.com/aviasales/v3/prices_for_dates?origin=' . $origin . '&destination=' . $destination . '&departure_at=' . $depart_date . '&return_at=' . $return_date . '&unique=false&sorting=price&direct=false&currency=BDT&limit=30&page=1&one_way=false&token=' . $apiToken . '';
+			$apiUrl = 'https://api.travelpayouts.com/aviasales/v3/prices_for_dates?origin=' . $origin . '&destination=' . $destination . '&departure_at=' . $depart_date . '&return_at=' . $return_date . '&unique=false&sorting=price&direct=false&currency='.$currency.'&limit=30&page=1&one_way=false&token=' . $apiToken . '';
 			$response = wp_remote_get($apiUrl);
 			$bodydata = wp_remote_retrieve_body( $response );
 

@@ -1840,9 +1840,10 @@ jQuery(function ($) {
           const day = returnDate.getDate().toString().padStart(2, "0");
           this.formatedReturnDate = `${returnDate.getFullYear()}-${month}-${day}`;
         }
-      },
+      }
     },
     computed: {
+      
       filteredCurrency() {
         if (!this.selectedCurrency) {
           return this.uniqueCurrencies;
@@ -1856,6 +1857,32 @@ jQuery(function ($) {
       
     },
     methods: {
+      handleSortChange() {
+      // Get the selected option value
+      const selectedOption = document.getElementById('short').value;
+
+      // Call the appropriate sorting function based on the selected option
+      if (selectedOption === 'lowToHigh') {
+        this.sortArrayLowToHigh();
+      } else if (selectedOption === 'highToLow') {
+        this.sortArrayHighToLow();
+      }
+    },
+    sortArrayLowToHigh() {
+      this.filteredData.sort((a, b) => {
+        const valueA = parseFloat(a.value.replace(',', ''));
+        const valueB = parseFloat(b.value.replace(',', ''));
+        return valueA - valueB;
+      });
+    },
+    sortArrayHighToLow() {
+      this.filteredData.sort((a, b) => {
+        const valueA = parseFloat(a.value.replace(',', ''));
+        const valueB = parseFloat(b.value.replace(',', ''));
+        return valueB - valueA;
+      });
+    
+  },
       async searchPlaces() {
         try {
           const response = await axios.get(
@@ -2027,7 +2054,11 @@ jQuery(function ($) {
                   return parseFloat(a.value) - parseFloat(b.value);
                 });
 
+                console.log(sortedCountries);
+
                 self.filteredData = sortedCountries;
+                console.log(self.filteredData);
+                
                 self.caLoading = false;
 
                 // Resolve the promise with any relevant data
@@ -2299,6 +2330,7 @@ jQuery(function ($) {
     },
     async created() {
       const self = this;
+      console.log(this.filteredData);
       // await self.getPopularLocations().then((response) => {
       //   self.popularLocations = response.data;
       //   //  console.log(self.popularLocations);
@@ -2362,10 +2394,12 @@ jQuery(function ($) {
           self.allCities = response.data;
 
           self.filteredData = sortedCountries;
+          console.log(self.filteredData);
         }
       });
     },
     async mounted() {
+
       
       document.addEventListener("click", (event) => {
         if (
